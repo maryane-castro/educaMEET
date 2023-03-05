@@ -12,7 +12,7 @@ import com.educaagenda.backend.repository.EventRepository;
 
 @Service
 public class EventService {
-    
+
     @Autowired
     EventRepository eventRepository;
 
@@ -20,9 +20,9 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-    public EventResponseDTO save(EventRequestDTO eventRequestDTO) {        
+    public EventResponseDTO save(EventRequestDTO eventRequestDTO) {
         Event event = eventRequestDTO.toEvent();
         return new EventResponseDTO(eventRepository.save(event));
-        }
-    
+    }
+
 }

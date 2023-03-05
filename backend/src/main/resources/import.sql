@@ -4,3 +4,9 @@
  insert into event (name, start_Date, end_Date, details, folder) values ('Evento 4','2022-03-07','2022-03-10','Detalhes Evento 4', 'Folder Evento 4');
  insert into event (name, start_Date, end_Date, details, folder) values ('Evento 5','2022-03-06','2022-03-10','Detalhes Evento 5', 'Folder Evento 5');
  insert into event (name, start_Date, end_Date, details, folder) values ('Evento 6','2022-03-11','2022-03-12','Detalhes Evento 6', 'Folder Evento 6');
+
+ insert into academic (name, password) values ('Jonny Quest','1234');
+ insert into academic (name, password) values ('Bill Murray','1234');
+ insert into academic (name, password) values ('Bruce Yoaness','1234');
+ insert into academic (name, password) values ('Dave Cobrero','1234');
+ insert into academic (name, password) values ('Steve Guttemberg','1234');
