@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="Relacionamento" id="DB3268D5-3B03-456E-CA15-1E254165EDD6" version="3.5">
-<createdBy>Darlan</createdBy>
-<createdTime>2023-02-18 02:02:15 UTC</createdTime>
-<ownerDesignName>Relacionamento</ownerDesignName>
-<capitalNames>false</capitalNames>
-<designId>DB3268D5-3B03-456E-CA15-1E254165EDD6</designId>
-</OSDM_Design>
