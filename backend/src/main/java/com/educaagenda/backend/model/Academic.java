@@ -10,25 +10,25 @@ public class Academic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long registration;
+    private long id;
     private String name;    
     private String password;
 
     public Academic() {        
     }
 
-    public Academic(long registration, String name, String password) {
-        this.registration = registration;
+    public Academic(long id, String name, String password) {
+        this.id = id;
         this.name = name;
         this.password = password;
     }
 
     public long getRegistration() {
-        return registration;
+        return id;
     }
 
-    public void setRegistration(long registration) {
-        this.registration = registration;
+    public void setRegistration(long id) {
+        this.id = id;
     }
 
     public String getName() {
