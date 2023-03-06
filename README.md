@@ -32,3 +32,4 @@ Diagrama de Relacionamento de Entidades
 Para visualizar o diagrama de relacionamento de entidades do sistema de eventos, acesse o seguinte link: https://lucid.app/lucidchart/d8d7a283-1e35-4ef1-b419-080d8fc6defe/view?page=QbbB18md6UEi&invitationId=inv_54277523-c738-48de-9bc2-e690a963275a#
 
 
+
