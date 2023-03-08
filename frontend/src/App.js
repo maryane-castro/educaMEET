@@ -1,12 +1,14 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 
-import Main from "./pages/Main";
+
+import AppRoutes from './AppRoutes';
 
 const App = () => {
   return (
-    <Main/>
+    <div>
+      <AppRoutes/>
+    </div>
   );
 }
 

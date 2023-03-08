@@ -15,9 +15,15 @@ const Header = () => {
             <Container fluid>
               <Row className="w-100">
                 <Col className="d-flex align-items-center">
-                  <Navbar.Brand href="#">
-                    <div>EducaMEET logo</div>
-                  </Navbar.Brand>
+                  <Row className="w-100">
+                    <Col md={6} lg={6} xl={2} className="d-flex align-items-center">
+                    <Button variant="outline-success">Menu</Button>
+                    </Col>
+                    <Col className="d-flex align-items-left">
+                      <Navbar.Brand href="#"> <div>EducaMEET logo</div> </Navbar.Brand>
+                    </Col> 
+                  </Row>
+                  
                 </Col>
                 <Col md={6} lg={6} xl={6}  className="d-flex justify-content-center align-items-center">
                   <Form className="d-flex flex-grow-1">
