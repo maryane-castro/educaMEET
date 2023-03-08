@@ -2,14 +2,11 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import Header from "./componets/Header";
+import Main from "./pages/Main";
 
 const App = () => {
   return (
-    <div className="bg-danger">
-      <Header/>
-      Bootstrap - OK
-    </div>
+    <Main/>
   );
 }
 
