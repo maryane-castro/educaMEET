@@ -7,17 +7,21 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image'
 
+import "./Header.css"
 
-const Header = () => {
+
+const Header = ({onButtonClick}) => {
     return(
         <Fragment>
-          <Navbar bg="light" expand="lg">
+          <Navbar className="custom-navbar" bg="blue-900" expand="lg">
             <Container fluid>
               <Row className="w-100">
                 <Col className="d-flex align-items-center">
                   <Row className="w-100">
                     <Col md={6} lg={6} xl={2} className="d-flex align-items-center">
-                    <Button variant="outline-success">Menu</Button>
+                    <Button onClick={onButtonClick} aria-controls="collapse-sidebar" aria-expanded={open}>
+                      Menu
+                    </Button>
                     </Col>
                     <Col className="d-flex align-items-left">
                       <Navbar.Brand href="#"> <div>EducaMEET logo</div> </Navbar.Brand>

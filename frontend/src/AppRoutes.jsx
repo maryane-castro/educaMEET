@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Layout from "./Screens/Layout"
-import Events from "./Screens/Events"
+import Layout from "./Screens/Layout/Layout"
+import Events from "./Screens/Events/Events"
 
 const AppRoutes = () => {
     return(
