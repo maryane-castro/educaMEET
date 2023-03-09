@@ -1,11 +1,15 @@
 package com.educaagenda.backend.model;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Event {
@@ -18,6 +22,13 @@ public class Event {
     private LocalDate endDate;
     private String details;
     private String folder;
+
+    @ManyToMany
+    @JoinTable(
+        name = "events_academics", 
+        joinColumns = @JoinColumn(name = "academic_id"),
+        inverseJoinColumns = @JoinColumn(name = "event_id"))
+    Set<Academic> academics;
     
     public Event() {
     }

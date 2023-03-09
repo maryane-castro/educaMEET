@@ -1,9 +1,12 @@
 package com.educaagenda.backend.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Academic {
@@ -13,6 +16,9 @@ public class Academic {
     private long id;
     private String name;    
     private String password;
+
+    @ManyToMany(mappedBy = "academics")
+    Set<Event> events;
 
     public Academic() {        
     }
