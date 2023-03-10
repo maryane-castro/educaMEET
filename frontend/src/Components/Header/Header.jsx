@@ -13,7 +13,7 @@ import "./Header.css"
 const Header = ({onButtonClick}) => {
     return(
         <Fragment>
-          <Navbar className="custom-navbar" bg="blue-900" expand="lg">
+          <Navbar className="custom-navbar fixed-top" bg="blue-900" expand="lg">
             <Container fluid>
               <Row className="w-100">
                 <Col className="d-flex align-items-center">

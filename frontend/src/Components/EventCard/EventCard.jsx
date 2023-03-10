@@ -3,7 +3,7 @@ import "./EventCard.css";
 
 function EventCard() {
   return (
-    <Card className="square custom-card">
+    <Card className="custom-card mb-3 ms-3 me-3">
       <Card.Body>
         <Card.Title>DATA DO EVENTO</Card.Title>
         <Card.Text>

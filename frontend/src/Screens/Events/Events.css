@@ -1,4 +1,6 @@
 .custom-events{
-    background-color: #b3cde0;
-    height: 100vh;
+    margin-top: 80px;
+    background-color: #121212;
+    height:calc(100vh - 80px);
+    overflow-y: auto;
 }

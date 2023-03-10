@@ -1,6 +1,7 @@
 .custom-sidebar{
-    border: black solid 2px;
-    background-color:#6497b1;
-    height:100vh;
+    border-right:solid #2D2D29 5px;
+    margin-top: 80px;
+    background-color:#121212;
+    height:calc(100vh - 80px);
     width: 500px;
 }
