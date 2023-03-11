@@ -2,3 +2,12 @@
     height: 80px;
     background-color: #2D2D29; 
 }
+
+.icons-color{
+    color: #92C7A3;
+}
+
+.icons-width{
+    height:24px;
+    width:24px;
+}
