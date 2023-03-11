@@ -5,27 +5,29 @@ import java.time.LocalDate;
 import com.educaagenda.backend.model.Event;
 
 public class EventResponseDTO {
+    private Long id;
+    public Long getId() {
+        return id;
+    }
+
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
     private String details;
-    private String folder; 
-
-    public EventResponseDTO(String name, LocalDate startDate, LocalDate endDate, String details, String folder) {
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.details = details;
-        this.folder = folder;
-    }
+    private String folder;     
 
     public EventResponseDTO(Event event) {
+        this.id = event.getId();
         this.name = event.getName();
         this.startDate = event.getStartDate();
         this.endDate = event.getEndDate();
         this.details = event.getDetails();
         this.folder = event.getFolder();
-    }    
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -68,4 +70,6 @@ public class EventResponseDTO {
     }
 
     
+
+        
 }

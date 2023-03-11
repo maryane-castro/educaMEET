@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
 @Entity
-public class Academic {
+public class Organizer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,13 +17,13 @@ public class Academic {
     private String name;    
     private String password;
 
-    @ManyToMany(mappedBy = "academics")
+    @ManyToMany(mappedBy = "organizers")
     Set<Event> events;
 
-    public Academic() {        
+    public Organizer() {        
     }
 
-    public Academic(long id, String name, String password, Set<Event> events) {
+    public Organizer(long id, String name, String password, Set<Event> events) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -60,6 +60,7 @@ public class Academic {
 
     public void setEvents(Set<Event> events) {
         this.events = events;
-    }    
+    }   
 
+    
 }

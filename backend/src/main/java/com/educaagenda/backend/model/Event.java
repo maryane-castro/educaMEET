@@ -29,17 +29,36 @@ public class Event {
         joinColumns = @JoinColumn(name = "academic_id"),
         inverseJoinColumns = @JoinColumn(name = "event_id"))
     Set<Academic> academics;
+
+    @ManyToMany
+    @JoinTable(
+        name = "events_organizers", 
+        joinColumns = @JoinColumn(name = "organizer_id"),
+        inverseJoinColumns = @JoinColumn(name = "event_id"))
+    Set<Organizer> organizers;
     
     public Event() {
     }
-    
-    public Event(String name, LocalDate startDate, LocalDate endDate, String details, String folder) {
+
+    public Event(long id, String name, LocalDate startDate, LocalDate endDate, String details, String folder,
+            Set<Academic> academics, Set<Organizer> organizers) {
+        this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.details = details;
         this.folder = folder;
-    }    
+        this.academics = academics;
+        this.organizers = organizers;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -79,7 +98,23 @@ public class Event {
 
     public void setFolder(String folder) {
         this.folder = folder;
-    }  
+    }
 
+    public Set<Academic> getAcademics() {
+        return academics;
+    }
+
+    public void setAcademics(Set<Academic> academics) {
+        this.academics = academics;
+    }
+
+    public Set<Organizer> getOrganizers() {
+        return organizers;
+    }
+
+    public void setOrganizers(Set<Organizer> organizers) {
+        this.organizers = organizers;
+    }
+    
     
 }
