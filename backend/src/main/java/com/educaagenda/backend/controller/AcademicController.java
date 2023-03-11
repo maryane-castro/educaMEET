@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.educaagenda.backend.dto.AcademicRequestDTO;
-import com.educaagenda.backend.dto.AcademicResponseDTO;
+import com.educaagenda.backend.dto.academic.AcademicRequestDTO;
+import com.educaagenda.backend.dto.academic.AcademicResponseDTO;
 import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.service.AcademicService;
 

@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.educaagenda.backend.dto.EventRequestDTO;
-import com.educaagenda.backend.dto.EventResponseDTO;
+import com.educaagenda.backend.dto.event.EventRequestDTO;
+import com.educaagenda.backend.dto.event.EventResponseDTO;
 import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.repository.EventRepository;
 

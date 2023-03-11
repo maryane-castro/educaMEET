@@ -1,4 +1,4 @@
-package com.educaagenda.backend.dto;
+package com.educaagenda.backend.dto.academic;
 
 import com.educaagenda.backend.model.Academic;
 

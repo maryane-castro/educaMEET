@@ -13,45 +13,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.educaagenda.backend.dto.event.EventRequestDTO;
-import com.educaagenda.backend.dto.event.EventResponseDTO;
-import com.educaagenda.backend.model.Event;
-import com.educaagenda.backend.service.EventService;
+import com.educaagenda.backend.dto.organizer.OrganizerRequestDTO;
+import com.educaagenda.backend.dto.organizer.OrganizerResponseDTO;
+import com.educaagenda.backend.model.Organizer;
+import com.educaagenda.backend.service.OrganizerService;
 
 @RestController
-@RequestMapping("/events")
-public class EventController {
+@RequestMapping("/organizers")
+public class OrganizerController {
     
     @Autowired
-    EventService eventService;
+    OrganizerService organizerService;
 
-    
     @GetMapping("/{id}")
     public ResponseEntity<Object> findById(@PathVariable(name = "id") Long id) {
-        return eventService.findById(id);
+        return organizerService.findById(id);
     }
 
     @GetMapping
-    public List<EventResponseDTO> findAll(){
-        List<Event> list = eventService.findAll();
-        return list.stream().map(EventResponseDTO::new).toList();
+    public List<OrganizerResponseDTO> findAll(){
+        List<Organizer> list = organizerService.findAll();
+        return list.stream().map(OrganizerResponseDTO::new).toList();
     }
 
     @PostMapping
-    public EventResponseDTO save(@RequestBody EventRequestDTO eventRequestDTO) {
-        return eventService.save(eventRequestDTO);
+    public OrganizerResponseDTO save(@RequestBody OrganizerRequestDTO organizerRequestDTO) {
+        return organizerService.save(organizerRequestDTO);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(
             @PathVariable(name = "id") Long id,
-            @RequestBody EventRequestDTO eventRequestDTO){
-        return eventService.update(id, eventRequestDTO);
+            @RequestBody OrganizerRequestDTO organizerRequestDTO){
+        return organizerService.update(id, organizerRequestDTO);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(
             @PathVariable(name = "id") Long id){
-        return eventService.delete(id);
+        return organizerService.delete(id);
     }
 }

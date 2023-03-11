@@ -32,3 +32,10 @@ insert into events_academics (academic_id, event_id) values (5,2);
 insert into events_academics (academic_id, event_id) values (5,3);
 insert into events_academics (academic_id, event_id) values (5,4);
 insert into events_academics (academic_id, event_id) values (5,5);
+
+insert into organizer (name, password) values ('Organizador 1','1234');
+insert into organizer (name, password) values ('Organizador 2','1234');
+insert into organizer (name, password) values ('Organizador 3','1234');
+insert into organizer (name, password) values ('Organizador 4','1234');
+insert into organizer (name, password) values ('Organizador 5','1234');
+insert into organizer (name, password) values ('Organizador 6','1234');

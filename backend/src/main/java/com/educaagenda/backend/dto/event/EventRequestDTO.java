@@ -1,33 +1,32 @@
-package com.educaagenda.backend.dto;
+package com.educaagenda.backend.dto.event;
 
 import java.time.LocalDate;
 
 import com.educaagenda.backend.model.Event;
 
-public class EventResponseDTO {
+public class EventRequestDTO {
     private Long id;
-    public Long getId() {
-        return id;
-    }
-
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
     private String details;
-    private String folder;     
+    private String folder;
 
-    public EventResponseDTO(Event event) {
-        this.id = event.getId();
-        this.name = event.getName();
-        this.startDate = event.getStartDate();
-        this.endDate = event.getEndDate();
-        this.details = event.getDetails();
-        this.folder = event.getFolder();
+    public EventRequestDTO() {        
     }
 
-    public void setId(Long id) {
+    public EventRequestDTO(Long id, String name, LocalDate startDate, LocalDate endDate, String details,
+            String folder) {
         this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.details = details;
+        this.folder = folder;
     }
+
+    
+
 
     public String getName() {
         return name;
@@ -69,7 +68,19 @@ public class EventResponseDTO {
         this.folder = folder;
     }
 
-    
-
+    public Event toEvent() {
+        Event event = new Event();
         
+        event.setName(name);
+        event.setStartDate(startDate);
+        event.setEndDate(endDate);
+        event.setDetails(details);
+        event.setFolder(folder);
+        return event;
+    }
+
+    public Long getId() {
+        return id;
+    }
+    
 }

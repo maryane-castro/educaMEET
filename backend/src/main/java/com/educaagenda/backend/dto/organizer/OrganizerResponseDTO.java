@@ -1,25 +1,26 @@
-package com.educaagenda.backend.dto;
+package com.educaagenda.backend.dto.organizer;
 
-import com.educaagenda.backend.model.Academic;
+import com.educaagenda.backend.model.Organizer;
 
-public class AcademicResponseDTO {
+public class OrganizerResponseDTO {
+   
     private Long id;
     private String name;
     private String password;
 
-    public AcademicResponseDTO() {        
+    public OrganizerResponseDTO() {        
     }
 
-    public AcademicResponseDTO(Long id, String name, String password) {
+    public OrganizerResponseDTO(Long id, String name, String password) {
         this.id = id;
         this.name = name;
         this.password = password;
     }
 
-    public AcademicResponseDTO(Academic academic) {
-        this.id = academic.getId();
-        this.name = academic.getName();
-        this.password = academic.getPassword();
+    public OrganizerResponseDTO(Organizer organizer) {
+        this.id = organizer.getId();
+        this.name = organizer.getName();
+        this.password = organizer.getPassword();
     }
 
     public Long getId() {
@@ -45,6 +46,5 @@ public class AcademicResponseDTO {
     public void setPassword(String password) {
         this.password = password;
     } 
-    
     
 }

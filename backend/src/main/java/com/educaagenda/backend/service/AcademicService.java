@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.educaagenda.backend.dto.AcademicRequestDTO;
-import com.educaagenda.backend.dto.AcademicResponseDTO;
+import com.educaagenda.backend.dto.academic.AcademicRequestDTO;
+import com.educaagenda.backend.dto.academic.AcademicResponseDTO;
 import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.repository.AcademicRepository;
 
