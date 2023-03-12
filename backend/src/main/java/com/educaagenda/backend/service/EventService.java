@@ -101,46 +101,46 @@ public class EventService {
         }
     }
 
-    // public ResponseEntity<Object> salvar_events_academics(Long event_id, Long academic_id) {
+    public ResponseEntity<Object> salvar_events_academics(Long event_id, Long academic_id) {
         
-    //     Optional<Event> eventOptional = eventRepository.findById(event_id);
-    //     if (eventOptional.isEmpty()) {
-    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");                         
-    //     }
+        Optional<Event> eventOptional = eventRepository.findById(event_id);
+        if (eventOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");                         
+        }
 
-    //     Optional<Academic> academicOptional = academicRepository.findById(academic_id);
-    //     if (academicOptional.isEmpty()) {
-    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Academico não encontrado");             
-    //     }
+        Optional<Academic> academicOptional = academicRepository.findById(academic_id);
+        if (academicOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Academico não encontrado");             
+        }
 
-    //     Event event = eventOptional.get();
-    //     Academic academic = academicOptional.get();
+        Event event = eventOptional.get();             
+        Academic academic = academicOptional.get();
 
-    //     event.getAcademics().add(academic);        
+        event.getAcademics().add(academic);        
 
-    //     return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
-    // }
+        return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
+    }
 
-    // @Transactional
-    // public ResponseEntity<Object> salvar_events_organizers(Long event_id, Long organizer_id) {
+    @Transactional
+    public ResponseEntity<Object> salvar_events_organizers(Long event_id, Long organizer_id) {
 
-    //     Optional<Event> eventOptional = eventRepository.findById(event_id);
-    //     if (eventOptional.isEmpty()) {
-    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");                         
-    //     }
+        Optional<Event> eventOptional = eventRepository.findById(event_id);
+        if (eventOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");                         
+        }
 
-    //     Optional<Organizer> organizerOptional = organizerRepository.findById(organizer_id);
-    //     if (organizerOptional.isEmpty()) {
-    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Organizador não encontrado");             
-    //     }
+        Optional<Organizer> organizerOptional = organizerRepository.findById(organizer_id);
+        if (organizerOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Organizador não encontrado");             
+        }
 
-    //     Event event = eventOptional.get();
-    //     Organizer organizer = organizerOptional.get();
+        Event event = eventOptional.get();
+        Organizer organizer = organizerOptional.get();
         
-    //     event.getOrganizers().add(organizer);
+        event.getOrganizers().add(organizer);
         
-    //     return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
-    // }
+        return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
+    }
 
     public ResponseEntity<Object> save_participants_events(Long event_id, Long academic_id, Long organizer_id) {
 
