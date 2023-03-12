@@ -1,20 +1,22 @@
 package com.educaagenda.backend.dto.event;
 
 import java.time.LocalDate;
+import java.util.Set;
 
+import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.model.Event;
+import com.educaagenda.backend.model.Organizer;
 
 public class EventResponseDTO {
-    private Long id;
-    public Long getId() {
-        return id;
-    }
 
+    private Long id;  
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
     private String details;
     private String folder;     
+    private Set<Academic> academics;
+    private Set<Organizer> organizers;
 
     public EventResponseDTO(Event event) {
         this.id = event.getId();
@@ -23,6 +25,12 @@ public class EventResponseDTO {
         this.endDate = event.getEndDate();
         this.details = event.getDetails();
         this.folder = event.getFolder();
+        this.academics = event.getAcademics();
+        this.organizers = event.getOrganizers();
+    }    
+
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
@@ -69,7 +77,21 @@ public class EventResponseDTO {
         this.folder = folder;
     }
 
-    
+    public Set<Academic> getAcademics() {
+        return academics;
+    }
 
+    public void setAcademics(Set<Academic> academics) {
+        this.academics = academics;
+    }
+
+    public Set<Organizer> getOrganizers() {
+        return organizers;
+    }
+
+    public void setOrganizers(Set<Organizer> organizers) {
+        this.organizers = organizers;
+    }  
+      
         
 }

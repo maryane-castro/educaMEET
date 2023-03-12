@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.educaagenda.backend.dto.organizer.OrganizerRequestDTO;
 import com.educaagenda.backend.dto.organizer.OrganizerResponseDTO;
 import com.educaagenda.backend.model.Organizer;
+import com.educaagenda.backend.repository.EventRepository;
 import com.educaagenda.backend.repository.OrganizerRepository;
 
 import jakarta.transaction.Transactional;
@@ -20,6 +21,9 @@ public class OrganizerService {
 
     @Autowired
     OrganizerRepository organizerRepository;
+
+    @Autowired
+    EventRepository eventRepository;
 
     public List<Organizer> findAll() {
         return organizerRepository.findAll();
@@ -44,38 +48,38 @@ public class OrganizerService {
     @Transactional
     public ResponseEntity<Object> delete(Long id) {
         Optional<Organizer> organizerOptional = organizerRepository.findById(id);
-        if(organizerOptional.isPresent()){
+        if (organizerOptional.isPresent()) {
             Organizer academic = organizerOptional.get();
             organizerRepository.delete(academic);
             return ResponseEntity.status(HttpStatus.OK).build();
-        }else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Organizador não encontrado");
         }
     }
 
     @Transactional
     public ResponseEntity<Object> update(Long id, OrganizerRequestDTO organizerRequestDTO) {
-        //Achar
+        // Achar
         Optional<Organizer> organizerOptional = organizerRepository.findById(id);
-        if(organizerOptional.isPresent()){
+        if (organizerOptional.isPresent()) {
             Organizer academic = organizerOptional.get();
             // Modificar
-            if(organizerRequestDTO.getName()!=null){
+            if (organizerRequestDTO.getName() != null) {
                 academic.setName(organizerRequestDTO.getName());
             }
 
-            if(organizerRequestDTO.getPassword()!=null){
+            if (organizerRequestDTO.getPassword() != null) {
                 academic.setPassword(organizerRequestDTO.getPassword());
             }
 
-            //Lista de eventos            
-            
+            // Lista de eventos
+
             // Salvar
             OrganizerResponseDTO organizerResponseDTO = new OrganizerResponseDTO(organizerRepository.save(academic));
             return ResponseEntity.status(HttpStatus.CREATED).body(organizerResponseDTO);
-        }else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Organizador não encontrado");
         }
     }
-    
+
 }

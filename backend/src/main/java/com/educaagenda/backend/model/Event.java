@@ -3,6 +3,9 @@ package com.educaagenda.backend.model;
 import java.time.LocalDate;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,18 +26,24 @@ public class Event {
     private String details;
     private String folder;
 
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany(targetEntity = Academic.class, cascade = CascadeType.ALL)
     @JoinTable(
         name = "events_academics", 
-        joinColumns = @JoinColumn(name = "academic_id"),
-        inverseJoinColumns = @JoinColumn(name = "event_id"))
+        // joinColumns = @JoinColumn(name = "academic_id"),
+        // inverseJoinColumns = @JoinColumn(name = "event_id"))
+        joinColumns = @JoinColumn(name = "event_id"),
+        inverseJoinColumns = @JoinColumn(name = "academic_id"))
     Set<Academic> academics;
 
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany(targetEntity = Organizer.class, cascade = CascadeType.ALL)
     @JoinTable(
         name = "events_organizers", 
-        joinColumns = @JoinColumn(name = "organizer_id"),
-        inverseJoinColumns = @JoinColumn(name = "event_id"))
+        joinColumns = @JoinColumn(name = "event_id"),
+        inverseJoinColumns = @JoinColumn(name = "organizer_id"))
+        // joinColumns = @JoinColumn(name = "organizer_id"),
+        // inverseJoinColumns = @JoinColumn(name = "event_id"))
     Set<Organizer> organizers;
     
     public Event() {

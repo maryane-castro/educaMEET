@@ -21,7 +21,7 @@ import com.educaagenda.backend.service.OrganizerService;
 @RestController
 @RequestMapping("/organizers")
 public class OrganizerController {
-    
+
     @Autowired
     OrganizerService organizerService;
 
@@ -31,7 +31,7 @@ public class OrganizerController {
     }
 
     @GetMapping
-    public List<OrganizerResponseDTO> findAll(){
+    public List<OrganizerResponseDTO> findAll() {
         List<Organizer> list = organizerService.findAll();
         return list.stream().map(OrganizerResponseDTO::new).toList();
     }
@@ -44,13 +44,13 @@ public class OrganizerController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(
             @PathVariable(name = "id") Long id,
-            @RequestBody OrganizerRequestDTO organizerRequestDTO){
+            @RequestBody OrganizerRequestDTO organizerRequestDTO) {
         return organizerService.update(id, organizerRequestDTO);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(
-            @PathVariable(name = "id") Long id){
+            @PathVariable(name = "id") Long id) {
         return organizerService.delete(id);
-    }
+    }    
 }

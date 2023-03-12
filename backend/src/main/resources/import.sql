@@ -11,31 +11,27 @@
  insert into academic (name, password) values ('Dave Cobrero','1234');
  insert into academic (name, password) values ('Steve Guttemberg','1234');
 
-insert into events_academics (academic_id, event_id) values (1,1);
-insert into events_academics (academic_id, event_id) values (1,2);
-insert into events_academics (academic_id, event_id) values (1,3);
-insert into events_academics (academic_id, event_id) values (1,4);
-insert into events_academics (academic_id, event_id) values (1,5);
-insert into events_academics (academic_id, event_id) values (2,1);
-insert into events_academics (academic_id, event_id) values (2,2);
-insert into events_academics (academic_id, event_id) values (2,3);
-insert into events_academics (academic_id, event_id) values (2,4);
-insert into events_academics (academic_id, event_id) values (3,4);
-insert into events_academics (academic_id, event_id) values (3,5);
-insert into events_academics (academic_id, event_id) values (4,1);
-insert into events_academics (academic_id, event_id) values (4,2);
-insert into events_academics (academic_id, event_id) values (4,3);
-insert into events_academics (academic_id, event_id) values (4,4);
-insert into events_academics (academic_id, event_id) values (4,5);
-insert into events_academics (academic_id, event_id) values (5,1);
-insert into events_academics (academic_id, event_id) values (5,2);
-insert into events_academics (academic_id, event_id) values (5,3);
-insert into events_academics (academic_id, event_id) values (5,4);
-insert into events_academics (academic_id, event_id) values (5,5);
-
 insert into organizer (name, password) values ('Organizador 1','1234');
 insert into organizer (name, password) values ('Organizador 2','1234');
 insert into organizer (name, password) values ('Organizador 3','1234');
 insert into organizer (name, password) values ('Organizador 4','1234');
 insert into organizer (name, password) values ('Organizador 5','1234');
 insert into organizer (name, password) values ('Organizador 6','1234');
+
+insert into events_academics (academic_id, event_id) values (1,1);
+insert into events_academics (academic_id, event_id) values (5,1);
+insert into events_academics (academic_id, event_id) values (5,2);
+insert into events_academics (academic_id, event_id) values (2,3);
+insert into events_academics (academic_id, event_id) values (4,3);
+insert into events_academics (academic_id, event_id) values (2,4);
+insert into events_academics (academic_id, event_id) values (3,4);
+insert into events_academics (academic_id, event_id) values (4,4);
+insert into events_academics (academic_id, event_id) values (1,5);
+insert into events_academics (academic_id, event_id) values (3,5);
+insert into events_academics (academic_id, event_id) values (4,5);
+
+insert into events_organizers (organizer_id, event_id) values (1,1);
+insert into events_organizers (organizer_id, event_id) values (3,1);
+insert into events_organizers (organizer_id, event_id) values (5,1);
+insert into events_organizers (organizer_id, event_id) values (3,2);
+insert into events_organizers (organizer_id, event_id) values (3,4);

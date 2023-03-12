@@ -44,36 +44,36 @@ public class AcademicService {
     @Transactional
     public ResponseEntity<Object> delete(Long id) {
         Optional<Academic> academicOptional = academicRepository.findById(id);
-        if(academicOptional.isPresent()){
+        if (academicOptional.isPresent()) {
             Academic academic = academicOptional.get();
             academicRepository.delete(academic);
             return ResponseEntity.status(HttpStatus.OK).build();
-        }else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Academico não encontrado");
         }
     }
 
     @Transactional
     public ResponseEntity<Object> update(Long id, AcademicRequestDTO academicRequestDTO) {
-        //Achar
+        // Achar
         Optional<Academic> academicOptional = academicRepository.findById(id);
-        if(academicOptional.isPresent()){
+        if (academicOptional.isPresent()) {
             Academic academic = academicOptional.get();
             // Modificar
-            if(academicRequestDTO.getName()!=null){
+            if (academicRequestDTO.getName() != null) {
                 academic.setName(academicRequestDTO.getName());
             }
 
-            if(academicRequestDTO.getPassword()!=null){
+            if (academicRequestDTO.getPassword() != null) {
                 academic.setPassword(academicRequestDTO.getPassword());
             }
 
-            //Lista de eventos            
-            
+            // Lista de eventos
+
             // Salvar
             AcademicResponseDTO academicResponseDTO = new AcademicResponseDTO(academicRepository.save(academic));
             return ResponseEntity.status(HttpStatus.CREATED).body(academicResponseDTO);
-        }else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Academico não encontrado");
         }
     }

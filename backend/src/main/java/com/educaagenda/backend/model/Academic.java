@@ -2,6 +2,9 @@ package com.educaagenda.backend.model;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +20,10 @@ public class Academic {
     private String name;    
     private String password;
 
-    @ManyToMany(mappedBy = "academics")
+    @JsonIgnore
+    @ManyToMany(
+        targetEntity = Event.class, cascade = CascadeType.ALL,
+        mappedBy = "academics")
     Set<Event> events;
 
     public Academic() {        

@@ -54,4 +54,28 @@ public class EventController {
             @PathVariable(name = "id") Long id){
         return eventService.delete(id);
     }
+
+    // @PostMapping("events_academics/{event_id}/{academic_id}")
+    // public ResponseEntity<Object> events_academics(
+    //     @PathVariable(name = "event_id") Long event_id,
+    //         @PathVariable(name = "academic_id") Long academic_id){
+
+    //     return eventService.salvar_events_academics(event_id, academic_id);
+    // }
+
+    // @PostMapping("events_organizers/{event_id}/{organizer_id}")
+    // public ResponseEntity<Object> events_organizers(
+    //         @PathVariable(name = "event_id") Long event_id,
+    //         @PathVariable(name = "organizer_id") Long organizer_id) {
+
+    //     return eventService.salvar_events_organizers(event_id, organizer_id);
+    // }
+
+    @PostMapping("participants_events/{event_id}/{academic_id}/{organizer_id}")
+    public ResponseEntity<Object> participantes_eventos(
+        @PathVariable(name = "event_id") Long event_id,
+        @PathVariable(name = "academic_id") Long academic_id,
+        @PathVariable(name = "organizer_id") Long organizer_id) {
+            return eventService.save_participants_events(event_id, academic_id, organizer_id);
+        }   
 }

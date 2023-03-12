@@ -21,7 +21,7 @@ import com.educaagenda.backend.service.AcademicService;
 @RestController
 @RequestMapping("/academics")
 public class AcademicController {
-    
+
     @Autowired
     AcademicService academicService;
 
@@ -31,7 +31,7 @@ public class AcademicController {
     }
 
     @GetMapping
-    public List<AcademicResponseDTO> findAll(){
+    public List<AcademicResponseDTO> findAll() {
         List<Academic> list = academicService.findAll();
         return list.stream().map(AcademicResponseDTO::new).toList();
     }
@@ -44,14 +44,14 @@ public class AcademicController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(
             @PathVariable(name = "id") Long id,
-            @RequestBody AcademicRequestDTO academicRequestDTO){
+            @RequestBody AcademicRequestDTO academicRequestDTO) {
         return academicService.update(id, academicRequestDTO);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(
-            @PathVariable(name = "id") Long id){
+            @PathVariable(name = "id") Long id) {
         return academicService.delete(id);
-    }
+    }   
 
 }
