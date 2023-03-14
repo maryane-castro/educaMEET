@@ -9,7 +9,7 @@ import "./Header.css"
 const Header = ({onButtonClick}) => {
   return(   
     <Fragment>
-      <nav className="navbar bg-body-tertiary fixed-top">
+      <nav className="navbar fixed-top">
           <div className="container-fluid">
             <div className="container-fluid justify-content-start flex-nowrap">
               <Button className="btn-light" onClick={onButtonClick} aria-controls="collapse-sidebar" aria-expanded={open}>

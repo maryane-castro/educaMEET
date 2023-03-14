@@ -1,44 +1,78 @@
---------------------------------------------------------
---  Arquivo criado - sexta-feira-fevereiro-17-2023   
---------------------------------------------------------
---------------------------------------------------------
---  DDL for Table EVENTO
---------------------------------------------------------
+CREATE TABLE academic(
+   academic_registration INT PRIMARY KEY,
+   academic_password VARCHAR2(50) NOT NULL,
+   academic_name VARCHAR2(50) NOT NULL
+);
 
-  CREATE TABLE "EVENTO" 
-   (	"IDEVENTO" NUMBER(*,0), 
-	"NOMEEVENTO" VARCHAR2(45 BYTE), 
-	"DATAINICIO" DATE, 
-	"DATATERMINO" DATE, 
-	"LOCALEVENTO" VARCHAR2(15 BYTE), 
-	"ORGANIZADORES" VARCHAR2(45 BYTE), 
-	"DETALHES" VARCHAR2(300 BYTE), 
-	"FOLDER" VARCHAR2(100 BYTE)
-   ) SEGMENT CREATION DEFERRED 
-  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
- NOCOMPRESS LOGGING
-  TABLESPACE "USERS" ;
---------------------------------------------------------
---  DDL for Table PARTICIPANTEEVENTO
---------------------------------------------------------
+CREATE TABLE organizer(
+   organizer_registration INT PRIMARY KEY,
+   organizer_password VARCHAR2(50) NOT NULL,
+   organizer_name VARCHAR2(50) NOT NULL
+);
 
-  CREATE TABLE "PARTICIPANTEEVENTO" 
-   (	"IDPARTICIPANTE" NUMBER(*,0), 
-	"IDEVENTO" NUMBER(*,0)
-   ) SEGMENT CREATION DEFERRED 
-  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
- NOCOMPRESS LOGGING
-  TABLESPACE "USERS" ;
---------------------------------------------------------
---  DDL for Table PARTICIPANTES
---------------------------------------------------------
+CREATE TABLE campus(
+   id_campus INT PRIMARY KEY,
+   organizer_registration INT NOT NULL,
+   campus_name VARCHAR(50) NOT NULL,
+   field VARCHAR(200) NOT NULL,
+   FOREIGN KEY (organizer_registration) REFERENCES organizer(organizer_registration) 
+);
 
-  CREATE TABLE "PARTICIPANTES" 
-   (	"IDPARTICIPANTE" NUMBER(*,0), 
-	"NUMEROMATRICULA" VARCHAR2(10 BYTE), 
-	"SENHA" VARCHAR2(8 BYTE), 
-	"NOME" VARCHAR2(45 BYTE)
-   ) SEGMENT CREATION DEFERRED 
-  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
- NOCOMPRESS LOGGING
-  TABLESPACE "USERS" ;
+CREATE TABLE event(
+   id_event INT PRIMARY KEY,
+   id_campus INT NOT NULL,
+   start_date DATE,
+   end_date DATE,
+   event_details VARCHAR2(500),
+   event_folder BLOB,
+   avg_event_rate FLOAT DEFAULT 0,
+   FOREIGN KEY (id_campus) REFERENCES campus(id_campus) 
+);
+
+CREATE TABLE event_academic(
+   id_event_academic INT PRIMARY KEY,
+   academic_registration INT NOT NULL,
+   id_event INT NOT NULL,
+   event_precense VARCHAR2(10),
+   FOREIGN KEY (academic_registration) REFERENCES academic(academic_registration),
+   FOREIGN KEY (id_event) REFERENCES event(id_event)
+);
+
+
+CREATE TABLE event_review(
+   id_event_review INT PRIMARY KEY,
+   academic_registration INT NOT NULL,
+   id_event INT NOT NULL,
+   review_date DATE,
+   review_text VARCHAR2(500),
+   event_rate FLOAT DEFAULT 0,
+   FOREIGN KEY (academic_registration) REFERENCES academic(academic_registration),
+   FOREIGN KEY (id_event) REFERENCES event(id_event)
+);
+
+CREATE TABLE certificate(
+   id_certificate INT PRIMARY KEY,
+   organizer_registration INT NOT NULL,
+   academic_registration INT NOT NULL,
+   certificate_file BLOB,
+   FOREIGN KEY (academic_registration) REFERENCES academic(academic_registration),
+   FOREIGN KEY (organizer_registration) REFERENCES organizer(organizer_registration) 
+);
+
+CREATE TABLE event_organizer(
+   id_event_organizer INT PRIMARY KEY,
+   organizer_registration INT NOT NULL,
+   id_event INT NOT NULL,
+   FOREIGN KEY (organizer_registration) REFERENCES organizer(organizer_registration),
+   FOREIGN KEY (id_event) REFERENCES event(id_event)
+);
+
+
+
+
+
+
+
+
+
+
