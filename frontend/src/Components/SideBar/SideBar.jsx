@@ -5,7 +5,7 @@ import "./SideBar.css";
 const SideBar = ({open}) => {
   return(
     <Fragment>
-      <div className="fixed-left" style={{backgroundColor:"#2D2D29"}}>
+      <div className="fixed-left" style={{backgroundColor:"#121212"}}>
         <Collapse in={open} dimension="width">
           <div className="custom-sidebar" id="collapse-sidebar">
       

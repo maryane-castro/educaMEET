@@ -1,5 +1,4 @@
-.custom-navbar{
-    height: 80px;
+.navbar{
     background-color: #2D2D29; 
 }
 
@@ -8,6 +7,15 @@
 }
 
 .icons-width{
-    height:24px;
-    width:24px;
+    height:35px;
+    width:35px;
+}
+
+.logo{
+    width:300px;
+    height:auto;
+}
+
+.custom-btn{
+    background-color: #2D2D29;
 }
