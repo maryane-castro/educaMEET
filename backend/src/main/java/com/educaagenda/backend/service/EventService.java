@@ -1,7 +1,9 @@
 package com.educaagenda.backend.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,26 +25,23 @@ import jakarta.transaction.Transactional;
 public class EventService {
 
     @Autowired
-    EventRepository eventRepository;    
-    
+    EventRepository eventRepository;
+
     @Autowired
     AcademicRepository academicRepository;
 
     @Autowired
     OrganizerRepository organizerRepository;
-    
-    public List<Event> findAll() {
-        return eventRepository.findAll();
+
+    public ResponseEntity<Object> findAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                eventRepository.findAll().stream().map((event) -> new EventResponseDTO(event)).toList());
     }
 
     public ResponseEntity<Object> findById(Long id) {
-        Optional<Event> eventOptional = eventRepository.findById(id);
-
-        if (eventOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(new EventResponseDTO(eventOptional.get()));
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado.");
-        }
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Evento não encontrado"));
+        return ResponseEntity.status(HttpStatus.OK).body(new EventResponseDTO(event));
     }
 
     @Transactional
@@ -54,69 +53,67 @@ public class EventService {
     @Transactional
     public ResponseEntity<Object> delete(Long id) {
         Optional<Event> eventOptional = eventRepository.findById(id);
-        if(eventOptional.isPresent()){
+        if (eventOptional.isPresent()) {
             Event event = eventOptional.get();
             eventRepository.delete(event);
             return ResponseEntity.status(HttpStatus.OK).build();
-        }else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");
         }
     }
 
     @Transactional
     public ResponseEntity<Object> update(Long id, EventRequestDTO eventRequestDTO) {
-        //Achar
-        Optional<Event> eventOptional = eventRepository.findById(id);
-        if(eventOptional.isPresent()){
-            Event event = eventOptional.get();
-            // Modificar
-            if(eventRequestDTO.getName()!=null){
-                event.setName(eventRequestDTO.getName());
-            }
 
-            if (eventRequestDTO.getStartDate()!=null) {
-                event.setStartDate(eventRequestDTO.getStartDate());
-            }
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Evento não encontrado"));
 
-            if (eventRequestDTO.getEndDate()!=null) {
-                event.setEndDate(eventRequestDTO.getEndDate());
-            }
-
-            if(eventRequestDTO.getDetails()!=null){
-                event.setDetails(eventRequestDTO.getDetails());
-            }
-
-            if(eventRequestDTO.getFolder()!=null){
-                event.setFolder(eventRequestDTO.getFolder());
-            }
-
-            //Lista de academicos
-            //lista de organizadores
-            
-            // Salvar
-            EventResponseDTO eventResponseDTO = new EventResponseDTO(eventRepository.save(event));
-            return ResponseEntity.status(HttpStatus.CREATED).body(eventResponseDTO);
-        }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");
+        // Modificar
+        if (eventRequestDTO.getName() != null) {
+            event.setName(eventRequestDTO.getName());
         }
+
+        if (eventRequestDTO.getStartDate() != null) {
+            event.setStartDate(eventRequestDTO.getStartDate());
+        }
+
+        if (eventRequestDTO.getEndDate() != null) {
+            event.setEndDate(eventRequestDTO.getEndDate());
+        }
+
+        if (eventRequestDTO.getDetails() != null) {
+            event.setDetails(eventRequestDTO.getDetails());
+        }
+
+        if (eventRequestDTO.getFolder() != null) {
+            event.setFolder(eventRequestDTO.getFolder());
+        }           
+
+        // Salvar
+        return ResponseEntity.status(HttpStatus.OK).body(new EventResponseDTO(eventRepository.save(event)));
+
     }
 
     public ResponseEntity<Object> salvar_events_academics(Long event_id, Long academic_id) {
-        
+
         Optional<Event> eventOptional = eventRepository.findById(event_id);
         if (eventOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");                         
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");
         }
 
         Optional<Academic> academicOptional = academicRepository.findById(academic_id);
         if (academicOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Academico não encontrado");             
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Academico não encontrado");
         }
 
-        Event event = eventOptional.get();             
+        Event event = eventOptional.get();
         Academic academic = academicOptional.get();
 
-        event.getAcademics().add(academic);        
+        if (academic.getEvents().contains(event)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Academico já cadastrado no Evento");
+        }
+
+        event.getAcademics().add(academic);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
     }
@@ -126,19 +123,23 @@ public class EventService {
 
         Optional<Event> eventOptional = eventRepository.findById(event_id);
         if (eventOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");                         
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");
         }
 
         Optional<Organizer> organizerOptional = organizerRepository.findById(organizer_id);
         if (organizerOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Organizador não encontrado");             
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Organizador não encontrado");
         }
 
         Event event = eventOptional.get();
         Organizer organizer = organizerOptional.get();
-        
+
+        if (organizer.getEvents().contains(event)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Organizador já cadastrado no Evento");
+        }
+
         event.getOrganizers().add(organizer);
-        
+
         return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
     }
 
@@ -146,26 +147,33 @@ public class EventService {
 
         Optional<Event> eventOptional = eventRepository.findById(event_id);
         if (eventOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");                         
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");
         }
 
         Optional<Academic> academicOptional = academicRepository.findById(academic_id);
         if (academicOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Academico não encontrado");             
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Academico não encontrado");
         }
 
         Optional<Organizer> organizerOptional = organizerRepository.findById(organizer_id);
         if (organizerOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Organizador não encontrado");             
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Organizador não encontrado");
         }
 
         Event event = eventOptional.get();
         Academic academic = academicOptional.get();
+        if (academic.getEvents().contains(event)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Academico já cadastrado no Evento");
+        }
+
         Organizer organizer = organizerOptional.get();
-        
+        if (organizer.getEvents().contains(event)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Organizador já cadastrado no Evento");
+        }
+
         event.getAcademics().add(academic);
         event.getOrganizers().add(organizer);
-        
+
         return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
     }
 

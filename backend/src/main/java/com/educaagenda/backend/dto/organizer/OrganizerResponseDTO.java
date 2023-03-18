@@ -1,5 +1,8 @@
 package com.educaagenda.backend.dto.organizer;
 
+import java.util.Set;
+
+import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.model.Organizer;
 
 public class OrganizerResponseDTO {
@@ -7,21 +10,25 @@ public class OrganizerResponseDTO {
     private Long id;
     private String name;
     private String password;
+    Set<Event> events;    
 
     public OrganizerResponseDTO() {        
     }
 
-    public OrganizerResponseDTO(Long id, String name, String password) {
+    public OrganizerResponseDTO(Long id, String name, String password, Set<Event> events) {
         this.id = id;
         this.name = name;
         this.password = password;
+        this.events = events;
     }
 
-    public OrganizerResponseDTO(Organizer organizer) {
-        this.id = organizer.getId();
-        this.name = organizer.getName();
-        this.password = organizer.getPassword();
+    public Set<Event> getEvents() {
+        return events;
     }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }    
 
     public Long getId() {
         return id;
@@ -46,5 +53,12 @@ public class OrganizerResponseDTO {
     public void setPassword(String password) {
         this.password = password;
     } 
+
+    public OrganizerResponseDTO(Organizer organizer) {
+        this.id = organizer.getId();
+        this.name = organizer.getName();
+        this.password = organizer.getPassword();
+        this.events = organizer.getEvents();
+    }
     
 }

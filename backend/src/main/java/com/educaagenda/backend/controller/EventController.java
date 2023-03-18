@@ -32,10 +32,10 @@ public class EventController {
     }
 
     @GetMapping
-    public List<EventResponseDTO> findAll(){
-        List<Event> list = eventService.findAll();
-        return list.stream().map(EventResponseDTO::new).toList();
+    public ResponseEntity<Object> findAll(){
+        return eventService.findAll();
     }
+    
 
     @PostMapping
     public EventResponseDTO save(@RequestBody EventRequestDTO eventRequestDTO) {

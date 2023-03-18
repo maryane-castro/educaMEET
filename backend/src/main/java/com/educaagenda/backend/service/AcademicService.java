@@ -1,7 +1,7 @@
 package com.educaagenda.backend.service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,13 +26,9 @@ public class AcademicService {
     }
 
     public ResponseEntity<Object> findById(Long id) {
-        Optional<Academic> academicOptional = academicRepository.findById(id);
-
-        if (academicOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(new AcademicResponseDTO(academicOptional.get()));
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Academico não encontrado.");
-        }
+        
+        Academic academic = academicRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Acadêmico não encontrado"));
+        return ResponseEntity.status(HttpStatus.OK).body(new AcademicResponseDTO(academic));
     }
 
     @Transactional
@@ -43,39 +39,32 @@ public class AcademicService {
 
     @Transactional
     public ResponseEntity<Object> delete(Long id) {
-        Optional<Academic> academicOptional = academicRepository.findById(id);
-        if (academicOptional.isPresent()) {
-            Academic academic = academicOptional.get();
-            academicRepository.delete(academic);
-            return ResponseEntity.status(HttpStatus.OK).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Academico não encontrado");
-        }
+
+        Academic academic = academicRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Acadêmico não encontrado"));
+        academicRepository.delete(academic);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+
     }
 
     @Transactional
     public ResponseEntity<Object> update(Long id, AcademicRequestDTO academicRequestDTO) {
-        // Achar
-        Optional<Academic> academicOptional = academicRepository.findById(id);
-        if (academicOptional.isPresent()) {
-            Academic academic = academicOptional.get();
-            // Modificar
-            if (academicRequestDTO.getName() != null) {
-                academic.setName(academicRequestDTO.getName());
-            }
 
-            if (academicRequestDTO.getPassword() != null) {
-                academic.setPassword(academicRequestDTO.getPassword());
-            }
+        Academic academic = academicRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Organizador não encontrado"));
 
-            // Lista de eventos
-
-            // Salvar
-            AcademicResponseDTO academicResponseDTO = new AcademicResponseDTO(academicRepository.save(academic));
-            return ResponseEntity.status(HttpStatus.CREATED).body(academicResponseDTO);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Academico não encontrado");
+        // Modificar
+        if (academicRequestDTO.getName() != null) {
+            academic.setName(academicRequestDTO.getName());
         }
+
+        if (academicRequestDTO.getPassword() != null) {
+            academic.setPassword(academicRequestDTO.getPassword());
+        }
+
+        // Salvar
+        AcademicResponseDTO academicResponseDTO = new AcademicResponseDTO(academicRepository.save(academic));
+        return ResponseEntity.status(HttpStatus.CREATED).body(academicResponseDTO);
+
     }
 
 }

@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +26,8 @@ public class Event {
     private String folder;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = Academic.class, cascade = CascadeType.ALL)
+    //@ManyToMany(targetEntity = Academic.class, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Academic.class)
     @JoinTable(
         name = "events_academics", 
         // joinColumns = @JoinColumn(name = "academic_id"),
@@ -37,7 +37,8 @@ public class Event {
     Set<Academic> academics;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = Organizer.class, cascade = CascadeType.ALL)
+    //@ManyToMany(targetEntity = Organizer.class, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Organizer.class)
     @JoinTable(
         name = "events_organizers", 
         joinColumns = @JoinColumn(name = "event_id"),
