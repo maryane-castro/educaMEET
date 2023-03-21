@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import { ReactComponent as Logo } from '../../assets/logo-educameet.svg';
+import { ReactComponent as Logo } from '../../assets/logo-educameet-light.svg';
 //import {FiSearch} from "react-icons/fi";
 import HamburgerButton from './Components/HamburgerButton';
 import ProfileImg from './Components/ProfileImg';

@@ -9,6 +9,14 @@ const Events = () => {
            <EventCard/>
            <EventCard/>
            <EventCard/>
+           <EventCard/>
+           <EventCard/>
+           <EventCard/>
+           <EventCard/>
+           <EventCard/>
+           <EventCard/>
+           <EventCard/>
+           <EventCard/>
            
         </Container>
     )

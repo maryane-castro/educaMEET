@@ -1,5 +1,20 @@
 .event-container{
     padding-top:80px;
     width: 100%;
-    height: calc(100vh - 80px);
+    height: 100vh;
+    background-color: #DFECE6;
+}
+
+.event-img{
+    height: 300px;
+    object-fit: cover;
+}
+
+.event-icon{
+    font-size: 30px;
+}
+
+.btn-green{
+    background-color:#92C7A3;
+    
 }
