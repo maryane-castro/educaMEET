@@ -5,7 +5,7 @@ const ProfileImg = () => {
     return(
         <Fragment>
             <Image src='https://avatars.githubusercontent.com/u/954547?v=4'
-                width={50} 
+                width={30} 
                 alt='Profile Image' 
                 roundedCircle
             >

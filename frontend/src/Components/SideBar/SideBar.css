@@ -1,7 +1,10 @@
-.custom-sidebar{
-    border-right:solid #2D2D29 5px;
+.open-sidebar{
     margin-top: 80px;
-    background-color:#121212;
+    background-color:#DFECE6;
     height:calc(100vh - 80px);
     width: 500px;
+}
+
+.close-sidebar{
+    background-color:#DFECE6;
 }
