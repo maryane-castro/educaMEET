@@ -1,9 +1,7 @@
 package com.educaagenda.backend.service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,14 +50,12 @@ public class EventService {
 
     @Transactional
     public ResponseEntity<Object> delete(Long id) {
-        Optional<Event> eventOptional = eventRepository.findById(id);
-        if (eventOptional.isPresent()) {
-            Event event = eventOptional.get();
-            eventRepository.delete(event);
-            return ResponseEntity.status(HttpStatus.OK).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento não encontrado");
-        }
+
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Evento não Encontrado"));
+        eventRepository.delete(event);
+        
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @Transactional
@@ -87,7 +83,7 @@ public class EventService {
 
         if (eventRequestDTO.getFolder() != null) {
             event.setFolder(eventRequestDTO.getFolder());
-        }           
+        }
 
         // Salvar
         return ResponseEntity.status(HttpStatus.OK).body(new EventResponseDTO(eventRepository.save(event)));
@@ -143,6 +139,7 @@ public class EventService {
         return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
     }
 
+    //será usado???
     public ResponseEntity<Object> save_participants_events(Long event_id, Long academic_id, Long organizer_id) {
 
         Optional<Event> eventOptional = eventRepository.findById(event_id);
@@ -175,6 +172,6 @@ public class EventService {
         event.getOrganizers().add(organizer);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
-    }
+    }   
 
 }

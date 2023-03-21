@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Event {
@@ -29,29 +30,28 @@ public class Event {
     //@ManyToMany(targetEntity = Academic.class, cascade = CascadeType.ALL)
     @ManyToMany(targetEntity = Academic.class)
     @JoinTable(
-        name = "events_academics", 
-        // joinColumns = @JoinColumn(name = "academic_id"),
-        // inverseJoinColumns = @JoinColumn(name = "event_id"))
+        name = "events_academics",         
         joinColumns = @JoinColumn(name = "event_id"),
         inverseJoinColumns = @JoinColumn(name = "academic_id"))
     Set<Academic> academics;
-
+ 
     @JsonIgnore
     //@ManyToMany(targetEntity = Organizer.class, cascade = CascadeType.ALL)
     @ManyToMany(targetEntity = Organizer.class)
     @JoinTable(
         name = "events_organizers", 
         joinColumns = @JoinColumn(name = "event_id"),
-        inverseJoinColumns = @JoinColumn(name = "organizer_id"))
-        // joinColumns = @JoinColumn(name = "organizer_id"),
-        // inverseJoinColumns = @JoinColumn(name = "event_id"))
+        inverseJoinColumns = @JoinColumn(name = "organizer_id"))        
     Set<Organizer> organizers;
+
+    @OneToMany(mappedBy = "event")
+    Set<EventReview> reviews;
     
     public Event() {
-    }
+    }    
 
     public Event(long id, String name, LocalDate startDate, LocalDate endDate, String details, String folder,
-            Set<Academic> academics, Set<Organizer> organizers) {
+            Set<Academic> academics, Set<Organizer> organizers, Set<EventReview> reviews) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -60,6 +60,7 @@ public class Event {
         this.folder = folder;
         this.academics = academics;
         this.organizers = organizers;
+        this.reviews = reviews;
     }
 
     public long getId() {
@@ -124,7 +125,14 @@ public class Event {
 
     public void setOrganizers(Set<Organizer> organizers) {
         this.organizers = organizers;
+    }    
+
+    public Set<EventReview> getReviews() {
+        return reviews;
     }
-    
+
+    public void setReviews(Set<EventReview> reviews) {
+        this.reviews = reviews;
+    }    
     
 }

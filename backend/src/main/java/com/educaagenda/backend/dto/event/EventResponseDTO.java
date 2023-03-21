@@ -1,13 +1,16 @@
 package com.educaagenda.backend.dto.event;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
 import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.model.Event;
+import com.educaagenda.backend.model.EventReview;
 import com.educaagenda.backend.model.Organizer;
 
-public class EventResponseDTO {
+public class EventResponseDTO  implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private Long id;  
     private String name;
@@ -17,6 +20,7 @@ public class EventResponseDTO {
     private String folder;     
     private Set<Academic> academics;
     private Set<Organizer> organizers;
+    private Set<EventReview> reviews;
 
     public EventResponseDTO(Event event) {
         this.id = event.getId();
@@ -27,7 +31,15 @@ public class EventResponseDTO {
         this.folder = event.getFolder();
         this.academics = event.getAcademics();
         this.organizers = event.getOrganizers();
+        this.reviews = event.getReviews();
     }    
+
+    public EventResponseDTO() {
+    }
+    
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
 
     public Long getId() {
         return id;
@@ -91,7 +103,14 @@ public class EventResponseDTO {
 
     public void setOrganizers(Set<Organizer> organizers) {
         this.organizers = organizers;
-    }  
-      
+    }
+
+    public Set<EventReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<EventReview> reviews) {
+        this.reviews = reviews;
+    }    
         
 }

@@ -1,8 +1,11 @@
 package com.educaagenda.backend.dto.organizer;
 
+import java.io.Serializable;
+
 import com.educaagenda.backend.model.Organizer;
 
-public class OrganizerRequestDTO {
+public class OrganizerRequestDTO  implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private String name;
     private String password;

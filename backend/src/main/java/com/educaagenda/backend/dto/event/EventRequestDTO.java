@@ -1,13 +1,17 @@
 package com.educaagenda.backend.dto.event;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
 import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.model.Event;
+import com.educaagenda.backend.model.EventReview;
 import com.educaagenda.backend.model.Organizer;
 
-public class EventRequestDTO {
+public class EventRequestDTO  implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     private Long id;
     private String name;
     private LocalDate startDate;
@@ -16,12 +20,13 @@ public class EventRequestDTO {
     private String folder;
     private Set<Academic> academics;
     private Set<Organizer> organizers;
+    private Set<EventReview> reviews;
 
     public EventRequestDTO() {
     }
 
     public EventRequestDTO(Long id, String name, LocalDate startDate, LocalDate endDate, String details, String folder,
-            Set<Academic> academics, Set<Organizer> organizers) {
+            Set<Academic> academics, Set<Organizer> organizers, Set<EventReview> reviews) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -30,6 +35,7 @@ public class EventRequestDTO {
         this.folder = folder;
         this.academics = academics;
         this.organizers = organizers;
+        this.reviews = reviews;
     }
 
     public String getName() {
@@ -92,6 +98,23 @@ public class EventRequestDTO {
         this.organizers = organizers;
     }
 
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }   
+    
+
+    public Set<EventReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<EventReview> reviews) {
+        this.reviews = reviews;
+    }
+
     public Event toEvent() {
         Event event = new Event();
 
@@ -101,7 +124,8 @@ public class EventRequestDTO {
         event.setDetails(details);
         event.setFolder(folder);
         event.setAcademics(academics);
-        event.setOrganizers(organizers);
+        event.setOrganizers(organizers);    
+        event.setReviews(reviews);    
         return event;
     }
 

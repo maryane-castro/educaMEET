@@ -1,7 +1,5 @@
 package com.educaagenda.backend.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.educaagenda.backend.dto.event.EventRequestDTO;
 import com.educaagenda.backend.dto.event.EventResponseDTO;
-import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.service.EventService;
 
 @RestController
@@ -24,7 +21,6 @@ public class EventController {
     
     @Autowired
     EventService eventService;
-
     
     @GetMapping("/{id}")
     public ResponseEntity<Object> findById(@PathVariable(name = "id") Long id) {
@@ -34,8 +30,7 @@ public class EventController {
     @GetMapping
     public ResponseEntity<Object> findAll(){
         return eventService.findAll();
-    }
-    
+    }    
 
     @PostMapping
     public EventResponseDTO save(@RequestBody EventRequestDTO eventRequestDTO) {
@@ -70,7 +65,8 @@ public class EventController {
 
         return eventService.salvar_events_organizers(event_id, organizer_id);
     }
-
+    
+    //será usado???
     @PostMapping("participants_events/{event_id}/{academic_id}/{organizer_id}")
     public ResponseEntity<Object> participantes_eventos(
         @PathVariable(name = "event_id") Long event_id,

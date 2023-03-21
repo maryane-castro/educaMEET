@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Academic {
@@ -26,14 +27,18 @@ public class Academic {
         mappedBy = "academics")
     Set<Event> events;
 
+    @OneToMany(mappedBy = "academic")
+    Set<EventReview> reviews;
+
     public Academic() {        
     }
-
-    public Academic(long id, String name, String password, Set<Event> events) {
+    
+    public Academic(long id, String name, String password, Set<Event> events, Set<EventReview> reviews) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.events = events;
+        this.reviews = reviews;
     }
 
     public long getId() {
@@ -66,6 +71,15 @@ public class Academic {
 
     public void setEvents(Set<Event> events) {
         this.events = events;
-    }    
+    }
+
+    public Set<EventReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<EventReview> reviews) {
+        this.reviews = reviews;
+    }      
+    
 
 }

@@ -1,24 +1,38 @@
 package com.educaagenda.backend.dto.academic;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.model.Event;
+import com.educaagenda.backend.model.EventReview;
 
-public class AcademicResponseDTO {
+public class AcademicResponseDTO implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     private Long id;
     private String name;
     private String password; 
     private Set<Event> events;
+    private Set<EventReview> reviews;
 
     public AcademicResponseDTO() {        
-    }        
+    }           
 
-    public AcademicResponseDTO(Long id, String name, String password, Set<Event> events) {
+    public AcademicResponseDTO(Long id, String name, String password, Set<Event> events, Set<EventReview> reviews) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.events = events;
+        this.reviews = reviews;
+    }
+
+    public AcademicResponseDTO(Academic academic) {
+        id = academic.getId();
+        name = academic.getName();
+        password = academic.getPassword();
+        events = academic.getEvents();
+        reviews = academic.getReviews();
     }
 
     public Long getId() {
@@ -51,13 +65,18 @@ public class AcademicResponseDTO {
     
     public void setEvents(Set<Event> events) {
         this.events = events;
-    }    
-    
-    public AcademicResponseDTO(Academic academic) {
-        id = academic.getId();
-        name = academic.getName();
-        password = academic.getPassword();
-        events = academic.getEvents();
+    } 
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public Set<EventReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<EventReview> reviews) {
+        this.reviews = reviews;
     }
     
 }
