@@ -25,7 +25,7 @@ public class Event {
     private LocalDate endDate;
     private String details;
     private String folder;
-
+    
     @JsonIgnore
     //@ManyToMany(targetEntity = Academic.class, cascade = CascadeType.ALL)
     @ManyToMany(targetEntity = Academic.class)
@@ -134,5 +134,4 @@ public class Event {
     public void setReviews(Set<EventReview> reviews) {
         this.reviews = reviews;
     }    
-    
 }

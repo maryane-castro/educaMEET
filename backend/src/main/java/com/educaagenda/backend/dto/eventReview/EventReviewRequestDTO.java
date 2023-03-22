@@ -3,27 +3,25 @@ package com.educaagenda.backend.dto.eventReview;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import com.educaagenda.backend.model.Academic;
-import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.model.EventReview;
 
 public class EventReviewRequestDTO implements Serializable{
     private static final long serialVersionUID = 1L;
     
     private Long id;
-    private Academic academic;
-    private Event event;
+    private Long academicId;
+    private Long eventId;
     private LocalDate date;
     private String text;
     private int rate_value;    
     
     public EventReviewRequestDTO() {
     }
-
-    public EventReviewRequestDTO(Long id, Academic academic, Event event, LocalDate date, String text, int rate_value) {
+  
+    public EventReviewRequestDTO(Long id, Long academicId, Long eventId, LocalDate date, String text, int rate_value) {
         this.id = id;
-        this.academic = academic;
-        this.event = event;
+        this.academicId = academicId;
+        this.eventId = eventId;
         this.date = date;
         this.text = text;
         this.rate_value = rate_value;
@@ -31,12 +29,16 @@ public class EventReviewRequestDTO implements Serializable{
 
     public EventReview toEventReview() {
         EventReview eventReview = new EventReview();
-        eventReview.setAcademic(academic);
-        eventReview.setEvent(event);
+        //eventReview.setAcademic(null);
+        //eventReview.setEvent(null);
         eventReview.setDate(date);
         eventReview.setText(text);
         eventReview.setRate_value(rate_value);      
         return eventReview;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
     }
 
     public Long getId() {
@@ -47,20 +49,20 @@ public class EventReviewRequestDTO implements Serializable{
         this.id = id;
     }
 
-    public Academic getAcademic() {
-        return academic;
+    public Long getAcademicId() {
+        return academicId;
     }
 
-    public void setAcademic(Academic academic) {
-        this.academic = academic;
+    public void setAcademicId(Long academicId) {
+        this.academicId = academicId;
     }
 
-    public Event getEvent() {
-        return event;
+    public Long getEventId() {
+        return eventId;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
     }
 
     public LocalDate getDate() {
@@ -86,4 +88,6 @@ public class EventReviewRequestDTO implements Serializable{
     public void setRate_value(int rate_value) {
         this.rate_value = rate_value;
     }
+
+    
 }

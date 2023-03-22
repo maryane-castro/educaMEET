@@ -41,4 +41,4 @@ insert into events_organizers (organizer_id, event_id) values (3,4);
 -- insert into event_review (date, rate, text) values ('2022-03-18', 8,'teste de teste');
 --insert into event_review (date, rate, text, academic_id) values ('2022-03-18', 8, 'teste de teste', 1)
 insert into event_review (date, text, rate_value, academic_id, event_id) values ('2022-03-18', 'teste de teste', 8, 1, 1)
-insert into event_review (date, text, rate_value, academic_id, event_id) values ('2022-03-20', 'avaliação dia 20/3', 8, 2, 1)
+insert into event_review (date, text, rate_value, academic_id, event_id) values ('2022-03-20', 'avaliação dia 20/3', 9, 2, 1)

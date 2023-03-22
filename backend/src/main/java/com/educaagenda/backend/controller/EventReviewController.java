@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.educaagenda.backend.dto.eventReview.EventReviewRequestDTO;
+import com.educaagenda.backend.dto.eventReview.EventReviewResponseDTO;
 import com.educaagenda.backend.service.EventReviewService;
 
 @RestController
@@ -30,8 +31,8 @@ public class EventReviewController {
     }     
 
     @PostMapping
-    public EventReviewRequestDTO save(@RequestBody EventReviewRequestDTO eventReviewRequestDTO) {
-        return eventReviewService.salvar(eventReviewRequestDTO);
+    public EventReviewResponseDTO saveReview(@RequestBody EventReviewRequestDTO eventReviewRequestDTO) {
+        return eventReviewService.saveReview(eventReviewRequestDTO);
     }
     
 

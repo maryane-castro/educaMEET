@@ -45,7 +45,7 @@ public class EventService {
     @Transactional
     public EventResponseDTO save(EventRequestDTO eventRequestDTO) {
         Event event = eventRequestDTO.toEvent();
-        return new EventResponseDTO(eventRepository.save(event));
+        return new EventResponseDTO(eventRepository.save(event));        
     }
 
     @Transactional

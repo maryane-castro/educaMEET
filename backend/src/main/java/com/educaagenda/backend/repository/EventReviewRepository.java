@@ -10,7 +10,8 @@ import com.educaagenda.backend.model.EventReview;
 
 @Repository
 public interface EventReviewRepository extends JpaRepository<EventReview, Long>{
-        
+
+    // procura por Eventos que já receberam Avaliações        
     List<EventReview> findByEvent(Event event);
 
 }
