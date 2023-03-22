@@ -70,6 +70,10 @@ public class EventReviewService {
 
         eventReview.setAcademic(academic);
         eventReview.setEvent(event);
+
+        if (!event.getAcademics().contains(academic)) {
+            throw new NoSuchElementException("Este Acadêmico não está inscrito neste Evento!");
+        }        
         
         return new EventReviewResponseDTO(eventReviewRepository.save(eventReview));
     }
