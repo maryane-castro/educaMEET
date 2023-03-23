@@ -32,11 +32,11 @@ public class EventReview implements  Serializable{
 
     private LocalDate date;
     private String text;
-    private int rate_value;
+    private double rate_value;
     
     public EventReview() {    }
 
-    public EventReview(Long id, Event event, Academic academic, LocalDate date, String text, int rate_value) {
+    public EventReview(Long id, Event event, Academic academic, LocalDate date, String text, double rate_value) {
         this.id = id;
         this.event = event;
         this.academic = academic;
@@ -85,11 +85,11 @@ public class EventReview implements  Serializable{
         this.text = text;
     }
 
-    public int getRate_value() {
+    public double getRate_value() {
         return rate_value;
     }
 
-    public void setRate_value(int rate_value) {
+    public void setRate_value(double rate_value) {
         this.rate_value = rate_value;
     }
 

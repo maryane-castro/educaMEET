@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -73,8 +74,39 @@ public class EventReviewService {
 
         if (!event.getAcademics().contains(academic)) {
             throw new NoSuchElementException("Este Acadêmico não está inscrito neste Evento!");
-        }        
-        
+        }
+
         return new EventReviewResponseDTO(eventReviewRepository.save(eventReview));
     }
+
+    public ResponseEntity<Object> findById(Long id) {
+        EventReview eventReview = eventReviewRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Avaliação não encontrada"));
+        return ResponseEntity.status(HttpStatus.OK).body(new EventReviewResponseDTO(eventReview));
+    }
+
+    @Transactional
+    public ResponseEntity<Object> update(Long id, EventReviewRequestDTO eventReviewRequestDTO) {
+
+        EventReview eventReview = eventReviewRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Avaliação não encontrada"));
+      
+        // data
+        if (eventReviewRequestDTO.getDate() != null) {
+            eventReview.setDate(eventReviewRequestDTO.getDate());
+        }
+
+        // texto avaliacao        
+        if (eventReviewRequestDTO.getText() != null) {
+            eventReview.setText(eventReviewRequestDTO.getText());
+        }
+
+        //avaliação
+        eventReview.setRate_value(eventReviewRequestDTO.getRate_value());
+
+        return ResponseEntity.status(HttpStatus.OK).body(new EventReviewResponseDTO(eventReviewRepository.save(eventReview)));
+
+    }
+
+    
 }

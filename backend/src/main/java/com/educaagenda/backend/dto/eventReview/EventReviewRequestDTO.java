@@ -13,12 +13,12 @@ public class EventReviewRequestDTO implements Serializable{
     private Long eventId;
     private LocalDate date;
     private String text;
-    private int rate_value;    
+    private double rate_value;    
     
     public EventReviewRequestDTO() {
     }
   
-    public EventReviewRequestDTO(Long id, Long academicId, Long eventId, LocalDate date, String text, int rate_value) {
+    public EventReviewRequestDTO(Long id, Long academicId, Long eventId, LocalDate date, String text, double rate_value) {
         this.id = id;
         this.academicId = academicId;
         this.eventId = eventId;
@@ -81,11 +81,11 @@ public class EventReviewRequestDTO implements Serializable{
         this.text = text;
     }
 
-    public int getRate_value() {
+    public double getRate_value() {
         return rate_value;
     }
 
-    public void setRate_value(int rate_value) {
+    public void setRate_value(double rate_value) {
         this.rate_value = rate_value;
     }
 

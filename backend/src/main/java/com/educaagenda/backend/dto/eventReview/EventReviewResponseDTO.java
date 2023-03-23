@@ -15,7 +15,7 @@ public class EventReviewResponseDTO implements Serializable {
     private Event event;
     private LocalDate date;
     private String text;
-    private int rate_value;
+    private double rate_value;
 
     public EventReviewResponseDTO(EventReview eventReview) {
         this.id = eventReview.getId();
@@ -69,11 +69,11 @@ public class EventReviewResponseDTO implements Serializable {
         this.text = text;
     }
 
-    public int getRate_value() {
+    public double getRate_value() {
         return rate_value;
     }
 
-    public void setRate_value(int rate_value) {
+    public void setRate_value(double rate_value) {
         this.rate_value = rate_value;
     }
 
