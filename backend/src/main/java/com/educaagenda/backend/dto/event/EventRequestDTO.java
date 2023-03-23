@@ -18,6 +18,7 @@ public class EventRequestDTO  implements Serializable{
     private LocalDate endDate;
     private String details;
     private String folder;
+    private double score;
     private Set<Academic> academics;
     private Set<Organizer> organizers;
     private Set<EventReview> reviews;
@@ -26,13 +27,14 @@ public class EventRequestDTO  implements Serializable{
     }
 
     public EventRequestDTO(Long id, String name, LocalDate startDate, LocalDate endDate, String details, String folder,
-            Set<Academic> academics, Set<Organizer> organizers, Set<EventReview> reviews) {
+            Set<Academic> academics, Set<Organizer> organizers, Set<EventReview> reviews, double score) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.details = details;
         this.folder = folder;
+        this.score = score;
         this.academics = academics;
         this.organizers = organizers;
         this.reviews = reviews;
@@ -115,18 +117,27 @@ public class EventRequestDTO  implements Serializable{
         this.reviews = reviews;
     }
 
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
     public Event toEvent() {
         Event event = new Event();
-
         event.setName(name);
         event.setStartDate(startDate);
         event.setEndDate(endDate);
         event.setDetails(details);
         event.setFolder(folder);
+        event.setScore(score);    
         event.setAcademics(academics);
         event.setOrganizers(organizers);    
-        event.setReviews(reviews);    
+        event.setReviews(reviews);
         return event;
     }
+
 
 }

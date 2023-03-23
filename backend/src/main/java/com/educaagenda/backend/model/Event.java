@@ -25,6 +25,7 @@ public class Event {
     private LocalDate endDate;
     private String details;
     private String folder;
+    private double score;
     
     @JsonIgnore
     //@ManyToMany(targetEntity = Academic.class, cascade = CascadeType.ALL)
@@ -51,17 +52,18 @@ public class Event {
     }    
 
     public Event(long id, String name, LocalDate startDate, LocalDate endDate, String details, String folder,
-            Set<Academic> academics, Set<Organizer> organizers, Set<EventReview> reviews) {
+            Set<Academic> academics, Set<Organizer> organizers, Set<EventReview> reviews, double score) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.details = details;
         this.folder = folder;
+        this.score = score;
         this.academics = academics;
         this.organizers = organizers;
         this.reviews = reviews;
-    }
+    }   
 
     public long getId() {
         return id;
@@ -133,5 +135,13 @@ public class Event {
 
     public void setReviews(Set<EventReview> reviews) {
         this.reviews = reviews;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
     }    
 }

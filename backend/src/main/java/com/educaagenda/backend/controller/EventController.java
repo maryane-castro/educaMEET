@@ -18,19 +18,19 @@ import com.educaagenda.backend.service.EventService;
 @RestController
 @RequestMapping("/events")
 public class EventController {
-    
+
     @Autowired
     EventService eventService;
-    
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> findById(@PathVariable(name = "id") Long id) {
         return eventService.findById(id);
     }
 
     @GetMapping
-    public ResponseEntity<Object> findAll(){
+    public ResponseEntity<Object> findAll() {
         return eventService.findAll();
-    }    
+    }
 
     @PostMapping
     public EventResponseDTO save(@RequestBody EventRequestDTO eventRequestDTO) {
@@ -40,20 +40,26 @@ public class EventController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(
             @PathVariable(name = "id") Long id,
-            @RequestBody EventRequestDTO eventRequestDTO){
+            @RequestBody EventRequestDTO eventRequestDTO) {
         return eventService.update(id, eventRequestDTO);
+    }
+
+    @PutMapping("score/{eventId}")
+    public EventResponseDTO saveScore(
+            @PathVariable(name = "eventId") Long eventId) {
+        return eventService.saveScore(eventId);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(
-            @PathVariable(name = "id") Long id){
+            @PathVariable(name = "id") Long id) {
         return eventService.delete(id);
     }
 
     @PostMapping("events_academics/{event_id}/{academic_id}")
     public ResponseEntity<Object> events_academics(
-        @PathVariable(name = "event_id") Long event_id,
-            @PathVariable(name = "academic_id") Long academic_id){
+            @PathVariable(name = "event_id") Long event_id,
+            @PathVariable(name = "academic_id") Long academic_id) {
 
         return eventService.salvar_events_academics(event_id, academic_id);
     }
@@ -65,13 +71,13 @@ public class EventController {
 
         return eventService.salvar_events_organizers(event_id, organizer_id);
     }
-    
-    //será usado???
+
+    // será usado???
     @PostMapping("participants_events/{event_id}/{academic_id}/{organizer_id}")
     public ResponseEntity<Object> participantes_eventos(
-        @PathVariable(name = "event_id") Long event_id,
-        @PathVariable(name = "academic_id") Long academic_id,
-        @PathVariable(name = "organizer_id") Long organizer_id) {
-            return eventService.save_participants_events(event_id, academic_id, organizer_id);
-        }   
+            @PathVariable(name = "event_id") Long event_id,
+            @PathVariable(name = "academic_id") Long academic_id,
+            @PathVariable(name = "organizer_id") Long organizer_id) {
+        return eventService.save_participants_events(event_id, academic_id, organizer_id);
+    }
 }

@@ -12,6 +12,7 @@ import com.educaagenda.backend.dto.event.EventRequestDTO;
 import com.educaagenda.backend.dto.event.EventResponseDTO;
 import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.model.Event;
+import com.educaagenda.backend.model.EventReview;
 import com.educaagenda.backend.model.Organizer;
 import com.educaagenda.backend.repository.AcademicRepository;
 import com.educaagenda.backend.repository.EventRepository;
@@ -173,5 +174,24 @@ public class EventService {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
     }   
+
+    @Transactional
+    public EventResponseDTO saveScore(Long id) {
+        
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Evento não encontrado"));
+        
+        double sum = 0.0;
+
+        for (EventReview e : event.getReviews()) {
+            sum = sum + e.getRate_value();
+        }
+
+        double avg = sum / event.getReviews().size();
+
+        event.setScore(avg);        
+
+        return new EventResponseDTO(eventRepository.save(event));
+    }  
 
 }

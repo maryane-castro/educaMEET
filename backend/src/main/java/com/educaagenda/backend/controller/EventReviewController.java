@@ -47,5 +47,4 @@ public class EventReviewController {
             @RequestBody EventReviewRequestDTO eventReviewRequestDTO){
         return eventReviewService.update(id, eventReviewRequestDTO);
     }
-
 }

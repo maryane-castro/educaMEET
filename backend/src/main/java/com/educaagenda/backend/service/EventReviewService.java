@@ -90,23 +90,23 @@ public class EventReviewService {
 
         EventReview eventReview = eventReviewRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Avaliação não encontrada"));
-      
+
         // data
         if (eventReviewRequestDTO.getDate() != null) {
             eventReview.setDate(eventReviewRequestDTO.getDate());
         }
 
-        // texto avaliacao        
+        // texto avaliacao
         if (eventReviewRequestDTO.getText() != null) {
             eventReview.setText(eventReviewRequestDTO.getText());
         }
 
-        //avaliação
+        // avaliação
         eventReview.setRate_value(eventReviewRequestDTO.getRate_value());
 
-        return ResponseEntity.status(HttpStatus.OK).body(new EventReviewResponseDTO(eventReviewRepository.save(eventReview)));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new EventReviewResponseDTO(eventReviewRepository.save(eventReview)));
 
-    }
+    }   
 
-    
 }
