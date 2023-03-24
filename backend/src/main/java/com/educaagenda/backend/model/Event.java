@@ -21,6 +21,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    private String campus;
     private LocalDate startDate;
     private LocalDate endDate;
     private String details;
@@ -51,10 +52,11 @@ public class Event {
     public Event() {
     }    
 
-    public Event(long id, String name, LocalDate startDate, LocalDate endDate, String details, String folder,
+    public Event(long id, String name, String campus, LocalDate startDate, LocalDate endDate, String details, String folder,
             Set<Academic> academics, Set<Organizer> organizers, Set<EventReview> reviews, double score) {
         this.id = id;
         this.name = name;
+        this.campus = campus;
         this.startDate = startDate;
         this.endDate = endDate;
         this.details = details;
@@ -63,7 +65,7 @@ public class Event {
         this.academics = academics;
         this.organizers = organizers;
         this.reviews = reviews;
-    }   
+    }       
 
     public long getId() {
         return id;
@@ -143,5 +145,13 @@ public class Event {
 
     public void setScore(double score) {
         this.score = score;
+    }
+
+    public String getCampus() {
+        return campus;
+    }
+
+    public void setCampus(String campus) {
+        this.campus = campus;
     }    
 }

@@ -14,6 +14,7 @@ public class EventResponseDTO  implements Serializable{
 
     private Long id;  
     private String name;
+    private String campus;
     private LocalDate startDate;
     private LocalDate endDate;
     private String details;
@@ -26,6 +27,7 @@ public class EventResponseDTO  implements Serializable{
     public EventResponseDTO(Event event) {
         this.id = event.getId();
         this.name = event.getName();
+        this.campus = event.getCampus();
         this.startDate = event.getStartDate();
         this.endDate = event.getEndDate();
         this.details = event.getDetails();
@@ -38,6 +40,7 @@ public class EventResponseDTO  implements Serializable{
 
     public EventResponseDTO() {
     }
+    
     
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -121,6 +124,14 @@ public class EventResponseDTO  implements Serializable{
 
     public void setScore(double score) {
         this.score = score;
+    }
+
+    public String getCampus() {
+        return campus;
+    }
+
+    public void setCampus(String campus) {
+        this.campus = campus;
     }    
         
 }
