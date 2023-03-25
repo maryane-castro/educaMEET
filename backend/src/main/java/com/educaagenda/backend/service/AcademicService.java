@@ -41,6 +41,11 @@ public class AcademicService {
     public ResponseEntity<Object> delete(Long id) {
 
         Academic academic = academicRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Acadêmico não encontrado"));
+
+        if (academic.getEvents().size() > 0) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Não é possível excluir " + academic.getName() + " pois ele está cadastrado(a) em algum Evento");
+        }
+
         academicRepository.delete(academic);
 
         return ResponseEntity.status(HttpStatus.OK).build();

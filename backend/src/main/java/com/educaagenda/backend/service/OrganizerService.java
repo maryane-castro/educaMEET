@@ -43,6 +43,10 @@ public class OrganizerService {
     @Transactional
     public ResponseEntity<Object> delete(Long id) {
         Organizer organizer = organizerRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Organizador não encontrado"));
+
+        if (organizer.getEvents().size() > 0) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Não é possível excluir " + organizer.getName() + " pois ele está cadastrado(a) em algum Evento");
+        }
         organizerRepository.delete(organizer);
 
         return ResponseEntity.status(HttpStatus.OK).build();
