@@ -1,6 +1,6 @@
 .custom-card{
-    height:500px;
-    width:400px;
+    max-height:400px;
+    max-width:350px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.4);
 
 }  

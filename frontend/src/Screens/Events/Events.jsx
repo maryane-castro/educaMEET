@@ -1,24 +1,31 @@
-import Container from 'react-bootstrap/Container';
+
 import EventCard from '../../Components/EventCard/EventCard';
 import "./Events.css"
 
 const Events = () => {
     return(
-        <Container fluid className="custom-events d-flex pt-4 justify-content-evenly flex-wrap gap-3">
-           <EventCard/>
-           <EventCard/>
-           <EventCard/>
-           <EventCard/>
-           <EventCard/>
-           <EventCard/>
-           <EventCard/>
-           <EventCard/>
-           <EventCard/>
-           <EventCard/>
-           <EventCard/>
-           <EventCard/>
-           
-        </Container>
+        <div className='container-fluid'>
+            <div className='row'>
+                <div className=' d-flex justify-content-center col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xl-6'>
+                    <EventCard/>
+                </div>
+                <div className=' d-flex justify-content-center col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xl-6'>
+                    <EventCard/>
+                </div>
+                <div className=' d-flex justify-content-center col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xl-6'>
+                    <EventCard/>
+                </div>
+                <div className=' d-flex justify-content-center col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xl-6'>
+                    <EventCard/>
+                </div>
+                <div className=' d-flex justify-content-center col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xl-6'>
+                    <EventCard/>
+                </div>
+                <div className=' d-flex justify-content-center col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xl-6'>
+                    <EventCard/>
+                </div>
+            </div>
+        </div>
     )
 }
 

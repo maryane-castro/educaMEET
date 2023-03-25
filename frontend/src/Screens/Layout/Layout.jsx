@@ -1,25 +1,27 @@
-import {Fragment, useState} from "react";
+import {Fragment} from "react";
 import {Outlet} from "react-router-dom";
-import Header from "../../Components/Header/Header";
-import SideBar from "../../Components/SideBar/SideBar";
-import Container from 'react-bootstrap/Container';
+import Navbar from "../../Components/Navbar/Navbar";
+import Profile from "../../Components/Profile/Profile";
 import React from "react";
 import "./Layout.css"
 
 const Layout = () => {
-
-    const [open, setOpen] = useState(false);
     return(
         <Fragment>
-            <Container fluid className="p-0">
-                <Header onButtonClick={() => setOpen(!open)}/>
-                <Container fluid className="d-flex content-container">
-                    <SideBar open={open}/>
-                    <Outlet/>
-                </Container>
-            </Container>
+            <Navbar/>
+            <div className="container pt-5 mt-3">
+                <div className="row">
+                    <div className="col">
+                        <Profile/>
+                    </div>
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8">
+                        <Outlet/>
+                    </div>
+
+                </div> 
+            </div>
         </Fragment>
     );
-}
+};
 
 export default Layout;

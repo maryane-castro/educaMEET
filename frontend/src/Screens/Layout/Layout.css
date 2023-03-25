@@ -1,4 +1,8 @@
 .content-container{
     padding:0!important;
-    heigth: calc(100vh - 80px);
+    height: calc(100vh - 80px);
+}
+
+.container{
+    border: 1px dashed black;
 }
