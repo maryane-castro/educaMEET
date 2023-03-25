@@ -1,6 +1,7 @@
 import Thumbnail from "../Thumbnail/Thumbnail";
 import DropdownMenu from "./DropdownMenu";
 import { useMediaQuery } from 'react-responsive';
+import OffcanvasBtn from "../OffcanvasBtn/OffcanvasBtn";
 
 const Navbar = () => {
 
@@ -12,10 +13,15 @@ const Navbar = () => {
         query: '(max-width: 991px)'
     });
 
+    const resolutionSmallerThanXL = useMediaQuery({
+        query: '(max-width: 1199px)'
+    });
+
     return(
         <nav className="navbar navbar-expand-lg fixed-top bg-body-tertiary">
             <div className="container">
-                <a className="navbar-brand" href="#">Navbar</a>
+                {resolutionSmallerThanXL ? <OffcanvasBtn/> : <a className="navbar-brand" href="#">Navbar</a>}
+                
                 <div className="d-flex align-items-center">
                     {resolutionSmallerThan && <DropdownMenu DropImage={<Thumbnail/>}/>}
                     <button className=" ms-3 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,4 +1,4 @@
-
+import './Profile.css'
 
 const Profile = () => {
     return(
@@ -6,7 +6,9 @@ const Profile = () => {
             <div className="card-body">
                 <div className="row">
                     <div className="col">
-
+                        <div className='card'>
+                            
+                        </div>
                     </div>
                     <div className="col">
                         

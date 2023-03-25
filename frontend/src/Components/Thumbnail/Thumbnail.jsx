@@ -6,7 +6,7 @@ const Thumbnail = () => {
         <Fragment>
             <img 
             style={{maxHeight:'30px'}}
-            src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png" 
+            src="https://avatars.githubusercontent.com/u/954547?v=4" 
             className=" p-0 img-thumbnail rounded-circle" 
             alt="GFG"
             />
