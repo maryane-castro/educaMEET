@@ -1,5 +1,8 @@
 package com.educaagenda.backend.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -32,9 +35,8 @@ public class EventService {
     @Autowired
     OrganizerRepository organizerRepository;
 
-    public ResponseEntity<Object> findAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(
-                eventRepository.findAll().stream().map((event) -> new EventResponseDTO(event)).toList());
+    public List<Event> findAll() {
+        return eventRepository.findAll();
     }
 
     public ResponseEntity<Object> findById(Long id) {
@@ -46,7 +48,7 @@ public class EventService {
     @Transactional
     public EventResponseDTO save(EventRequestDTO eventRequestDTO) {
         Event event = eventRequestDTO.toEvent();
-        return new EventResponseDTO(eventRepository.save(event));        
+        return new EventResponseDTO(eventRepository.save(event));
     }
 
     @Transactional
@@ -55,7 +57,7 @@ public class EventService {
         Event event = eventRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Evento não Encontrado"));
         eventRepository.delete(event);
-        
+
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
@@ -140,7 +142,7 @@ public class EventService {
         return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
     }
 
-    //será usado???
+    // será usado???
     public ResponseEntity<Object> save_participants_events(Long event_id, Long academic_id, Long organizer_id) {
 
         Optional<Event> eventOptional = eventRepository.findById(event_id);
@@ -173,14 +175,14 @@ public class EventService {
         event.getOrganizers().add(organizer);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
-    }   
+    }
 
     @Transactional
     public EventResponseDTO saveScore(Long id) {
-        
+
         Event event = eventRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Evento não encontrado"));
-        
+
         double sum = 0.0;
 
         for (EventReview e : event.getReviews()) {
@@ -189,9 +191,15 @@ public class EventService {
 
         double avg = sum / event.getReviews().size();
 
-        event.setScore(avg);        
+        event.setScore(avg);
 
         return new EventResponseDTO(eventRepository.save(event));
-    }  
+    }
+
+    public ResponseEntity<Object> findAllByData(LocalDate startDate) {
+        return ResponseEntity.status(HttpStatus.OK).body(eventRepository.findAllByStartDate(startDate));
+        //return ResponseEntity.status(HttpStatus.OK).body(minhasDatasRepository.findAllByMyData(myDate));
+    }
+
 
 }
