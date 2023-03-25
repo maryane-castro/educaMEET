@@ -11,15 +11,17 @@ public class OrganizerResponseDTO implements Serializable{
    
     private Long id;
     private String name;
+    private String email;
     private String password;
     Set<Event> events;    
 
     public OrganizerResponseDTO() {        
     }
 
-    public OrganizerResponseDTO(Long id, String name, String password, Set<Event> events) {
+    public OrganizerResponseDTO(Long id, String name, String email, String password, Set<Event> events) {
         this.id = id;
         this.name = name;
+        this.email = email;
         this.password = password;
         this.events = events;
     }
@@ -55,12 +57,26 @@ public class OrganizerResponseDTO implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     } 
+    
 
     public OrganizerResponseDTO(Organizer organizer) {
         this.id = organizer.getId();
         this.name = organizer.getName();
+        this.email = organizer.getEmail();
         this.password = organizer.getPassword();
         this.events = organizer.getEvents();
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }

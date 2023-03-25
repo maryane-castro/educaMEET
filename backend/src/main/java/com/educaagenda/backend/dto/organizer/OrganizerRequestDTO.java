@@ -9,18 +9,21 @@ public class OrganizerRequestDTO  implements Serializable{
 
     private String name;
     private String password;
+    private String email;
 
     public OrganizerRequestDTO() {        
     }
 
-    public OrganizerRequestDTO(String name, String password) {
+    public OrganizerRequestDTO(String name, String email, String password) {
         this.name = name;
+        this.email = email;
         this.password = password;
     }
 
     public Organizer toOrganizer() {
         Organizer organizer = new Organizer();
         organizer.setName(name);
+        organizer.setEmail(email);
         organizer.setPassword(password);
         return organizer;
     }
@@ -39,5 +42,18 @@ public class OrganizerRequestDTO  implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }  
+    
 }

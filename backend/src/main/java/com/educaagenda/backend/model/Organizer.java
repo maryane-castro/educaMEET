@@ -6,6 +6,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +20,11 @@ public class Organizer implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String name;    
+    private String name;   
+
+    @Column(nullable = false, unique = true) 
+    private String email;   
+    
     private String password;
 
     @JsonIgnore
@@ -31,9 +36,10 @@ public class Organizer implements Serializable{
     public Organizer() {        
     }
 
-    public Organizer(long id, String name, String password, Set<Event> events) {
+    public Organizer(long id, String name, String email, String password, Set<Event> events) {
         this.id = id;
         this.name = name;
+        this.email = email;
         this.password = password;
         this.events = events;
     }
@@ -68,6 +74,18 @@ public class Organizer implements Serializable{
 
     public void setEvents(Set<Event> events) {
         this.events = events;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }   
 
     

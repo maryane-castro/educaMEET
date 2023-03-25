@@ -7,4 +7,7 @@ import com.educaagenda.backend.model.Academic;
 
 @Repository
 public interface AcademicRepository extends JpaRepository<Academic, Long>{   
+
+    boolean existsByEmail(String login);
+
 }

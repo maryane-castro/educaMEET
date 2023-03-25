@@ -12,6 +12,7 @@ public class AcademicResponseDTO implements Serializable{
     
     private Long id;
     private String name;
+    private String email;
     private String password; 
     private Set<Event> events;
     private Set<EventReview> reviews;
@@ -19,9 +20,10 @@ public class AcademicResponseDTO implements Serializable{
     public AcademicResponseDTO() {        
     }           
 
-    public AcademicResponseDTO(Long id, String name, String password, Set<Event> events, Set<EventReview> reviews) {
+    public AcademicResponseDTO(Long id, String name, String email, String password, Set<Event> events, Set<EventReview> reviews) {
         this.id = id;
         this.name = name;
+        this.email = email;
         this.password = password;
         this.events = events;
         this.reviews = reviews;
@@ -30,6 +32,7 @@ public class AcademicResponseDTO implements Serializable{
     public AcademicResponseDTO(Academic academic) {
         id = academic.getId();
         name = academic.getName();
+        email = academic.getEmail();
         password = academic.getPassword();
         events = academic.getEvents();
         reviews = academic.getReviews();
@@ -77,6 +80,14 @@ public class AcademicResponseDTO implements Serializable{
 
     public void setReviews(Set<EventReview> reviews) {
         this.reviews = reviews;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }

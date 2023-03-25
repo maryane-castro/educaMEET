@@ -5,18 +5,18 @@
  insert into event (name, campus, start_Date, end_Date, details, folder, score) values ('Evento 5','','2022-03-06','2022-03-10','Detalhes Evento 5', 'Folder Evento 5', 0.0);
  insert into event (name, campus, start_Date, end_Date, details, folder, score) values ('Evento 6','IFCE Bahia','2022-03-11','2022-03-12','Detalhes Evento 6', 'Folder Evento 6', 0.0);
 
- insert into academic (name, password) values ('Jonny Quest','1234');
- insert into academic (name, password) values ('Bill Murray','1234');
- insert into academic (name, password) values ('Bruce Yoaness','1234');
- insert into academic (name, password) values ('Dave Cobrero','1234');
- insert into academic (name, password) values ('Steve Guttemberg','1234');
+ insert into academic (name, email, password) values ('Jonny Quest', 'a@a.com', '1234');
+ insert into academic (name, email, password) values ('Bill Murray', 'b@a.com', '1234');
+ insert into academic (name, email, password) values ('Bruce Yoaness', 'c@a.com', '1234');
+ insert into academic (name, email, password) values ('Dave Cobrero', 'd@a.com', '1234');
+ insert into academic (name, email, password) values ('Steve Guttemberg', 'e@a.com', '1234');
 
-insert into organizer (name, password) values ('Organizador 1','1234');
-insert into organizer (name, password) values ('Organizador 2','1234');
-insert into organizer (name, password) values ('Organizador 3','1234');
-insert into organizer (name, password) values ('Organizador 4','1234');
-insert into organizer (name, password) values ('Organizador 5','1234');
-insert into organizer (name, password) values ('Organizador 6','1234');
+insert into organizer (name, email, password) values ('Organizador 1', 'f@a.com', '1234');
+insert into organizer (name, email, password) values ('Organizador 2', 'g@a.com', '1234');
+insert into organizer (name, email, password) values ('Organizador 3', 'h@a.com', '1234');
+insert into organizer (name, email, password) values ('Organizador 4', 'j@a.com', '1234');
+insert into organizer (name, email, password) values ('Organizador 5', 'k@a.com', '1234');
+insert into organizer (name, email, password) values ('Organizador 6', 'l@a.com', '1234');
 
 insert into events_academics (academic_id, event_id) values (1,1);
 insert into events_academics (academic_id, event_id) values (5,1);

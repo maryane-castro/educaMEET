@@ -11,6 +11,7 @@ public class AcademicRequestDTO  implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private String name;
+    private String email;
     private String password;
     private Set<Event> events;
     private Set<EventReview> eventReviews;
@@ -18,14 +19,16 @@ public class AcademicRequestDTO  implements Serializable{
     public AcademicRequestDTO() {        
     }
 
-    public AcademicRequestDTO(String name, String password) {
+    public AcademicRequestDTO(String name, String email, String password) {
         this.name = name;
+        this.email = email;
         this.password = password;
     }
 
     public Academic toAcademic() {
         Academic academic = new Academic();
         academic.setName(name);
+        academic.setEmail(email);
         academic.setPassword(password);
         academic.setEvents(events);
         academic.setReviews(eventReviews);
@@ -66,6 +69,14 @@ public class AcademicRequestDTO  implements Serializable{
 
     public void setEvents(Set<Event> events) {
         this.events = events;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     } 
     
        

@@ -5,6 +5,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,24 +19,27 @@ public class Academic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String name;    
-    private String password;    
+    private String name;
+
+    @Column(nullable = false, unique = true)    
+    private String email;
+    
+    private String password;
 
     @JsonIgnore
-    @ManyToMany(
-        targetEntity = Event.class, cascade = CascadeType.ALL,
-        mappedBy = "academics")
+    @ManyToMany(targetEntity = Event.class, cascade = CascadeType.ALL, mappedBy = "academics")
     Set<Event> events;
 
     @OneToMany(mappedBy = "academic")
     Set<EventReview> reviews;
 
-    public Academic() {        
+    public Academic() {
     }
-    
-    public Academic(long id, String name, String password, Set<Event> events, Set<EventReview> reviews) {
+
+    public Academic(long id, String name, String password, String email, Set<Event> events, Set<EventReview> reviews) {
         this.id = id;
         this.name = name;
+        this.email = email;
         this.password = password;
         this.events = events;
         this.reviews = reviews;
@@ -79,7 +83,14 @@ public class Academic {
 
     public void setReviews(Set<EventReview> reviews) {
         this.reviews = reviews;
-    }      
-    
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 }
