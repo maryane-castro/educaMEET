@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.educaagenda.backend.dto.academic.AcademicRequestDTO;
@@ -58,8 +59,9 @@ public class AcademicService {
                 throw new ConflictStoreException("Este e-mail já está sendo usado!");
             }
         }
-
         academic.setEmail(academicRequestDTO.getEmail());
+
+
 
         return new AcademicResponseDTO(academicRepository.save(academic));
     }
@@ -103,20 +105,29 @@ public class AcademicService {
                 throw new EmailValidatorException("Formato do e-mail inválido");
             }
 
-            if(academic.getEmail().equals(academicRequestDTO.getEmail())){
-            throw new ConflictStoreException("O e-mail informado é o mesmo usado no cadastro!");
-            }
+            // if(academic.getEmail().equals(academicRequestDTO.getEmail())){
+            // throw new ConflictStoreException("O e-mail informado é o mesmo usado no
+            // cadastro!");
+            // }
 
-            if ((academicRepository.existsByEmail(academicRequestDTO.getEmail())) ||
-                    (organizerRepository.existsByEmail(academicRequestDTO.getEmail()))) {
+            if (((academicRepository.existsByEmail(academicRequestDTO.getEmail())) &&
+                    (!academic.getEmail().equals(academicRequestDTO.getEmail()))) ||
+                    ((organizerRepository.existsByEmail(academicRequestDTO.getEmail())))) {
                 throw new ConflictStoreException("Este e-mail já está sendo usado!");
             }
 
+            // procura pelo email informado num Organizador
+            // if (organizerRepository.existsByEmail(academicRequestDTO.getEmail())) {
+            // throw new ConflictStoreException("Este e-mail já está sendo usado!");
+            // }
+
             academic.setEmail(academicRequestDTO.getEmail());
         }
-
-        if (academicRequestDTO.getPassword() != null) {
-            academic.setPassword(academicRequestDTO.getPassword());
+        
+        // se password não for a mesma que esta no banco, alterar
+        if ((academicRequestDTO.getPassword() != null) ||
+                (!academicRequestDTO.getPassword().equals(academic.getPassword()))) { 
+              academic.setPassword(new BCryptPasswordEncoder().encode(academicRequestDTO.getPassword()));
         }
 
         // Salvar

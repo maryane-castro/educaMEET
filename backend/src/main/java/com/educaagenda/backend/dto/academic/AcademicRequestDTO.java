@@ -3,6 +3,8 @@ package com.educaagenda.backend.dto.academic;
 import java.io.Serializable;
 import java.util.Set;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.model.EventReview;
@@ -11,7 +13,7 @@ public class AcademicRequestDTO  implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private String name;
-    private String email;
+    private String email;    
     private String password;
     private Set<Event> events;
     private Set<EventReview> eventReviews;
@@ -26,6 +28,8 @@ public class AcademicRequestDTO  implements Serializable{
     }
 
     public Academic toAcademic() {
+        password = new BCryptPasswordEncoder().encode(password);
+
         Academic academic = new Academic();
         academic.setName(name);
         academic.setEmail(email);

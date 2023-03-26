@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.educaagenda.backend.dto.organizer.OrganizerRequestDTO;
@@ -104,12 +105,14 @@ public class OrganizerService {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Formato do e-mail inválido");
             }
 
-            if(organizer.getEmail().equals(organizerRequestDTO.getEmail())){
-            throw new ConflictStoreException("O e-mail informado é o mesmo usado no cadastro!");
-            }
+            // if(organizer.getEmail().equals(organizerRequestDTO.getEmail())){
+            // throw new ConflictStoreException("O e-mail informado é o mesmo usado no
+            // cadastro!");
+            // }
 
-            if ((organizerRepository.existsByEmail(organizerRequestDTO.getEmail())) ||
-                    (academicRepository.existsByEmail(organizerRequestDTO.getEmail()))) {
+            if (((organizerRepository.existsByEmail(organizerRequestDTO.getEmail())) &&
+                    (!organizer.getEmail().equals(organizerRequestDTO.getEmail()))) ||
+                    ((academicRepository.existsByEmail(organizerRequestDTO.getEmail())))) {
                 throw new ConflictStoreException("Este e-mail já está sendo usado!");
             }
 
@@ -117,10 +120,11 @@ public class OrganizerService {
 
         }
 
-        if (organizerRequestDTO.getPassword() != null) {
-            organizer.setPassword(organizerRequestDTO.getPassword());
+        // se password não for a mesma que esta no banco, alterar
+        if ((organizerRequestDTO.getPassword() != null) ||
+                (!organizerRequestDTO.getPassword().equals(organizer.getPassword()))) {
+            organizer.setPassword(new BCryptPasswordEncoder().encode(organizerRequestDTO.getPassword()));
         }
-
         OrganizerResponseDTO organizerResponseDTO = new OrganizerResponseDTO(organizerRepository.save(organizer));
         return ResponseEntity.status(HttpStatus.CREATED).body(organizerResponseDTO);
     }

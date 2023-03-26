@@ -37,7 +37,7 @@ public class LoginService {
         
         Organizer organizer = organizerRepository.findByEmail(email);        
 
-        if (organizer == null) {
+        if (organizer == null) {            
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organizador(a) não localizado(a) no servidor!");
         }
         

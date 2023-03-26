@@ -2,6 +2,8 @@ package com.educaagenda.backend.dto.organizer;
 
 import java.io.Serializable;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.educaagenda.backend.model.Organizer;
 
 public class OrganizerRequestDTO  implements Serializable{
@@ -21,6 +23,8 @@ public class OrganizerRequestDTO  implements Serializable{
     }
 
     public Organizer toOrganizer() {
+        password = new BCryptPasswordEncoder().encode(password);
+        
         Organizer organizer = new Organizer();
         organizer.setName(name);
         organizer.setEmail(email);

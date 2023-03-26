@@ -32,7 +32,7 @@ public class AcademicResponseDTO implements Serializable{
     public AcademicResponseDTO(Academic academic) {
         id = academic.getId();
         name = academic.getName();
-        email = academic.getEmail();
+        email = academic.getEmail();        
         password = academic.getPassword();
         events = academic.getEvents();
         reviews = academic.getReviews();
