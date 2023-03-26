@@ -10,4 +10,5 @@ public interface AcademicRepository extends JpaRepository<Academic, Long>{
 
     boolean existsByEmail(String login);
 
+    Academic findByEmail(String email);
 }

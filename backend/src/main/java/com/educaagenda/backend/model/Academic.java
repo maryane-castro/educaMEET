@@ -93,4 +93,8 @@ public class Academic {
         this.email = email;
     }
 
+    public Academic orElseThrow(Object object) {
+        return null;
+    }
+
 }

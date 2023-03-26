@@ -1,6 +1,5 @@
 package com.educaagenda.backend.service;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -197,8 +196,7 @@ public class EventService {
     }
 
     public ResponseEntity<Object> findAllByData(LocalDate startDate) {
-        return ResponseEntity.status(HttpStatus.OK).body(eventRepository.findAllByStartDate(startDate));
-        //return ResponseEntity.status(HttpStatus.OK).body(minhasDatasRepository.findAllByMyData(myDate));
+        return ResponseEntity.status(HttpStatus.OK).body(eventRepository.findAllByStartDate(startDate));        
     }
 
 

@@ -7,4 +7,7 @@ import com.educaagenda.backend.model.Organizer;
 public interface OrganizerRepository extends JpaRepository<Organizer, Long>{    
 
     boolean existsByEmail(String login);
+
+    Organizer findByEmail(String email);
+    
 }
