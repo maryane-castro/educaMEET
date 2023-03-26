@@ -59,9 +59,8 @@ public class AcademicService {
                 throw new ConflictStoreException("Este e-mail já está sendo usado!");
             }
         }
+
         academic.setEmail(academicRequestDTO.getEmail());
-
-
 
         return new AcademicResponseDTO(academicRepository.save(academic));
     }

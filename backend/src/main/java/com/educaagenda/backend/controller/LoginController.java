@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.educaagenda.backend.dto.academic.AcademicRequestDTO;
+import com.educaagenda.backend.dto.organizer.OrganizerRequestDTO;
 import com.educaagenda.backend.service.LoginService;
 
 @RestController
@@ -26,6 +29,20 @@ public class LoginController {
     public ResponseEntity<Object> findOrganizerByEmail(
         @PathVariable(name = "email") String email) {
         return loginService.findOrganizerByEmail(email);
+    }
+
+    @GetMapping("/academic/login/{email}")
+    public ResponseEntity<Object> acabemicLogin(
+        @PathVariable(name = "email") String email,
+        @RequestBody AcademicRequestDTO academicRequestDTO) {
+        return loginService.academicLogin(email, academicRequestDTO);
+    }
+
+    @GetMapping("/organizer/login/{email}")
+    public ResponseEntity<Object> organizerLogin(
+        @PathVariable(name = "email") String email,
+        @RequestBody OrganizerRequestDTO organizerRequestDTO) {
+        return loginService.organizerLogin(email, organizerRequestDTO);
     }
     
 }

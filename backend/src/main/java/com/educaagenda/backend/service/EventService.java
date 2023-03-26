@@ -198,6 +198,4 @@ public class EventService {
     public ResponseEntity<Object> findAllByData(LocalDate startDate) {
         return ResponseEntity.status(HttpStatus.OK).body(eventRepository.findAllByStartDate(startDate));        
     }
-
-
 }

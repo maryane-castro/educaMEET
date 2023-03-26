@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.educaagenda.backend.dto.academic.AcademicRequestDTO;
 import com.educaagenda.backend.dto.academic.AcademicResponseDTO;
+import com.educaagenda.backend.dto.organizer.OrganizerRequestDTO;
 import com.educaagenda.backend.dto.organizer.OrganizerResponseDTO;
 import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.model.Organizer;
@@ -27,7 +29,7 @@ public class LoginService {
 
         if (academic == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Acadêmico(a) não localizado(a) no servidor!");
-        }
+        }        
         
         return ResponseEntity.status(HttpStatus.OK).body(new AcademicResponseDTO(academic));            
 
@@ -41,8 +43,35 @@ public class LoginService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organizador(a) não localizado(a) no servidor!");
         }
         
-        return ResponseEntity.status(HttpStatus.OK).body(new OrganizerResponseDTO(organizer));            
+        return ResponseEntity.status(HttpStatus.OK).body(new OrganizerResponseDTO(organizer));     
+    }
 
+    public ResponseEntity<Object> academicLogin(String email, AcademicRequestDTO academicRequestDTO) {
+        
+        Academic academic = academicRepository.findByEmail(email);        
+        if (academic == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Acadêmico(a) não localizado(a) no servidor!");
+        }
+
+        if (!academicRequestDTO.getPassword().equals(academic.getPassword())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password inválida para o Acadêmico " + academic.getEmail());
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(new AcademicResponseDTO(academic));     
+    }
+
+    public ResponseEntity<Object> organizerLogin(String email, OrganizerRequestDTO organizerRequestDTO) {
+        
+        Organizer organizer = organizerRepository.findByEmail(email);        
+        if (organizer == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organizador(a) não localizado(a) no servidor!");
+        }
+
+        if (!organizerRequestDTO.getPassword().equals(organizer.getPassword())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password inválida para o Organizador " + organizer.getEmail());
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(new OrganizerResponseDTO(organizer));     
     }
     
 }
