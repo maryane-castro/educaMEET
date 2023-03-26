@@ -1,10 +1,9 @@
 import React, {Fragment} from 'react';
+import AppRoutes from './AppRoutes';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
-import "./App.module.css"
-
-import AppRoutes from './AppRoutes';
+import './App.scss'
 
 const App = () => {
   return (

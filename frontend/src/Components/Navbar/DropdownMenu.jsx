@@ -5,9 +5,8 @@ const DropdownMenu = ({DropImage}) => {
                 {DropImage}
             </div>
             <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#">opção 1</a></li>
-            <li><a className="dropdown-item" href="#">opção 2</a></li>
-            <li><a className="dropdown-item" href="#">opção 3</a></li>
+            <li><a className="dropdown-item" href="#">Perfil</a></li>
+            <li><a className="dropdown-item" href="#">Sair</a></li>
             </ul>
         </div>
     );

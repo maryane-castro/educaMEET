@@ -4,6 +4,8 @@ import Layout from "./Screens/Layout/Layout"
 import Events from "./Screens/Events/Events"
 import Event from "./Screens/Event/Event"
 
+
+
 const AppRoutes = () => {
     return(
         <BrowserRouter>

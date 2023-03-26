@@ -3,6 +3,7 @@ import DropdownMenu from "./DropdownMenu";
 import { useMediaQuery } from 'react-responsive';
 import OffcanvasBtn from "../OffcanvasBtn/OffcanvasBtn";
 
+
 const Navbar = () => {
 
     const resolutionBiggerThan = useMediaQuery({
@@ -18,12 +19,12 @@ const Navbar = () => {
     });
 
     return(
-        <nav className="navbar navbar-expand-lg fixed-top bg-body-tertiary">
+        <nav className="navbar bg-color navbar-expand-lg fixed-top bg-body-tertiary">
             <div className="container">
                 {resolutionSmallerThanXL ? <OffcanvasBtn/> : <a className="navbar-brand" href="#">Navbar</a>}
                 
                 <div className="d-flex align-items-center">
-                    {resolutionSmallerThan && <DropdownMenu DropImage={<Thumbnail/>}/>}
+                    {resolutionSmallerThan && <DropdownMenu DropImage={<Thumbnail MaxHeight="10px"/>}/>}
                     <button className=" ms-3 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -40,14 +41,11 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link" aria-current="page" href="#">opção 1</a>
+                            <a className="nav-link" aria-current="page" href="#">Eventos</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">opção 2</a>
+                            <a className="nav-link" href="#">Ocorridos</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">opção 3</a>
-                        </li>  
                     </ul>
                     {resolutionBiggerThan && <DropdownMenu DropImage={<Thumbnail/>}/>}
                 </div>  
