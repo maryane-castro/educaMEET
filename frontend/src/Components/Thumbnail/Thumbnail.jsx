@@ -7,7 +7,7 @@ const Thumbnail = () => {
             <img 
             style={{maxHeight:'30px'}}
             src="https://avatars.githubusercontent.com/u/954547?v=4" 
-            className=" p-0 img-thumbnail rounded-circle" 
+            className=" p-0 img-thumbnail rounded-circle border-color-eton" 
             alt="GFG"
             />
         </Fragment>

@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 
 const Profile = () => {
     return(
-        <div className="card mt-4">
+        <div className="card mt-4 border-color-eton shadow-border">
             <div className="card-body">
                 <div className="row">
                     <div className="col-12 d-flex flex-column align-items-center justify-content-center">

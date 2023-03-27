@@ -4,7 +4,7 @@ const DropdownMenu = ({DropImage}) => {
             <div className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {DropImage}
             </div>
-            <ul className="dropdown-menu">
+            <ul className="dropdown-menu border-color-eton">
             <li><a className="dropdown-item" href="#">Perfil</a></li>
             <li><a className="dropdown-item" href="#">Sair</a></li>
             </ul>

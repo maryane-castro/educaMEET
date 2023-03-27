@@ -2,31 +2,41 @@ import React from 'react';
 import {BsCalendarEvent} from "react-icons/bs"
 import {GoLocation} from "react-icons/go"
 import { Link } from "react-router-dom";
-import "./EventCard.css";
+import "./EventCard.scss";
 
 
 import EventFolder from "../../assets/event-folder.svg"
 
 function EventCard() {
   return (
-      <div className="card mt-4">
-        <img src={EventFolder} className="card-img-top" alt="..."/>
-        <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-        </div>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <BsCalendarEvent/>
-          </li>
-          <li className="list-group-item">
-            <GoLocation/>
-          </li>
-        </ul>
-        <div className="card-body">
-          <Link to="/event">
-            <div className="btn bg-color">Saiba mais</div>
-          </Link>
-        </div>
+      <div className="card mt-4 shadow-border">
+          <img src={EventFolder} className="card-img-top" alt="..."/>
+            <div className="row align-items-center card-body">
+              <h4 className=" col-12 card-title">
+                <strong>
+                Card title
+                </strong>
+              </h4>
+              <div className='col-2 d-flex align-items-center justify-content-center'>
+                <BsCalendarEvent className='icon-size'/>
+              </div>
+              <div className='col-10'>
+                <div className='adress-fontsize'>
+                  12/03/23
+                </div>
+              </div>
+              <div className='col-2 d-flex align-items-center justify-content-center'>
+                <GoLocation className='icon-size'/>
+              </div>
+              <div className='col-10'>
+                <div className='adress-fontsize'>R. Dr. Siqueira, 273 - Parque Dom Bosco, Campos dos Goytacazes - RJ, 28030-130</div>
+              </div>
+              <div className=" col-sm-6-off-set-3 mt-2 mb-2">
+              <Link to="/event">
+                <div className="btn w-100">Saiba mais</div>
+              </Link>
+              </div>
+            </div>
       </div>
   );
 }

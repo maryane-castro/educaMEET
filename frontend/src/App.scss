@@ -4,4 +4,28 @@
     background-color: $eton-blue;
 }
 
+a .nav-item {
+    color:$pure-white;
+}
+
+.text-color-eton-variation{
+    color: $eton-blue-variation;
+}
+
+.border-color-eton{
+    border: $eton-blue-variation 2px solid;
+}
+
+.shadow-border {
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+.icon-size{
+    font-size:25px;
+}
+
+.adress-fontsize{
+    font-size: 12px;
+}
 
