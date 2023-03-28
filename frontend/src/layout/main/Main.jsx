@@ -1,13 +1,12 @@
 import {Fragment} from "react";
 import {Outlet} from "react-router-dom";
-import Navbar from "../../Components/Navbar/Navbar";
-import Sidebar from "../../Components/sidebar/Sidebar";
-import Offcanvas from "../../Components/Offcanvas/Offcanvas";
+import Navbar from '../../Components/Navbar/Navbar';
+import Sidebar from '../../Components/sidebar/Sidebar';
+import Offcanvas from '../../Components/Offcanvas/Offcanvas';
 import { useMediaQuery } from 'react-responsive';
 import React from "react";
-import "./Layout.css"
 
-const Layout = () => {
+const Main = () => {
     const resolutionSmallerThanXL = useMediaQuery({
         query: '(min-width: 1200px)'
     });
@@ -32,4 +31,4 @@ const Layout = () => {
     );
 };
 
-export default Layout;
+export default Main;
