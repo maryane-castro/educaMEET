@@ -1,7 +1,6 @@
 import React from "react";
 import { Fragment } from "react";
-import Profile from "../Profile/Profile";
-
+import Sidebar from "../sidebar/Sidebar";
 const Offcanvas = () => {
     return(
         <Fragment>
@@ -11,7 +10,7 @@ const Offcanvas = () => {
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
-                    <Profile/>
+                    <Sidebar/>
                 </div>
             </div>
         </Fragment>

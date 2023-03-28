@@ -1,12 +1,16 @@
-@import './styles/variables.scss';
+@import './variables.scss';
+@import './eventCard.scss';
+@import './eventForm.scss';
+
 
 .bg-color{
     background-color: $eton-blue;
 }
 
-a .nav-item {
-    color:$pure-white;
+.bg-color-eton{
+    background-color: $eton-blue-variation;
 }
+
 
 .text-color-eton-variation{
     color: $eton-blue-variation;

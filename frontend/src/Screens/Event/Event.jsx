@@ -36,7 +36,7 @@ const Event = () => {
             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non impedit numquam recusandae quas neque corrupti eligendi expedita inventore quis nesciunt magnam natus animi debitis optio eveniet veniam, velit, commodi facere?Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum magnam omnis labore corrupti, qui reprehenderit, totam aperiam aliquid, facere provident similique. Blanditiis ipsum magnam provident velit. Dignissimos perferendis dolorem dicta!</p>
           </div>
           <div className=" card col-12 col-sm-12 col-md-12 col-lg-4">
-            <div className='btn btn-green m-3'>Inscreva-se</div>
+            <div className='btn custom-button m-3'>Inscreva-se</div>
             <div className="text-center "> Organizadores </div>
             <div className="text-center">Numero de inscritos</div>
           </div>

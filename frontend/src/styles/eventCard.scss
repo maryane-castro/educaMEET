@@ -1,0 +1,37 @@
+
+.custom-card{
+    max-height:400px;
+    max-width:350px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+
+}  
+
+.custom-button{
+    background-color:$eton-blue;
+    color: $pure-white;
+    border:solid 2px transparent;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.custom-button:hover{
+    background-color:$eton-blue;
+    color: $eton-blue-variation;
+    border:solid 2px $eton-blue-variation;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn{
+    &.custom-button:active{
+        background-color:$eton-blue-variation;
+        color: $pure-white;
+        border:solid 2px $eton-blue-variation;
+        font-size: 20px;
+        font-weight: bold;
+}}
+
+
+
+
