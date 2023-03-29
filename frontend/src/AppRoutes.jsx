@@ -7,7 +7,7 @@ import EventForm from "./Components/EventForm/EventForm";
 import Authentication from "./layout/login/authentication";
 import RegisterCard from "./Components/registerCard/RegisterCard";
 import LoginCard from "./Components/loginCard/loginCard";
-
+import Dashbord from "./Components/dashbord/Dashbord";
 
 const AppRoutes = () => {
     return(
@@ -17,6 +17,7 @@ const AppRoutes = () => {
                     <Route index element={<Events/>}/>
                     <Route path="/event" element={<Event/>}/>
                     <Route path="/new" element={<EventForm/>}/>
+                    <Route path="/dashboard" element={<Dashbord/>}/>
                 </Route>
                 <Route path="/auth" element={<Authentication/>}>
                     <Route index element={<LoginCard/>}/>

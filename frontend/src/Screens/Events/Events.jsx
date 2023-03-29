@@ -1,6 +1,6 @@
 
 import EventCard from '../../Components/EventCard/EventCard';
-import "./Events.css"
+
 
 const Events = () => {
     return(

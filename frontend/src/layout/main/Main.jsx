@@ -21,7 +21,7 @@ const Main = () => {
                             <Sidebar/>
                         </div>
                     }
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8">
+                    <div className=" mt-4 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8">
                         <Outlet/>
                     </div>
                 </div> 

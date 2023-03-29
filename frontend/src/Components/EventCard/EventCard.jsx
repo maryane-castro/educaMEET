@@ -9,7 +9,7 @@ import EventFolder from "../../assets/event-folder.svg"
 
 function EventCard() {
   return (
-      <div className="card mt-4 shadow-border">
+      <div className="card shadow-border">
           <img src={EventFolder} className="card-img-top" alt="..."/>
             <div className="row align-items-center card-body">
               <h4 className=" col-12 card-title">
