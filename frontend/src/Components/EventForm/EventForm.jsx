@@ -6,20 +6,30 @@ const EventForm = () => {
     const [start, getStart] = useState(new Date());
     const [end, getEnd] = useState(new Date());
 
+    const [eventData, setEventData] = useState(Object());
+
+    const handleFieldChange = (e) => setEventData({...eventData, [e.currentTarget.name]: e.currentTarget.value});
+    
+    const handleSubmit = (e) => {
+        console.log(eventData);
+        e.preventDefault();
+        
+    }
+
     return(
-        <div className="card shadow-border mt-4">
-            <form>
+        <div className="card shadow-border ">
+            <form onSubmit={handleSubmit}>
                 <div className="form-floating ms-2 me-2 mt-4 mb-3 ps-2 pe-2">
-                    <input type="email" className="form-control custom-input" id="floatingInput" placeholder="name@example.com"/>
-                    <label htmlFor="floatingInput">Evento</label>
+                    <input onChange={handleFieldChange} name='eventTitle'value={eventData.eventTitle} type="text" className="form-control custom-input" id="eventTitle" placeholder="name@example.com"/>
+                    <label htmlFor="eventTitle">Evento</label>
                 </div>
                 <div className="form-floating ms-2 me-2 mt-2 mb-3 ps-2 pe-2">
-                    <input type="email" className="form-control custom-input" id="floatingInput" placeholder="name@example.com"/>
-                    <label htmlFor="floatingInput">Campus</label>
+                    <input onChange={handleFieldChange} name="campus" value={eventData.campus} type="text" className="form-control custom-input" id="campus" placeholder="name@example.com"/>
+                    <label htmlFor="campus">Campus</label>
                 </div>
                 <div className="form-floating ms-2 me-2 mt-2 mb-3 ps-2 pe-2">
-                    <textarea className="form-control custom-input" placeholder="Leave a comment here" id="floatingTextarea2" style={{height: "200px"}}></textarea>
-                    <label htmlFor="floatingTextarea2">Descrição</label>
+                    <textarea onChange={handleFieldChange} name='description' value={eventData.description} className="form-control custom-input" placeholder="Leave a comment here" id="description" style={{height: "200px"}}></textarea>
+                    <label htmlFor="description">Descrição</label>
                 </div>
                 <div className='row mt-2 mb-3 ps-2 pe-2'>
                     <div className='col-12 col-sm-6'>
