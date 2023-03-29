@@ -121,12 +121,11 @@ public class AcademicService {
             // }
 
             academic.setEmail(academicRequestDTO.getEmail());
-        }
+        }        
         
-        // se password não for a mesma que esta no banco, alterar
         if ((academicRequestDTO.getPassword() != null) ||
                 (!academicRequestDTO.getPassword().equals(academic.getPassword()))) { 
-              academic.setPassword(new BCryptPasswordEncoder().encode(academicRequestDTO.getPassword()));
+              academic.setPassword(new BCryptPasswordEncoder(16).encode(academicRequestDTO.getPassword()));
         }
 
         // Salvar

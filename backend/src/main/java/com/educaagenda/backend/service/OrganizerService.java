@@ -123,7 +123,7 @@ public class OrganizerService {
         // se password não for a mesma que esta no banco, alterar
         if ((organizerRequestDTO.getPassword() != null) ||
                 (!organizerRequestDTO.getPassword().equals(organizer.getPassword()))) {
-            organizer.setPassword(new BCryptPasswordEncoder().encode(organizerRequestDTO.getPassword()));
+            organizer.setPassword(new BCryptPasswordEncoder(16).encode(organizerRequestDTO.getPassword()));
         }
         OrganizerResponseDTO organizerResponseDTO = new OrganizerResponseDTO(organizerRepository.save(organizer));
         return ResponseEntity.status(HttpStatus.CREATED).body(organizerResponseDTO);

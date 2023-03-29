@@ -28,7 +28,7 @@ public class AcademicRequestDTO  implements Serializable{
     }
 
     public Academic toAcademic() {
-        password = new BCryptPasswordEncoder().encode(password);
+        password = new BCryptPasswordEncoder(16).encode(password);
 
         Academic academic = new Academic();
         academic.setName(name);

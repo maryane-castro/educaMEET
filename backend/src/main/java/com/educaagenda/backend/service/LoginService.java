@@ -3,6 +3,8 @@ package com.educaagenda.backend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.educaagenda.backend.dto.academic.AcademicRequestDTO;
@@ -53,11 +55,20 @@ public class LoginService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Acadêmico(a) não localizado(a) no servidor!");
         }
 
-        if (!academicRequestDTO.getPassword().equals(academic.getPassword())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password inválida para o Acadêmico " + academic.getEmail());
-        }
+        //vem do banco - vem hash
+        var encodedPassword  = academic.getPassword(); 
+        var rawPassword = academicRequestDTO.getPassword();     
 
-        return ResponseEntity.status(HttpStatus.OK).body(new AcademicResponseDTO(academic));     
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();        
+        if (passwordEncoder.matches(rawPassword, encodedPassword)) {
+            return ResponseEntity.status(HttpStatus.OK).body(new AcademicResponseDTO(academic));                 
+        }        
+        else{
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password inválida para o Acadêmico " + academic.getEmail());
+        }  
+        
+
     }
 
     public ResponseEntity<Object> organizerLogin(String email, OrganizerRequestDTO organizerRequestDTO) {
@@ -67,11 +78,17 @@ public class LoginService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organizador(a) não localizado(a) no servidor!");
         }
 
-        if (!organizerRequestDTO.getPassword().equals(organizer.getPassword())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password inválida para o Organizador " + organizer.getEmail());
-        }
+        //vem do banco - vem hash
+        var encodedPassword = organizer.getPassword(); 
+        var rawPassword = organizerRequestDTO.getPassword();     
 
-        return ResponseEntity.status(HttpStatus.OK).body(new OrganizerResponseDTO(organizer));     
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();        
+        if (passwordEncoder.matches(rawPassword, encodedPassword)) {
+            return ResponseEntity.status(HttpStatus.OK).body(new OrganizerResponseDTO(organizer));                 
+        }        
+        else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password inválida para o Organizador " + organizer.getEmail());
+        }    
     }
     
 }

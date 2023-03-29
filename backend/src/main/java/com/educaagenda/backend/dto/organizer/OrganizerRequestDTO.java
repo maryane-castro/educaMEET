@@ -23,7 +23,7 @@ public class OrganizerRequestDTO  implements Serializable{
     }
 
     public Organizer toOrganizer() {
-        password = new BCryptPasswordEncoder().encode(password);
+        password = new BCryptPasswordEncoder(16).encode(password);
         
         Organizer organizer = new Organizer();
         organizer.setName(name);
