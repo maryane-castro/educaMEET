@@ -3,7 +3,10 @@
 
 const Historic = () => {
     return(
-        <h1>Historic</h1>
+        <div>
+            <h1>Historic</h1>
+            <p>Historico de eventos</p>
+        </div>
     )
 }
 
