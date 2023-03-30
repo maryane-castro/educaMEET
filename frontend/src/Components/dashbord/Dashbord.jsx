@@ -1,7 +1,10 @@
 
 const Dashbord = () =>{
     return(
-        <div className="container-fluid">DASHBOARD</div>
+        <div className="container-fluid">
+            DASHBOARD
+            dasd
+        </div>
     );
 };
 
