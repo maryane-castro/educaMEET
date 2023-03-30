@@ -1,4 +1,4 @@
-
+/*saiba mais*/ 
 import {BsCalendarEvent} from "react-icons/bs"
 import {GoLocation} from "react-icons/go"
 import "./Event.css"

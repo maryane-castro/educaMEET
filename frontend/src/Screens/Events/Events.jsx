@@ -1,4 +1,4 @@
-
+/*Criar Evento*/
 import EventCard from '../../Components/EventCard/EventCard';
 
 
