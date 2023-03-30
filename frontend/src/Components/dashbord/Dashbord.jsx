@@ -13,7 +13,7 @@ export const data = [
       calc: "stringify",
     },
   ],
-  ["Alunos", 8.94, "#f3f3", null],
+  ["Alunos", 20.94, "#f3f3", null],
   ["Professores", 10.49, "#f3a", null],
   ["Gestores", 19.3, "#f44", null],
   ["Convidados", 21.45, "color: #3e2", null],
