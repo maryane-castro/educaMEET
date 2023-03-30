@@ -56,10 +56,10 @@ const Navbar = () => {
                             <Link to="/new" className="nav-link text-color-eton-variation" aria-current="page"> <strong>Criar Evento</strong></Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-color-eton-variation" href="#"><strong>Meus Eventos</strong></a>
+                            <Link to="/myevents" className="nav-link text-color-eton-variation" aria-current="page"><strong>Meus Eventos</strong></Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-color-eton-variation" href="#"><strong>Histórico</strong></a>
+                            <Link to="/historic" className="nav-link text-color-eton-variation" aria-current="page"><strong>Histórico</strong></Link>
                         </li>
                     </ul>
                     {resolutionBiggerThan && <DropdownMenu DropImage={<Thumbnail/>}/>}
