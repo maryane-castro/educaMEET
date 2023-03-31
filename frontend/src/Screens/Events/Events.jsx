@@ -1,6 +1,6 @@
 /*Criar Evento*/
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../axios/config';
 import EventCard from '../../Components/EventCard/EventCard';
 
 const Events = () => {
@@ -8,7 +8,7 @@ const Events = () => {
 
     const getEvents = async ()  => {
         try {
-            const response = await axios.get('http://localhost:8080/events');
+            const response = await api.get("/events");
             const data = response.data;
             setEvents(data);
         } catch (error) {
@@ -24,9 +24,8 @@ const Events = () => {
         <div className='container-fluid'>
             <div className='row'>
                 {events.map((evt) => (
-                    <div className=' mb-4 d-flex justify-content-center col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xl-6'>
+                    <div key={evt.id} className=' mb-4 d-flex justify-content-center col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xl-6'>
                         <EventCard 
-                        key={evt.id}
                         id={evt.id}
                         name={evt.name}
                         campus={evt.campus}
