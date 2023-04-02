@@ -111,23 +111,30 @@ public class EventService {
         return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
     }    
 
+    // TODO ATUALIZA A NOTA
     @Transactional
     public EventResponseDTO saveScore(Long id) {
 
         Event event = eventRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Evento não encontrado"));
 
+        // TODO FAZER UM METODO PRA ATUALIZAR?
+
+        atualizarScore(event);        
+
+        return new EventResponseDTO(eventRepository.save(event));
+    }
+
+    private void atualizarScore(Event event) {
         double sum = 0.0;
 
         for (EventReview e : event.getReviews()) {
             sum = sum + e.getRate_value();
         }
 
-        double avg = sum / event.getReviews().size();
+        double avg = Math.round(sum / event.getReviews().size()*100.0)/100.0;
 
         event.setScore(avg);
-
-        return new EventResponseDTO(eventRepository.save(event));
     }
 
     public ResponseEntity<Object> findAllByData(LocalDate startDate) {

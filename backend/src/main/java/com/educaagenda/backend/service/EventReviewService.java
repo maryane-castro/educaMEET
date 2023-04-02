@@ -58,6 +58,7 @@ public class EventReviewService {
         return ResponseEntity.status(HttpStatus.OK).body(resposta);
     }
 
+    
     @Transactional
     public EventReviewResponseDTO saveReview(EventReviewRequestDTO eventReviewRequestDTO) {
         EventReview eventReview = eventReviewRequestDTO.toEventReview();
@@ -84,7 +85,8 @@ public class EventReviewService {
             throw new NoSuchElementException("Este Participante não está inscrito neste Evento!");
         }
 
-        //atualizar nota geral
+        // TODO atualizar nota geral NO EVENTO
+        
         return new EventReviewResponseDTO(eventReviewRepository.save(eventReview));
     }
 
@@ -107,11 +109,11 @@ public class EventReviewService {
         if (eventReviewRequestDTO.getText() != null) {
             eventReview.setText(eventReviewRequestDTO.getText());
         }
-
+        
         // avaliação
         eventReview.setRate_value(eventReviewRequestDTO.getRate_value());
 
-        // atualizar nota geral
+        // TODO atualizar nota geral NO EVENTO
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new EventReviewResponseDTO(eventReviewRepository.save(eventReview)));
