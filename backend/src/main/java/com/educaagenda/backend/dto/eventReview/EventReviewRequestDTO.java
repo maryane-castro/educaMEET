@@ -9,7 +9,7 @@ public class EventReviewRequestDTO implements Serializable{
     private static final long serialVersionUID = 1L;
     
     private Long id;
-    private Long academicId;
+    private Long participanteId;
     private Long eventId;
     private LocalDate date;
     private String text;
@@ -18,9 +18,9 @@ public class EventReviewRequestDTO implements Serializable{
     public EventReviewRequestDTO() {
     }
   
-    public EventReviewRequestDTO(Long id, Long academicId, Long eventId, LocalDate date, String text, double rate_value) {
+    public EventReviewRequestDTO(Long id, Long participanteId, Long eventId, LocalDate date, String text, double rate_value) {
         this.id = id;
-        this.academicId = academicId;
+        this.participanteId = participanteId;
         this.eventId = eventId;
         this.date = date;
         this.text = text;
@@ -47,15 +47,7 @@ public class EventReviewRequestDTO implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getAcademicId() {
-        return academicId;
-    }
-
-    public void setAcademicId(Long academicId) {
-        this.academicId = academicId;
-    }
+    }    
 
     public Long getEventId() {
         return eventId;
@@ -87,6 +79,14 @@ public class EventReviewRequestDTO implements Serializable{
 
     public void setRate_value(double rate_value) {
         this.rate_value = rate_value;
+    }
+
+    public Long getParticipanteId() {
+        return participanteId;
+    }
+
+    public void setParticipanteId(Long participanteId) {
+        this.participanteId = participanteId;
     }
 
     

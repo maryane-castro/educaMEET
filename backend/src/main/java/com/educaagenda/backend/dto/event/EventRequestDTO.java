@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.model.EventReview;
-import com.educaagenda.backend.model.Organizer;
+import com.educaagenda.backend.model.Participante;
 
 public class EventRequestDTO  implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -20,15 +19,14 @@ public class EventRequestDTO  implements Serializable{
     private String details;
     private String folder;
     private double score;
-    private Set<Academic> academics;
-    private Set<Organizer> organizers;
+    private Set<Participante> participantes;
     private Set<EventReview> reviews;
 
     public EventRequestDTO() {
     }
 
     public EventRequestDTO(Long id, String name, String campus, LocalDate startDate, LocalDate endDate, String details, String folder,
-            Set<Academic> academics, Set<Organizer> organizers, Set<EventReview> reviews, double score) {
+            Set<Participante> participantes, Set<EventReview> reviews, double score) {
         this.id = id;
         this.name = name;
         this.campus = campus;
@@ -37,8 +35,7 @@ public class EventRequestDTO  implements Serializable{
         this.details = details;
         this.folder = folder;
         this.score = score;
-        this.academics = academics;
-        this.organizers = organizers;
+        this.participantes = participantes;
         this.reviews = reviews;
     }
 
@@ -85,23 +82,7 @@ public class EventRequestDTO  implements Serializable{
     public Long getId() {
         return id;
     }
-
-    public Set<Academic> getAcademics() {
-        return academics;
-    }
-
-    public void setAcademics(Set<Academic> academics) {
-        this.academics = academics;
-    }
-
-    public Set<Organizer> getOrganizers() {
-        return organizers;
-    }
-
-    public void setOrganizers(Set<Organizer> organizers) {
-        this.organizers = organizers;
-    }
-
+    
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
@@ -136,8 +117,7 @@ public class EventRequestDTO  implements Serializable{
         event.setDetails(details);
         event.setFolder(folder);
         event.setScore(score);    
-        event.setAcademics(academics);
-        event.setOrganizers(organizers);    
+        event.setParticipantes(participantes);
         event.setReviews(reviews);
         return event;
     }
@@ -148,6 +128,14 @@ public class EventRequestDTO  implements Serializable{
 
     public void setCampus(String campus) {
         this.campus = campus;
+    }
+
+    public Set<Participante> getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(Set<Participante> participantes) {
+        this.participantes = participantes;
     }
 
 

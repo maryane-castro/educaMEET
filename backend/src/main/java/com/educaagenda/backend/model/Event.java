@@ -28,23 +28,21 @@ public class Event {
     private String folder;
     private double score;
     
+    // @JsonIgnore
+    // @ManyToMany(targetEntity = Academic.class)
+    // @JoinTable(
+    //     name = "events_academics",         
+    //     joinColumns = @JoinColumn(name = "event_id"),
+    //     inverseJoinColumns = @JoinColumn(name = "academic_id"))
+    // Set<Academic> academics;
+    
     @JsonIgnore
-    //@ManyToMany(targetEntity = Academic.class, cascade = CascadeType.ALL)
-    @ManyToMany(targetEntity = Academic.class)
+    @ManyToMany(targetEntity = Participante.class)
     @JoinTable(
-        name = "events_academics",         
+        name = "participantes_events",         
         joinColumns = @JoinColumn(name = "event_id"),
-        inverseJoinColumns = @JoinColumn(name = "academic_id"))
-    Set<Academic> academics;
- 
-    @JsonIgnore
-    //@ManyToMany(targetEntity = Organizer.class, cascade = CascadeType.ALL)
-    @ManyToMany(targetEntity = Organizer.class)
-    @JoinTable(
-        name = "events_organizers", 
-        joinColumns = @JoinColumn(name = "event_id"),
-        inverseJoinColumns = @JoinColumn(name = "organizer_id"))        
-    Set<Organizer> organizers;
+        inverseJoinColumns = @JoinColumn(name = "participante_id"))
+    Set<Participante> participantes;
 
     @OneToMany(mappedBy = "event")
     Set<EventReview> reviews;
@@ -53,7 +51,7 @@ public class Event {
     }    
 
     public Event(long id, String name, String campus, LocalDate startDate, LocalDate endDate, String details, String folder,
-            Set<Academic> academics, Set<Organizer> organizers, Set<EventReview> reviews, double score) {
+            Set<Participante> participantes, Set<EventReview> reviews, double score) {
         this.id = id;
         this.name = name;
         this.campus = campus;
@@ -62,8 +60,7 @@ public class Event {
         this.details = details;
         this.folder = folder;
         this.score = score;
-        this.academics = academics;
-        this.organizers = organizers;
+        this.participantes = participantes;
         this.reviews = reviews;
     }       
 
@@ -113,22 +110,6 @@ public class Event {
 
     public void setFolder(String folder) {
         this.folder = folder;
-    }
-
-    public Set<Academic> getAcademics() {
-        return academics;
-    }
-
-    public void setAcademics(Set<Academic> academics) {
-        this.academics = academics;
-    }
-
-    public Set<Organizer> getOrganizers() {
-        return organizers;
-    }
-
-    public void setOrganizers(Set<Organizer> organizers) {
-        this.organizers = organizers;
     }    
 
     public Set<EventReview> getReviews() {
@@ -153,5 +134,13 @@ public class Event {
 
     public void setCampus(String campus) {
         this.campus = campus;
+    }
+
+    public Set<Participante> getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(Set<Participante> participantes) {
+        this.participantes = participantes;
     }    
 }

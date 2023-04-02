@@ -69,28 +69,12 @@ public class EventController {
         return eventService.delete(id);
     }
 
-    @PostMapping("events_academics/{event_id}/{academic_id}")
-    public ResponseEntity<Object> events_academics(
+    @PostMapping("participantes/{event_id}/{participante_id}")
+    public ResponseEntity<Object> salvar_participantes(
             @PathVariable(name = "event_id") Long event_id,
-            @PathVariable(name = "academic_id") Long academic_id) {
+            @PathVariable(name = "participante_id") Long participante_id) {
 
-        return eventService.salvar_events_academics(event_id, academic_id);
-    }
-
-    @PostMapping("events_organizers/{event_id}/{organizer_id}")
-    public ResponseEntity<Object> events_organizers(
-            @PathVariable(name = "event_id") Long event_id,
-            @PathVariable(name = "organizer_id") Long organizer_id) {
-
-        return eventService.salvar_events_organizers(event_id, organizer_id);
-    }
-
-    // será usado???
-    @PostMapping("participants_events/{event_id}/{academic_id}/{organizer_id}")
-    public ResponseEntity<Object> participantes_eventos(
-            @PathVariable(name = "event_id") Long event_id,
-            @PathVariable(name = "academic_id") Long academic_id,
-            @PathVariable(name = "organizer_id") Long organizer_id) {
-        return eventService.save_participants_events(event_id, academic_id, organizer_id);
-    }
+        return eventService.salvar_participantes(event_id, participante_id);
+   }  
+   
 }

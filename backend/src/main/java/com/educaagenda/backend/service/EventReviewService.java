@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.educaagenda.backend.dto.eventReview.EventReviewRequestDTO;
 import com.educaagenda.backend.dto.eventReview.EventReviewResponseDTO;
-import com.educaagenda.backend.model.Academic;
+import com.educaagenda.backend.exception.exceptions.ConflictStoreException;
 import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.model.EventReview;
-import com.educaagenda.backend.repository.AcademicRepository;
+import com.educaagenda.backend.model.Participante;
 import com.educaagenda.backend.repository.EventRepository;
 import com.educaagenda.backend.repository.EventReviewRepository;
+import com.educaagenda.backend.repository.ParticipanteRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -26,7 +27,7 @@ public class EventReviewService {
     EventRepository eventRepository;
 
     @Autowired
-    AcademicRepository academicRepository;
+    ParticipanteRepository participanteRepository;
 
     @Autowired
     EventReviewRepository eventReviewRepository;
@@ -60,21 +61,29 @@ public class EventReviewService {
     public EventReviewResponseDTO saveReview(EventReviewRequestDTO eventReviewRequestDTO) {
         EventReview eventReview = eventReviewRequestDTO.toEventReview();
 
-        // localizar academico pelo eventReviewRequestDTO
-        Academic academic = academicRepository.findById(eventReviewRequestDTO.getAcademicId())
-                .orElseThrow(() -> new NoSuchElementException("Acadêmico não encontrado"));
+        // localizar participante pelo eventReviewRequestDTO
+        Participante participante = participanteRepository.findById(eventReviewRequestDTO.getParticipanteId())
+                .orElseThrow(() -> new NoSuchElementException("Participante não encontrado"));
+        
+        var participante_id = eventReviewRepository.findParticipanteById(eventReviewRequestDTO.getParticipanteId());
 
+        if (participante_id != null) {
+            throw new ConflictStoreException("Este participante já votou neste evento!");
+        }
+                
         // localizar evento pelo eventReviewRequestDTO
         Event event = eventRepository.findById(eventReviewRequestDTO.getEventId())
                 .orElseThrow(() -> new NoSuchElementException("Evento não encontrado"));
+                
+        
+        eventReview.setParticipante(participante);
+        eventReview.setEvent(event);        
 
-        eventReview.setAcademic(academic);
-        eventReview.setEvent(event);
-
-        if (!event.getAcademics().contains(academic)) {
-            throw new NoSuchElementException("Este Acadêmico não está inscrito neste Evento!");
+        if (!event.getParticipantes().contains(participante)) {
+            throw new NoSuchElementException("Este Participante não está inscrito neste Evento!");
         }
 
+        //atualizar nota geral
         return new EventReviewResponseDTO(eventReviewRepository.save(eventReview));
     }
 
@@ -103,9 +112,11 @@ public class EventReviewService {
         // avaliação
         eventReview.setRate_value(eventReviewRequestDTO.getRate_value());
 
+        // atualizar nota geral
+
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new EventReviewResponseDTO(eventReviewRepository.save(eventReview)));
 
-    }   
+    }
 
 }

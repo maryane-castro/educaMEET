@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-@Entity
+@Entity()
 public class EventReview implements  Serializable{
     private static final long serialVersionUID = 1L;
 
@@ -27,8 +27,8 @@ public class EventReview implements  Serializable{
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "academic_id")
-    Academic academic;
+    @JoinColumn(name = "participante_id")
+    Participante participante;
 
     private LocalDate date;
     private String text;
@@ -36,10 +36,10 @@ public class EventReview implements  Serializable{
     
     public EventReview() {    }
 
-    public EventReview(Long id, Event event, Academic academic, LocalDate date, String text, double rate_value) {
+    public EventReview(Long id, Event event, Participante participante, LocalDate date, String text, double rate_value) {
         this.id = id;
         this.event = event;
-        this.academic = academic;
+        this.participante = participante;
         this.date = date;
         this.text = text;
         this.rate_value = rate_value;
@@ -59,15 +59,7 @@ public class EventReview implements  Serializable{
 
     public void setEvent(Event event) {
         this.event = event;
-    }
-
-    public Academic getAcademic() {
-        return academic;
-    }
-
-    public void setAcademic(Academic academic) {
-        this.academic = academic;
-    }
+    }   
 
     public LocalDate getDate() {
         return date;
@@ -91,6 +83,18 @@ public class EventReview implements  Serializable{
 
     public void setRate_value(double rate_value) {
         this.rate_value = rate_value;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public Participante getParticipante() {
+        return participante;
+    }
+
+    public void setParticipante(Participante participante) {
+        this.participante = participante;
     }
 
     

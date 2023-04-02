@@ -7,88 +7,50 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.educaagenda.backend.dto.academic.AcademicRequestDTO;
-import com.educaagenda.backend.dto.academic.AcademicResponseDTO;
-import com.educaagenda.backend.dto.organizer.OrganizerRequestDTO;
-import com.educaagenda.backend.dto.organizer.OrganizerResponseDTO;
-import com.educaagenda.backend.model.Academic;
-import com.educaagenda.backend.model.Organizer;
-import com.educaagenda.backend.repository.AcademicRepository;
-import com.educaagenda.backend.repository.OrganizerRepository;
+import com.educaagenda.backend.dto.participante.ParticipanteRequestDTO;
+import com.educaagenda.backend.dto.participante.ParticipanteResponseDTO;
+import com.educaagenda.backend.model.Participante;
+import com.educaagenda.backend.repository.ParticipanteRepository;
 
 @Service
 public class LoginService {
 
     @Autowired
-    AcademicRepository academicRepository;
-
-    @Autowired
-    OrganizerRepository organizerRepository;
-
-    public ResponseEntity<Object> findAcademicByEmail(String email) {
+    ParticipanteRepository participanteRepository;
+    
+    public ResponseEntity<Object> findParticipanteByEmail(String email) {
         
-        Academic academic = academicRepository.findByEmail(email);        
+        Participante participante = participanteRepository.findByEmail(email);        
 
-        if (academic == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Acadêmico(a) não localizado(a) no servidor!");
+        if (participante == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Participante não localizado(a) no servidor!");
         }        
         
-        return ResponseEntity.status(HttpStatus.OK).body(new AcademicResponseDTO(academic));            
+        return ResponseEntity.status(HttpStatus.OK).body(new ParticipanteResponseDTO(participante));            
 
-    }
+    }    
 
-    public ResponseEntity<Object> findOrganizerByEmail(String email) {
+    public ResponseEntity<Object> login(String email, ParticipanteRequestDTO participanteRequestDTO) {
         
-        Organizer organizer = organizerRepository.findByEmail(email);        
-
-        if (organizer == null) {            
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organizador(a) não localizado(a) no servidor!");
-        }
-        
-        return ResponseEntity.status(HttpStatus.OK).body(new OrganizerResponseDTO(organizer));     
-    }
-
-    public ResponseEntity<Object> academicLogin(String email, AcademicRequestDTO academicRequestDTO) {
-        
-        Academic academic = academicRepository.findByEmail(email);        
-        if (academic == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Acadêmico(a) não localizado(a) no servidor!");
+        Participante participante = participanteRepository.findByEmail(email);        
+        if (participante == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Participante não localizado(a) no servidor!");
         }
 
         //vem do banco - vem hash
-        var encodedPassword  = academic.getPassword(); 
-        var rawPassword = academicRequestDTO.getPassword();     
+        var encodedPassword  = participante.getPassword(); 
+        var rawPassword = participanteRequestDTO.getPassword();     
 
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();        
         if (passwordEncoder.matches(rawPassword, encodedPassword)) {
-            return ResponseEntity.status(HttpStatus.OK).body(new AcademicResponseDTO(academic));                 
+            return ResponseEntity.status(HttpStatus.OK).body(new ParticipanteResponseDTO(participante));                 
         }        
         else{
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password inválida para o Acadêmico " + academic.getEmail());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password inválida para o participante " + participante.getEmail());
         }  
         
 
-    }
-
-    public ResponseEntity<Object> organizerLogin(String email, OrganizerRequestDTO organizerRequestDTO) {
-        
-        Organizer organizer = organizerRepository.findByEmail(email);        
-        if (organizer == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organizador(a) não localizado(a) no servidor!");
-        }
-
-        //vem do banco - vem hash
-        var encodedPassword = organizer.getPassword(); 
-        var rawPassword = organizerRequestDTO.getPassword();     
-
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();        
-        if (passwordEncoder.matches(rawPassword, encodedPassword)) {
-            return ResponseEntity.status(HttpStatus.OK).body(new OrganizerResponseDTO(organizer));                 
-        }        
-        else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password inválida para o Organizador " + organizer.getEmail());
-        }    
-    }
+    }   
     
 }

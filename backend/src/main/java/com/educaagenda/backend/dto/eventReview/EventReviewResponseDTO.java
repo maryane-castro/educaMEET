@@ -3,15 +3,15 @@ package com.educaagenda.backend.dto.eventReview;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.model.EventReview;
+import com.educaagenda.backend.model.Participante;
 
 public class EventReviewResponseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private Academic academic;
+    private Participante participante;
     private Event event;
     private LocalDate date;
     private String text;
@@ -19,7 +19,7 @@ public class EventReviewResponseDTO implements Serializable {
 
     public EventReviewResponseDTO(EventReview eventReview) {
         this.id = eventReview.getId();
-        this.academic = eventReview.getAcademic();
+        this.participante = eventReview.getParticipante();
         this.event = eventReview.getEvent();
         this.date = eventReview.getDate();
         this.text = eventReview.getText();
@@ -35,15 +35,7 @@ public class EventReviewResponseDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Academic getAcademic() {
-        return academic;
-    }
-
-    public void setAcademic(Academic academic) {
-        this.academic = academic;
-    }
+    } 
 
     public Event getEvent() {
         return event;
@@ -75,6 +67,18 @@ public class EventReviewResponseDTO implements Serializable {
 
     public void setRate_value(double rate_value) {
         this.rate_value = rate_value;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public Participante getParticipante() {
+        return participante;
+    }
+
+    public void setParticipante(Participante participante) {
+        this.participante = participante;
     }
 
 }

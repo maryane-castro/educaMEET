@@ -14,31 +14,34 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Academic {
-
+public class Participante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    private String tipo;
 
-    @Column(nullable = false, unique = true)    
+    @Column(unique = true)    
     private String email;
     
     private String password;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = Event.class, cascade = CascadeType.ALL, mappedBy = "academics")
+    @ManyToMany(targetEntity = Event.class, cascade = CascadeType.ALL, mappedBy = "participantes")
     Set<Event> events;
 
-    @OneToMany(mappedBy = "academic")
+    @OneToMany(mappedBy = "participante")
     Set<EventReview> reviews;
 
-    public Academic() {
-    }
+    //--------------------//
 
-    public Academic(long id, String name, String password, String email, Set<Event> events, Set<EventReview> reviews) {
+    public Participante() { }
+
+    public Participante(long id, String name, String tipo, String email, String password, Set<Event> events,
+            Set<EventReview> reviews) {
         this.id = id;
         this.name = name;
+        this.tipo = tipo;
         this.email = email;
         this.password = password;
         this.events = events;
@@ -59,6 +62,22 @@ public class Academic {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -84,17 +103,5 @@ public class Academic {
     public void setReviews(Set<EventReview> reviews) {
         this.reviews = reviews;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Academic orElseThrow(Object object) {
-        return null;
-    }
-
+    
 }

@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.educaagenda.backend.model.Academic;
 import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.model.EventReview;
-import com.educaagenda.backend.model.Organizer;
+import com.educaagenda.backend.model.Participante;
 
 public class EventResponseDTO  implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -20,8 +19,7 @@ public class EventResponseDTO  implements Serializable{
     private String details;
     private String folder;     
     private double score;
-    private Set<Academic> academics;
-    private Set<Organizer> organizers;
+    private Set<Participante> participantes;
     private Set<EventReview> reviews;
 
     public EventResponseDTO(Event event) {
@@ -33,8 +31,7 @@ public class EventResponseDTO  implements Serializable{
         this.details = event.getDetails();
         this.folder = event.getFolder();
         this.score = event.getScore();
-        this.academics = event.getAcademics();
-        this.organizers = event.getOrganizers();
+        this.participantes = event.getParticipantes();
         this.reviews = event.getReviews();
     }    
 
@@ -93,23 +90,7 @@ public class EventResponseDTO  implements Serializable{
     public void setFolder(String folder) {
         this.folder = folder;
     }
-
-    public Set<Academic> getAcademics() {
-        return academics;
-    }
-
-    public void setAcademics(Set<Academic> academics) {
-        this.academics = academics;
-    }
-
-    public Set<Organizer> getOrganizers() {
-        return organizers;
-    }
-
-    public void setOrganizers(Set<Organizer> organizers) {
-        this.organizers = organizers;
-    }
-
+    
     public Set<EventReview> getReviews() {
         return reviews;
     }
@@ -132,6 +113,14 @@ public class EventResponseDTO  implements Serializable{
 
     public void setCampus(String campus) {
         this.campus = campus;
+    }
+
+    public Set<Participante> getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(Set<Participante> participantes) {
+        this.participantes = participantes;
     }    
         
 }

@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.educaagenda.backend.dto.academic.AcademicRequestDTO;
-import com.educaagenda.backend.dto.organizer.OrganizerRequestDTO;
+import com.educaagenda.backend.dto.participante.ParticipanteRequestDTO;
 import com.educaagenda.backend.service.LoginService;
 
 @RestController
@@ -19,30 +18,16 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
-    @GetMapping("/academic/{email}")
-    public ResponseEntity<Object> findAcademicByEmail(
+    @GetMapping("/find/{email}")
+    public ResponseEntity<Object> findParticipanteByEmail(
         @PathVariable(name = "email") String email) {
-        return loginService.findAcademicByEmail(email);
-    }
+        return loginService.findParticipanteByEmail(email);
+    }    
 
-    @GetMapping("/organizer/{email}")
-    public ResponseEntity<Object> findOrganizerByEmail(
-        @PathVariable(name = "email") String email) {
-        return loginService.findOrganizerByEmail(email);
-    }
-
-    @GetMapping("/academic/login/{email}")
-    public ResponseEntity<Object> acabemicLogin(
+    @GetMapping("/{email}")
+    public ResponseEntity<Object> login(
         @PathVariable(name = "email") String email,
-        @RequestBody AcademicRequestDTO academicRequestDTO) {
-        return loginService.academicLogin(email, academicRequestDTO);
+        @RequestBody ParticipanteRequestDTO participanteRequestDTO) {
+        return loginService.login(email, participanteRequestDTO);        
     }
-
-    @GetMapping("/organizer/login/{email}")
-    public ResponseEntity<Object> organizerLogin(
-        @PathVariable(name = "email") String email,
-        @RequestBody OrganizerRequestDTO organizerRequestDTO) {
-        return loginService.organizerLogin(email, organizerRequestDTO);
-    }
-    
 }
