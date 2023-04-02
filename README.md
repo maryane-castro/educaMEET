@@ -35,7 +35,7 @@ Na condição de organizador onde tambem é necessário autenticação por matri
 
 Para visualizar o diagrama de relacionamento de entidades do web app, acesse o seguinte link:
 </br>
-<a href="https://lucid.app/lucidchart/d8d7a283-1e35-4ef1-b419-080d8fc6defe/view?page=QbbB18md6UEi&invitationId=inv_54277523-c738-48de-9bc2-e690a963275a#"> DER - EducaMEET <a/>
+<a href="https://lucid.app/documents/view/ed62d289-9a37-433c-a302-dfec9ad1839d"> DER - EducaMEET <a/>
 
 
 <h3> Tecnologias Utilizadas </h3>
