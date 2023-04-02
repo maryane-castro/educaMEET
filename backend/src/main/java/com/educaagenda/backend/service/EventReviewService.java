@@ -1,5 +1,6 @@
 package com.educaagenda.backend.service;
 
+import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -99,10 +100,8 @@ public class EventReviewService {
         EventReview eventReview = eventReviewRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Avaliação não encontrada"));
 
-        // data
-        if (eventReviewRequestDTO.getDate() != null) {
-            eventReview.setDate(eventReviewRequestDTO.getDate());
-        }
+        // data do dia
+        eventReview.setDate(LocalDate.now());        
 
         // texto avaliacao
         if (eventReviewRequestDTO.getText() != null) {

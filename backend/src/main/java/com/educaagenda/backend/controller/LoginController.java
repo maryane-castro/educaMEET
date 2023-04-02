@@ -28,6 +28,7 @@ public class LoginController {
     public ResponseEntity<Object> login(
         @PathVariable(name = "email") String email,
         @RequestBody ParticipanteRequestDTO participanteRequestDTO) {
-        return loginService.login(email, participanteRequestDTO);        
+        return loginService.login(email, participanteRequestDTO);         
     }
+    
 }

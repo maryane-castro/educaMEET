@@ -31,7 +31,8 @@ public class EventReviewRequestDTO implements Serializable{
         EventReview eventReview = new EventReview();
         //eventReview.setAcademic(null);
         //eventReview.setEvent(null);
-        eventReview.setDate(date);
+        //eventReview.setDate(date);
+        eventReview.setDate(LocalDate.now());
         eventReview.setText(text);
         eventReview.setRate_value(rate_value);      
         return eventReview;

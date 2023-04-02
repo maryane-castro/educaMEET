@@ -28,15 +28,7 @@ public class Event {
     private String folder;
     private double score;
     
-    // @JsonIgnore
-    // @ManyToMany(targetEntity = Academic.class)
-    // @JoinTable(
-    //     name = "events_academics",         
-    //     joinColumns = @JoinColumn(name = "event_id"),
-    //     inverseJoinColumns = @JoinColumn(name = "academic_id"))
-    // Set<Academic> academics;
-    
-    @JsonIgnore
+     @JsonIgnore
     @ManyToMany(targetEntity = Participante.class)
     @JoinTable(
         name = "participantes_events",         
