@@ -4,7 +4,7 @@ import Sidebar from "../sidebar/Sidebar";
 const Offcanvas = () => {
     return(
         <Fragment>
-            <div className="offcanvas offcanvas-start position-absolute" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div className="offcanvas position-fixed offcanvas-start position-absolute" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div className="offcanvas-body position-absolute">
                     <Sidebar/>
                 </div>

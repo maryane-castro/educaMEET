@@ -7,7 +7,7 @@
 }  
 
 .custom-button{
-    background-color:$eton-blue;
+    background-color:first-color;
     color: $pure-white;
     border:solid 2px transparent;
     font-size: 20px;
@@ -16,18 +16,18 @@
 
 
 .custom-button:hover{
-    background-color:$eton-blue;
-    color: $eton-blue-variation;
-    border:solid 2px $eton-blue-variation;
+    background-color:$first-color;
+    color: second-color;
+    border:solid 2px $second-color;
     font-size: 20px;
     font-weight: bold;
 }
 
 .btn{
     &.custom-button:active{
-        background-color:$eton-blue-variation;
+        background-color:second-color;
         color: $pure-white;
-        border:solid 2px $eton-blue-variation;
+        border:solid 2px second-color;
         font-size: 20px;
         font-weight: bold;
 }}

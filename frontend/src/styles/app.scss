@@ -9,20 +9,20 @@
 @import './calendar.scss';
 
 .bg-color{
-    background-color: $eton-blue;
+    background-color: $first-color;
 }
 
 .bg-color-eton{
-    background-color: $eton-blue-variation;
+    background-color: $second-color;
 }
 
 
 .text-color-eton-variation{
-    color: $eton-blue-variation;
+    color: $second-color;
 }
 
 .border-color-eton{
-    border: $eton-blue-variation 2px solid;
+    border: $second-color 2px solid;
 }
 
 .shadow-border {
@@ -43,5 +43,9 @@
 }
 
 .offcanvas-header{
-    border: solid $eton-blue;
+    border: solid $first-color;
+}
+
+.offcanvas{
+    height:100vh;
 }
