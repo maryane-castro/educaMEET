@@ -1,16 +1,17 @@
 
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import { calendarOptions } from '../../calendar/config';
 import Profile from '../profile/Profile';
 import {Link} from 'react-router-dom';
+import { Fragment } from 'react';
 const Sidebar = () => {
     return(
-        <div className="card mt-4 border-color-eton shadow-border">
+        <Fragment>
             <div className="card-body">
                 <Profile/>
                 <div className='row'>
-                    <div className="col-12 mt-5 d-flex justify-content-center align-items-center">
-                        <Calendar/>
+                    <div className="top-border col-12 mt-3 pt-4 d-flex justify-content-center align-items-center">
+                        <Calendar {...calendarOptions}/>
                     </div>
                     <div className="col-12 pt-3">
                         <Link to='/dashboard'>
@@ -19,7 +20,7 @@ const Sidebar = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Fragment>
     );
 };
 

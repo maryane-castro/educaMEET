@@ -5,7 +5,7 @@ import "./Event.css"
 import EventFolder from "../../assets/event-folder.svg"
 const Event = () => {
   return(
-    <div className="card mt-4">
+    <div className="card">
       <img src={EventFolder} className="card-img-top event-img" alt="..."/>
       <div className="card-body me-3 ms-3">
         <div className="row">

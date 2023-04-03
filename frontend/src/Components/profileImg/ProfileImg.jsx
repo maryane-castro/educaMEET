@@ -6,8 +6,8 @@ const ProfileImg = () => {
         <Fragment>
             <img 
             style={{maxHeight:'150px'}}
-            src="https://avatars.githubusercontent.com/u/954547?v=4" 
-            className=" p-0 img-thumbnail rounded-circle border-color-eton" 
+            src="https://avatars.githubusercontent.com/u/31219833?v=4" 
+            className=" p-0 img-thumbnail rounded-circle profile-img-border " 
             alt="GFG"
             />
         </Fragment>

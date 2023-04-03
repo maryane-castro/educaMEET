@@ -3,7 +3,10 @@
 @import './eventCard.scss';
 @import './eventForm.scss';
 @import './authentication.scss';
-
+@import './profile.scss';
+@import './sideBar.scss';
+@import './profileImg.scss';
+@import './calendar.scss';
 
 .bg-color{
     background-color: $eton-blue;
@@ -39,3 +42,6 @@
     width: 500px;
 }
 
+.offcanvas-header{
+    border: solid $eton-blue;
+}

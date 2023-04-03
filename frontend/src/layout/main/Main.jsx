@@ -18,7 +18,9 @@ const Main = () => {
                 <div className="row">
                     {resolutionSmallerThanXL &&
                         <div className=" col-lg-12 col-xl-4 col-xxl-4">
-                            <Sidebar/>
+                            <div className="position-relative card ps-3 pe-3 mt-4  shadow-border">
+                                <Sidebar/>  
+                            </div>
                         </div>
                     }
                     <div className=" mt-4 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8">
