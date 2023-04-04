@@ -8,6 +8,7 @@
     "bootstrap-icons": "^1.10.3",
     "date-fns": "^2.29.3",
     "react": "^18.2.0",
+    "react-avatar-group": "^1.0.2",
     "react-bootstrap": "^2.7.2",
     "react-calendar": "^4.0.0",
     "react-date-picker": "^9.2.0",

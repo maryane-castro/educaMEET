@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
+import translateDate from '../../utils/dataUtils';
+import EventServices from '../../services/event.service';
 
 const EventForm = () => {
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-
     const [fileContent, setFileContent] = useState('');
-
     const [eventData, setEventData] = useState({name: '', campus: '', details: ''});
+    const [completeEvent, setCompleteEvent] = useState({});
 
     const handleFileSelection = (e) => {
         const file = e.target.files[0];
@@ -20,18 +21,21 @@ const EventForm = () => {
         reader.readAsText(file);
     };
       
-
     const handleFieldChange = (e) => {
         setEventData({...eventData, [e.currentTarget.name]: e.currentTarget.value});
     };
 
     const handleSubmit = (e) => {
-        const completeEventData = {...eventData, startDate:startDate, endDate:endDate, folder:fileContent};
-        console.log(completeEventData);
-        setEventData({name: '', campus: '', details: ''});
         e.preventDefault();
+        setCompleteEvent({...eventData, startDate:"", endDate: "", folder:fileContent});
+        try {
+            console.log(completeEvent);
+            EventServices.create(completeEvent);
+        } catch (error) {
+            console.log({message:error.message});
+        }   
+        setEventData({name: '', campus: '', details: ''});
     }
-
 
     return(
         <div className="card shadow-border ">
@@ -78,7 +82,7 @@ const EventForm = () => {
                         <DatePicker onChange={setStartDate} value={startDate}/>
                     </div>
                     <div className='col-12 col-sm-6 mb-2 mt-2'>
-                        <DatePicker onChange={setEndDate} value={endDate}/>
+                        <DatePicker calendarIcon={null} onChange={setEndDate} value={endDate}/>
                     </div>
                     <div className="col-12 input-group mt-2 mb-3">
                         <label htmlFor='folder'>Upload do folder</label>
@@ -89,10 +93,7 @@ const EventForm = () => {
                         />
                     </div>
                     <div className="col-12 col-sm-4 offset-sm-4">
-                        <button
-                            type="submit" 
-                            className="btn custom-button btn-block w-100 mb-3"
-                        >
+                        <button type="submit" className="btn custom-button btn-block w-100 mb-3">
                             Cadastrar
                         </button>
                     </div>
