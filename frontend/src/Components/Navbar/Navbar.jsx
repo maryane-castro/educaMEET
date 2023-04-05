@@ -5,6 +5,9 @@ import OffcanvasBtn from "../OffcanvasBtn/OffcanvasBtn";
 import './Navbar.scss';
 import {ReactComponent as Logo} from '../../assets/logo-educameet-light.svg'
 import { Link } from "react-router-dom";
+import {BsFillCalendar2PlusFill} from 'react-icons/bs';
+import {AiFillStar} from 'react-icons/ai';
+import {BsFolderFill} from 'react-icons/bs';
 
 
 const Navbar = () => {
@@ -53,13 +56,19 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                     <ul className="navbar-nav d-flex align-items-center justify-content-center">
                         <li className="nav-item">
-                            <Link to="/new" className="nav-link text-color-eton-variation" aria-current="page"> <strong>Criar Evento</strong></Link>
+                            <BsFillCalendar2PlusFill 
+                            className="options-icon m-1" type="button" 
+                            data-bs-toggle="modal" data-bs-target="#exampleModal"/>
                         </li>
                         <li className="nav-item">
-                            <Link to="/myevents" className="nav-link text-color-eton-variation" aria-current="page"><strong>Meus Eventos</strong></Link>
+                            <Link to="/myevents" aria-current="page">
+                                <AiFillStar className="options-icon m-1"/>
+                            </Link> 
                         </li>
                         <li className="nav-item">
-                            <Link to="/historic" className="nav-link text-color-eton-variation" aria-current="page"><strong>Histórico</strong></Link>
+                            <Link to="/historic" aria-current="page">
+                                <BsFolderFill className="options-icon m-1"/>
+                            </Link>
                         </li>
                     </ul>
                     {resolutionBiggerThan && <DropdownMenu DropImage={<Thumbnail/>}/>}

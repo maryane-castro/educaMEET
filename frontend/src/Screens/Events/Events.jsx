@@ -23,7 +23,7 @@ const Events = () => {
         <div className='container-fluid'>
             <div className='row align-items-center'>
                 {events.map((evt) => (
-                    <div key={evt.id} className='mb-3 d-flex justify-content-center col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 col-xl-4'>
+                    <div key={evt.id} className='mb-3 d-flex justify-content-center col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xl-6'>
                         <EventCard 
                         id={evt.id}
                         name={evt.name}

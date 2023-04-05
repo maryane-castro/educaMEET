@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
-import translateDate from '../../utils/dataUtils';
+import ConvertDate from '../../utils/dataUtils';
 import EventServices from '../../services/event.service';
 
 const EventForm = () => {
@@ -10,7 +10,7 @@ const EventForm = () => {
     const [endDate, setEndDate] = useState(new Date());
     const [fileContent, setFileContent] = useState('');
     const [eventData, setEventData] = useState({name: '', campus: '', details: ''});
-    const [completeEvent, setCompleteEvent] = useState({});
+    const [completeEvent, setCompleteEvent] = useState({name: '', campus: '', details: '', startDate:'', endDate:'', folder:''});
 
     const handleFileSelection = (e) => {
         const file = e.target.files[0];
@@ -27,12 +27,16 @@ const EventForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setCompleteEvent({...eventData, startDate:"", endDate: "", folder:fileContent});
+        setCompleteEvent({...eventData, 
+                        startDate:ConvertDate.dbDateFormat(startDate), 
+                        endDate:ConvertDate.dbDateFormat(endDate), 
+                        folder:fileContent}
+                        );
         try {
             console.log(completeEvent);
-            EventServices.create(completeEvent);
+            //EventServices.create(completeEvent);
         } catch (error) {
-            console.log({message:error.message});
+            //console.log({message:error.message});
         }   
         setEventData({name: '', campus: '', details: ''});
     }

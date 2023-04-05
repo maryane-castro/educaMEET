@@ -3,3 +3,12 @@
     height: calc(100vh - 80px);
 }
 
+
+.options-icon{
+    font-size: 40px;
+    color: $pure-white;
+    background-color: $first-color;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
