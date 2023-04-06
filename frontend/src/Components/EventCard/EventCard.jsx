@@ -4,13 +4,19 @@ import {GoLocation} from "react-icons/go"
 import AvatarsComponent from '../avatarComponent/avatarComponent';
 
 
-
-import EventFolder from "../../assets/event-folder.svg"
-
 function EventCard({name, campus, startDate, endDate, details, folder, id}) {
+
+  let cardFolder;
+  try {
+    cardFolder = require(`../../assets/${folder}`);
+  } catch (error) {
+    console.log(error);
+  }
+  
+  
   return (
       <div className=" custom-card card shadow-border">
-          <img src={EventFolder} className="card-img-top" alt="..."/>
+          <img src={cardFolder} className="card-img-top" alt="..."/>
             <div className="row pt-1 card-body event-card-body">
               <h4 className=" col-12 card-title">
                   <div className='event-name'>{name}</div>
