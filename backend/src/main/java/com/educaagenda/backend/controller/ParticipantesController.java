@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.educaagenda.backend.dto.participante.ParticipanteRequestDTO;
 import com.educaagenda.backend.dto.participante.ParticipanteResponseDTO;
 import com.educaagenda.backend.model.Participante;
+import com.educaagenda.backend.repository.RoleRepository;
 import com.educaagenda.backend.service.ParticipanteService;
 
 @RestController
@@ -26,6 +25,9 @@ public class ParticipantesController {
 
     @Autowired
     ParticipanteService participanteService;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> findById(
@@ -40,17 +42,7 @@ public class ParticipantesController {
     }
 
     @PostMapping
-    public ParticipanteResponseDTO save(
-            @RequestBody ParticipanteRequestDTO participanteRequestDTO) {
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        String email;
-
-        if (principal instanceof UserDetails) {
-            email = ((UserDetails) principal).getUsername();
-        }
-       
+    public ParticipanteResponseDTO save(@RequestBody ParticipanteRequestDTO participanteRequestDTO) {
         return participanteService.save(participanteRequestDTO);
     }
 

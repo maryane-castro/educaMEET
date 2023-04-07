@@ -1,7 +1,9 @@
 package com.educaagenda.backend.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import jakarta.transaction.Transactional;
 
@@ -12,10 +14,13 @@ import org.springframework.stereotype.Service;
 
 import com.educaagenda.backend.dto.participante.ParticipanteRequestDTO;
 import com.educaagenda.backend.dto.participante.ParticipanteResponseDTO;
+import com.educaagenda.backend.enums.RoleNames;
 import com.educaagenda.backend.exception.exceptions.ConflictStoreException;
 import com.educaagenda.backend.exception.exceptions.EmailValidatorException;
 import com.educaagenda.backend.model.Participante;
+import com.educaagenda.backend.model.Role;
 import com.educaagenda.backend.repository.ParticipanteRepository;
+import com.educaagenda.backend.repository.RoleRepository;
 
 @Service
 public class ParticipanteService {
@@ -23,13 +28,16 @@ public class ParticipanteService {
     @Autowired
     ParticipanteRepository participanteRepository;
 
+    @Autowired
+    RoleRepository roleRepository;
+
     public List<Participante> findAll() {
         return participanteRepository.findAll();
-    }   
+    }
 
     public ResponseEntity<Object> findById(Long id) {
         Participante participante = participanteRepository.findById(id)
-            .orElseThrow(() -> new NoSuchElementException("Participante não encontrado"));
+                .orElseThrow(() -> new NoSuchElementException("Participante não encontrado"));
         return ResponseEntity.status(HttpStatus.OK).body(new ParticipanteResponseDTO(participante));
     }
 
@@ -51,11 +59,26 @@ public class ParticipanteService {
             if (participanteRepository.existsByEmail(participante.getEmail())) {
                 throw new ConflictStoreException("Este e-mail já está sendo usado!");
             }
+
+            participante.setEmail(participanteRequestDTO.getEmail());
         }
 
-        participante.setEmail(participanteRequestDTO.getEmail());
+        var tipoParticipante = participanteRequestDTO.getTipo();
+        Optional<Role> role = null;
 
-        return new ParticipanteResponseDTO(participanteRepository.save(participante));
+        if (tipoParticipante.toUpperCase().equals("ORGANIZADOR")) {
+            role = roleRepository.findByRole(RoleNames.ROLE_ORGANIZADOR);
+        } else {
+            role = roleRepository.findByRole(RoleNames.ROLE_ACADEMICO);
+        }
+
+        List<Role> roles = new ArrayList<>();
+        roles.add(role.get());
+        participante.setRoles(roles);
+
+        participanteRepository.save(participante);
+        
+        return new ParticipanteResponseDTO(participante);
     }
 
     @Transactional

@@ -1,5 +1,7 @@
 package com.educaagenda.backend.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.model.Participante;
+import com.educaagenda.backend.repository.EventReviewRepository;
+import com.educaagenda.backend.repository.ParticipanteRepository;
 import com.educaagenda.backend.service.ParticipanteService;
 
 @RestController
@@ -19,7 +24,7 @@ public class MyController {
     ParticipanteService participanteService;
 
     @GetMapping("/participante")
-    public ResponseEntity<Object> findClient() {
+    public ResponseEntity<Object> findParticipante() {
         Object principal = SecurityContextHolder
                 .getContext()
                 .getAuthentication()
@@ -31,6 +36,6 @@ public class MyController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-    }
+    }   
 
 }
