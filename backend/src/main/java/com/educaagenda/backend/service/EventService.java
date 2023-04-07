@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.educaagenda.backend.dto.event.EventRequestDTO;
 import com.educaagenda.backend.dto.event.EventResponseDTO;
 import com.educaagenda.backend.model.Event;
-import com.educaagenda.backend.model.EventReview;
 import com.educaagenda.backend.model.Participante;
 import com.educaagenda.backend.repository.EventRepository;
 import com.educaagenda.backend.repository.ParticipanteRepository;
@@ -111,30 +110,17 @@ public class EventService {
         return ResponseEntity.status(HttpStatus.CREATED).body(new EventResponseDTO(eventRepository.save(event)));
     }    
 
-    // TODO ATUALIZA A NOTA
     @Transactional
     public EventResponseDTO saveScore(Long id) {
 
         Event event = eventRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Evento não encontrado"));
 
-        // TODO FAZER UM METODO PRA ATUALIZAR?
-
-        atualizarScore(event);        
+        // serviço para atualizar as atualizações
+        AtualizarScoreService atualizarScoreService = new AtualizarScoreService();
+        atualizarScoreService.atualizarScore(event);        
 
         return new EventResponseDTO(eventRepository.save(event));
-    }
-
-    private void atualizarScore(Event event) {
-        double sum = 0.0;
-
-        for (EventReview e : event.getReviews()) {
-            sum = sum + e.getRate_value();
-        }
-
-        double avg = Math.round(sum / event.getReviews().size()*100.0)/100.0;
-
-        event.setScore(avg);
     }
 
     public ResponseEntity<Object> findAllByData(LocalDate startDate) {

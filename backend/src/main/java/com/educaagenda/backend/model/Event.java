@@ -31,7 +31,7 @@ public class Event {
      @JsonIgnore
     @ManyToMany(targetEntity = Participante.class)
     @JoinTable(
-        name = "participantes_events",         
+        name = "participantes_events",                
         joinColumns = @JoinColumn(name = "event_id"),
         inverseJoinColumns = @JoinColumn(name = "participante_id"))
     Set<Participante> participantes;

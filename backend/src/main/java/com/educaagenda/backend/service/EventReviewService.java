@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.educaagenda.backend.dto.eventReview.EventReviewRequestDTO;
 import com.educaagenda.backend.dto.eventReview.EventReviewResponseDTO;
-import com.educaagenda.backend.exception.exceptions.ConflictStoreException;
 import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.model.EventReview;
 import com.educaagenda.backend.model.Participante;
@@ -58,36 +57,44 @@ public class EventReviewService {
         return ResponseEntity.status(HttpStatus.OK).body(resposta);
     }
 
-    
     @Transactional
     public EventReviewResponseDTO saveReview(EventReviewRequestDTO eventReviewRequestDTO) {
+
         EventReview eventReview = eventReviewRequestDTO.toEventReview();
 
         // localizar participante pelo eventReviewRequestDTO
         Participante participante = participanteRepository.findById(eventReviewRequestDTO.getParticipanteId())
                 .orElseThrow(() -> new NoSuchElementException("Participante não encontrado"));
-        
-        var participante_id = eventReviewRepository.findParticipanteById(eventReviewRequestDTO.getParticipanteId());
 
-        if (participante_id != null) {
-            throw new ConflictStoreException("Este participante já votou neste evento!");
-        }
-                
+        // TODO ALTERAR PARA PEGAR OS PARTICIPANTES DESSE EVENTO
+        
+        //var participante_id = eventReviewRepository.findParticipanteById(eventReviewRequestDTO.getParticipanteId());
+        //var teste = participante_id.getParticipante().getId();
+        // if (participante_id != null) {
+        // throw new ConflictStoreException("Este participante já votou neste evento!");
+        // }
+
         // localizar evento pelo eventReviewRequestDTO
         Event event = eventRepository.findById(eventReviewRequestDTO.getEventId())
                 .orElseThrow(() -> new NoSuchElementException("Evento não encontrado"));
-                
+
         
-        eventReview.setParticipante(participante);
-        eventReview.setEvent(event);        
 
         if (!event.getParticipantes().contains(participante)) {
             throw new NoSuchElementException("Este Participante não está inscrito neste Evento!");
         }
 
-        // TODO atualizar nota geral NO EVENTO
-        
-        return new EventReviewResponseDTO(eventReviewRepository.save(eventReview));
+        eventReview.setParticipante(participante);
+        eventReview.setEvent(event);
+
+        eventReviewRepository.save(eventReview);
+
+        // atualiza nota avaliação
+        AtualizarScoreService atualizarScoreService = new AtualizarScoreService();
+        atualizarScoreService.atualizarScore(event);
+
+        return new EventReviewResponseDTO(eventReview);
+        // return new EventReviewResponseDTO(eventReviewRepository.save(eventReview));
     }
 
     public ResponseEntity<Object> findById(Long id) {
@@ -102,21 +109,28 @@ public class EventReviewService {
         EventReview eventReview = eventReviewRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Avaliação não encontrada"));
 
+        Event event = eventRepository.findById(eventReview.getEvent().getId())
+            .orElseThrow(() -> new NoSuchElementException("Evento não encontrado"));
+
         // data do dia
-        eventReview.setDate(LocalDate.now());        
+        eventReview.setReview_date(LocalDate.now());
 
         // texto avaliacao
         if (eventReviewRequestDTO.getText() != null) {
             eventReview.setText(eventReviewRequestDTO.getText());
         }
-        
+
         // avaliação
         eventReview.setRate_value(eventReviewRequestDTO.getRate_value());
 
-        // TODO atualizar nota geral NO EVENTO
+        eventReviewRepository.save(eventReview);
+
+        // atualiza nota avaliação
+        AtualizarScoreService atualizarScoreService = new AtualizarScoreService();
+        atualizarScoreService.atualizarScore(event);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(new EventReviewResponseDTO(eventReviewRepository.save(eventReview)));
+                .body(new EventReviewResponseDTO(eventReview));
 
     }
 

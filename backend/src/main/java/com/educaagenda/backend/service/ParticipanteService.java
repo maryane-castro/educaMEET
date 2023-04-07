@@ -3,10 +3,11 @@ package com.educaagenda.backend.service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.educaagenda.backend.dto.participante.ParticipanteRequestDTO;
@@ -16,8 +17,6 @@ import com.educaagenda.backend.exception.exceptions.EmailValidatorException;
 import com.educaagenda.backend.model.Participante;
 import com.educaagenda.backend.repository.ParticipanteRepository;
 
-import jakarta.transaction.Transactional;
-
 @Service
 public class ParticipanteService {
 
@@ -26,12 +25,11 @@ public class ParticipanteService {
 
     public List<Participante> findAll() {
         return participanteRepository.findAll();
-    }
+    }   
 
     public ResponseEntity<Object> findById(Long id) {
-
         Participante participante = participanteRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Participante não encontrado"));
+            .orElseThrow(() -> new NoSuchElementException("Participante não encontrado"));
         return ResponseEntity.status(HttpStatus.OK).body(new ParticipanteResponseDTO(participante));
     }
 
@@ -113,7 +111,9 @@ public class ParticipanteService {
         }
 
         if (participanteRequestDTO.getPassword() != null) {
-            participante.setPassword(new BCryptPasswordEncoder().encode(participanteRequestDTO.getPassword()));
+            participante.setPassword(participanteRequestDTO.getPassword());
+            // participante.setPassword(new
+            // BCryptPasswordEncoder().encode(participanteRequestDTO.getPassword()));
         }
 
         // if ((participanteRequestDTO.getPassword() != null) ||

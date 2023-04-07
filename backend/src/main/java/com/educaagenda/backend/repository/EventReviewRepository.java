@@ -3,7 +3,6 @@ package com.educaagenda.backend.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.educaagenda.backend.model.Event;
@@ -15,6 +14,7 @@ public interface EventReviewRepository extends JpaRepository<EventReview, Long>{
     // procura por Eventos que já receberam Avaliações        
     List<EventReview> findByEvent(Event event);
     
-	EventReview findParticipanteById(@Param("participante_id") Long id);
+    EventReview findParticipanteById(Long participante_id);
+	//EventReview findParticipanteById(@Param("participante_id") Set<Participante> set);
 
 }

@@ -13,7 +13,7 @@ public class EventReviewResponseDTO implements Serializable {
     private Long id;
     private Participante participante;
     private Event event;
-    private LocalDate date;
+    private LocalDate review_date;
     private String text;
     private double rate_value;
 
@@ -21,7 +21,7 @@ public class EventReviewResponseDTO implements Serializable {
         this.id = eventReview.getId();
         this.participante = eventReview.getParticipante();
         this.event = eventReview.getEvent();
-        this.date = eventReview.getDate();
+        this.review_date = eventReview.getReview_date();
         this.text = eventReview.getText();
         this.rate_value = eventReview.getRate_value();
     }
@@ -43,15 +43,7 @@ public class EventReviewResponseDTO implements Serializable {
 
     public void setEvent(Event event) {
         this.event = event;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+    }   
 
     public String getText() {
         return text;
@@ -79,6 +71,14 @@ public class EventReviewResponseDTO implements Serializable {
 
     public void setParticipante(Participante participante) {
         this.participante = participante;
+    }
+
+    public LocalDate getReview_date() {
+        return review_date;
+    }
+
+    public void setReview_date(LocalDate review_date) {
+        this.review_date = review_date;
     }
 
 }

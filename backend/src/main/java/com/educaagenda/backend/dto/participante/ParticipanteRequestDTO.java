@@ -20,6 +20,7 @@ public class ParticipanteRequestDTO implements Serializable{
     public ParticipanteRequestDTO() {}
  
     public Participante toParticipante() {
+        
         password = new BCryptPasswordEncoder().encode(password);
 
         Participante participante = new Participante();

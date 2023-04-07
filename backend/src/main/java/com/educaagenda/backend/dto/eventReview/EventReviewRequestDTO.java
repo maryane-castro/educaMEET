@@ -11,28 +11,25 @@ public class EventReviewRequestDTO implements Serializable{
     private Long id;
     private Long participanteId;
     private Long eventId;
-    private LocalDate date;
+    private LocalDate review_date;
     private String text;
     private double rate_value;    
     
     public EventReviewRequestDTO() {
     }
   
-    public EventReviewRequestDTO(Long id, Long participanteId, Long eventId, LocalDate date, String text, double rate_value) {
+    public EventReviewRequestDTO(Long id, Long participanteId, Long eventId, LocalDate review_date, String text, double rate_value) {
         this.id = id;
         this.participanteId = participanteId;
         this.eventId = eventId;
-        this.date = date;
+        this.review_date = review_date;
         this.text = text;
         this.rate_value = rate_value;
     }    
 
     public EventReview toEventReview() {
-        EventReview eventReview = new EventReview();
-        //eventReview.setAcademic(null);
-        //eventReview.setEvent(null);
-        //eventReview.setDate(date);
-        eventReview.setDate(LocalDate.now());
+        EventReview eventReview = new EventReview();    
+        eventReview.setReview_date(LocalDate.now());
         eventReview.setText(text);
         eventReview.setRate_value(rate_value);      
         return eventReview;
@@ -56,15 +53,7 @@ public class EventReviewRequestDTO implements Serializable{
 
     public void setEventId(Long eventId) {
         this.eventId = eventId;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+    }   
 
     public String getText() {
         return text;
@@ -88,6 +77,14 @@ public class EventReviewRequestDTO implements Serializable{
 
     public void setParticipanteId(Long participanteId) {
         this.participanteId = participanteId;
+    }
+
+    public LocalDate getReview_date() {
+        return review_date;
+    }
+
+    public void setReview_date(LocalDate review_date) {
+        this.review_date = review_date;
     }
 
     
