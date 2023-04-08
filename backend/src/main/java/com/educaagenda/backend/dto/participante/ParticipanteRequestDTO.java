@@ -21,10 +21,12 @@ public class ParticipanteRequestDTO implements Serializable{
     @NotNull(message = "Tipo deve ser ORGANIZADOR OU ACADEMICO")    
     private String tipo;
 
+    private String avatar;
+
     @NotNull(message = "E-mail deve ser preenchido")
     @Email(message = "Formado de e-mail incorreto")
-    private String email;    
-
+    private String email; 
+    
     @NotNull(message = "Nome deve ser preenchido")
     @Size(min = 4, max = 10, message = "Password deve ter entre 4 e 10 caracteres")
     private String password;
@@ -41,6 +43,7 @@ public class ParticipanteRequestDTO implements Serializable{
         Participante participante = new Participante();
         participante.setName(name);
         participante.setTipo(tipo);
+        participante.setAvatar(avatar);
         participante.setEmail(email);
         participante.setPassword(password);
         participante.setEvents(events);
@@ -48,12 +51,13 @@ public class ParticipanteRequestDTO implements Serializable{
         return participante;
     }
 
-    public ParticipanteRequestDTO(String name, String tipo, String email, String password) {
+    public ParticipanteRequestDTO(String name, String tipo, String avatar, String email, String password) {
         this.name = name;
         this.tipo = tipo;
+        this.avatar = avatar;
         this.email = email;
         this.password = password;
-    }
+    }    
 
     public String getName() {
         return name;
@@ -101,6 +105,14 @@ public class ParticipanteRequestDTO implements Serializable{
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }    
     
 }

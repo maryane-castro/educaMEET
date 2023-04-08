@@ -5,6 +5,11 @@ import java.time.LocalDate;
 
 import com.educaagenda.backend.model.EventReview;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class EventReviewRequestDTO implements Serializable{
     private static final long serialVersionUID = 1L;
     
@@ -13,6 +18,13 @@ public class EventReviewRequestDTO implements Serializable{
     private Long eventId;
     private LocalDate review_date;
     private String text;
+    
+    @Min(
+        value =  5,
+        message = "O valor da avaliação deve ser no mínimo 5")
+    @Max(
+            value =  10,
+            message = "O valor da avaliação deve ser no maximo 10")
     private double rate_value;    
     
     public EventReviewRequestDTO() {

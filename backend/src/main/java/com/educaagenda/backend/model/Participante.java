@@ -28,6 +28,7 @@ public class Participante implements UserDetails{
     private long id;
     private String name;
     private String tipo;
+    private String avatar;
 
     @Column(unique = true)    
     private String email;
@@ -51,18 +52,19 @@ public class Participante implements UserDetails{
 
     public Participante() { }    
 
-    public Participante(long id, String name, String tipo, String email, String password, Set<Event> events,
+    public Participante(long id, String name, String tipo, String avatar, String email, String password, Set<Event> events,
             Set<EventReview> reviews, List<Role> roles) {
         this.id = id;
         this.name = name;
         this.tipo = tipo;
+        this.avatar = avatar;
         this.email = email;
         this.password = password;
         this.events = events;
         this.reviews = reviews;
         this.roles = roles;
     }
-
+    
     public long getId() {
         return id;
     }
@@ -155,6 +157,14 @@ public class Participante implements UserDetails{
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
     
 }

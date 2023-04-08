@@ -12,6 +12,7 @@ public class ParticipanteResponseDTO implements Serializable {
     private Long id;
     private String name;
     private String tipo;
+    private String avatar;
     private String email;
     private String password;
     private Set<Event> events;
@@ -22,6 +23,7 @@ public class ParticipanteResponseDTO implements Serializable {
     public ParticipanteResponseDTO(Participante participante) {
         id = participante.getId();
         name = participante.getName();
+        avatar = participante.getAvatar();
         tipo = participante.getTipo();
         email = participante.getEmail();        
         password = participante.getPassword();
@@ -29,11 +31,12 @@ public class ParticipanteResponseDTO implements Serializable {
         reviews = participante.getReviews();
     }    
 
-    public ParticipanteResponseDTO(Long id, String name, String tipo, String email, String password, Set<Event> events,
+    public ParticipanteResponseDTO(Long id, String name, String tipo, String avatar, String email, String password, Set<Event> events,
             Set<EventReview> reviews) {
         this.id = id;
         this.name = name;
         this.tipo = tipo;
+        this.avatar = avatar;
         this.email = email;
         this.password = password;
         this.events = events;
@@ -94,6 +97,14 @@ public class ParticipanteResponseDTO implements Serializable {
 
     public void setReviews(Set<EventReview> reviews) {
         this.reviews = reviews;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     

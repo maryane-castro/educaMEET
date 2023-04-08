@@ -61,7 +61,7 @@ public class ParticipanteService {
             }
 
             participante.setEmail(participanteRequestDTO.getEmail());
-        }
+        }       
 
         var tipoParticipante = participanteRequestDTO.getTipo();
         Optional<Role> role = null;
@@ -131,6 +131,10 @@ public class ParticipanteService {
 
         if (participanteRequestDTO.getTipo() != null) {
             participante.setTipo(participanteRequestDTO.getTipo());
+        }
+
+        if (participanteRequestDTO.getAvatar() != null) {
+            participante.setAvatar(participanteRequestDTO.getAvatar());
         }
 
         if (participanteRequestDTO.getPassword() != null) {

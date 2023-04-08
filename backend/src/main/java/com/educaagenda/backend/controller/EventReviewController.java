@@ -14,6 +14,8 @@ import com.educaagenda.backend.dto.eventReview.EventReviewRequestDTO;
 import com.educaagenda.backend.dto.eventReview.EventReviewResponseDTO;
 import com.educaagenda.backend.service.EventReviewService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/reviews")
 public class EventReviewController {
@@ -37,14 +39,14 @@ public class EventReviewController {
     }     
 
     @PostMapping
-    public EventReviewResponseDTO saveReview(@RequestBody EventReviewRequestDTO eventReviewRequestDTO) {
+    public EventReviewResponseDTO saveReview(@RequestBody @Valid EventReviewRequestDTO eventReviewRequestDTO) {
         return eventReviewService.saveReview(eventReviewRequestDTO);
     }
     
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(
             @PathVariable(name = "id") Long id,
-            @RequestBody EventReviewRequestDTO eventReviewRequestDTO){
+            @RequestBody @Valid EventReviewRequestDTO eventReviewRequestDTO){
         return eventReviewService.update(id, eventReviewRequestDTO);
     }
 }
