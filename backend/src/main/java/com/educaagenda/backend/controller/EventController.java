@@ -19,6 +19,8 @@ import com.educaagenda.backend.dto.event.EventResponseDTO;
 import com.educaagenda.backend.model.Event;
 import com.educaagenda.backend.service.EventService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/events")
 public class EventController {
@@ -40,13 +42,12 @@ public class EventController {
 
     @GetMapping("/startDate/{startDate}")
     public ResponseEntity<Object> findAllByStartData(
-            @PathVariable(name = "startDate") LocalDate startDate
-    ){
+            @PathVariable(name = "startDate") LocalDate startDate) {
         return eventService.findAllByData(startDate);
     }
 
     @PostMapping
-    public EventResponseDTO save(@RequestBody EventRequestDTO eventRequestDTO) {
+    public EventResponseDTO save(@RequestBody @Valid EventRequestDTO eventRequestDTO) {
         return eventService.save(eventRequestDTO);
     }
 
@@ -75,6 +76,6 @@ public class EventController {
             @PathVariable(name = "participante_id") Long participante_id) {
 
         return eventService.salvar_participantes(event_id, participante_id);
-   }  
-   
+    }
+
 }

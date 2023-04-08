@@ -19,6 +19,8 @@ import com.educaagenda.backend.model.Participante;
 import com.educaagenda.backend.repository.RoleRepository;
 import com.educaagenda.backend.service.ParticipanteService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/participantes")
 public class ParticipantesController {
@@ -42,14 +44,14 @@ public class ParticipantesController {
     }
 
     @PostMapping
-    public ParticipanteResponseDTO save(@RequestBody ParticipanteRequestDTO participanteRequestDTO) {
+    public ParticipanteResponseDTO save(@RequestBody @Valid ParticipanteRequestDTO participanteRequestDTO) {
         return participanteService.save(participanteRequestDTO);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(
-            @PathVariable(name = "id") Long id,
-            @RequestBody ParticipanteRequestDTO participanteRequestDTO) {
+            @PathVariable(name = "id") Long id,            
+            @RequestBody @Valid ParticipanteRequestDTO participanteRequestDTO) {
         return participanteService.update(id, participanteRequestDTO);
     }
 

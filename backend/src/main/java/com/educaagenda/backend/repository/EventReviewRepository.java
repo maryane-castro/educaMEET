@@ -14,10 +14,4 @@ public interface EventReviewRepository extends JpaRepository<EventReview, Long>{
 
     // procura por Eventos que já receberam Avaliações        
     List<EventReview> findByEvent(Event event);
-    
-    //EventReview findParticipanteById(Long participante_id);
-	
-    // TODO PROCURAR PARTICIPANTE EM DETERMINADO EVENTO
-    Optional<Event> findByParticipanteId(Long participante_id);
-
 }

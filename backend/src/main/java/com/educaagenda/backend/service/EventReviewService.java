@@ -78,8 +78,6 @@ public class EventReviewService {
         Event event = eventRepository.findById(eventReviewRequestDTO.getEventId())
                 .orElseThrow(() -> new NoSuchElementException("Evento não encontrado"));
 
-        
-
         if (!event.getParticipantes().contains(participante)) {
             throw new NoSuchElementException("Este Participante não está inscrito neste Evento!");
         }
