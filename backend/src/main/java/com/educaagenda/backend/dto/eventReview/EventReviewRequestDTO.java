@@ -20,8 +20,8 @@ public class EventReviewRequestDTO implements Serializable{
     private String text;
     
     @Min(
-        value =  5,
-        message = "O valor da avaliação deve ser no mínimo 5")
+        value =  1,
+        message = "O valor da avaliação deve ser no mínimo 1")
     @Max(
             value =  10,
             message = "O valor da avaliação deve ser no maximo 10")
