@@ -7,8 +7,8 @@ import authHeader from '../../utils/authHeader';
 
 
 const LoginCard = () => {
-
-    const userData = useContext(UserContext);
+    const {updateUser} = useContext(UserContext);
+    const {user} = useContext(UserContext);
     const navigate = useNavigate();
     const [state, setState] = useState({ email: '', password: '' });
     const api = useAPI()
@@ -30,10 +30,10 @@ const LoginCard = () => {
             const getUSerData = async ( ) => {
                 const response = await api.get('/my/participante', htmlConfig)
                 console.log(response)
-                userData.updateUser({...response},{...auth});
+                updateUser((user) => ({...user,...response}));
                 console.log(auth)
                 console.log("retorno")
-                console.log(userData.user);
+                console.log(user);
                 navigate('/home');
             }
             getUSerData()
