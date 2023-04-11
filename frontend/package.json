@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "alertifyjs": "^1.13.1",
     "antd": "^5.4.0",
     "axios": "^1.3.4",
     "bootstrap": "^5.2.3",

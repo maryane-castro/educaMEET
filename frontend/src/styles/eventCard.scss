@@ -1,7 +1,9 @@
 
 .custom-card{
+    flex-wrap: nowrap;
     box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-
+    height: 250px;
+    width: 300px;
 }  
 
 .custom-button{

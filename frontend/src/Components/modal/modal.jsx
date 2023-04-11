@@ -1,7 +1,6 @@
 import FormEvent from "../EventForm/formEvent";
 import {Form, Button} from 'antd';
 import moment from "moment";
-import EventServices from '../../services/event.service';
 
 const Modal = () => {
 
@@ -15,18 +14,17 @@ const Modal = () => {
           'details': fieldsValue['details'],
           'folder': fieldsValue['folder'][0].name
         };
-        EventServices.create(eventDate);
         console.log('Values :', eventDate);
 
     };
    
     return(
-        <div className="modal  fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal  fade" id="create-event-modal" tabIndex="-1" aria-labelledby="modal-label" aria-hidden="true">
             <div className="modal-dialog">
                 <Form  onFinish={onFinish}>
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel"> Criar Evento</h1>
+                            <h1 className="modal-title fs-5" id="modal-label"> Criar Evento</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
