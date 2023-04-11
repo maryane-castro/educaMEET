@@ -1,7 +1,10 @@
 import { createContext } from 'react'
 
-const initialValue = {user:{email:"", password:""}, updateUser(x){
-  return this.user = x;
-}}
+/*const userData = {
+  user: { email: '', password: '' },
+  updateUser: (newUser) => {
+    userData.user = { ...userData.user, ...newUser };
+  },
+};*/
 
-export const AuthContext = createContext(initialValue);
+export const UserContext = createContext({});

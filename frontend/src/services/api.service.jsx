@@ -2,35 +2,19 @@ import Axios, { AxiosError } from 'axios'
 import { useContext, useMemo } from 'react'
 
 import Alertify from '../utils/alertify';
-import { AuthContext } from '../store/authContext';
+import { UserContext } from '../store/authContext';
 
 export const useAPI = () => {
-  const auth = useContext(AuthContext)
+  const auth = useContext(UserContext)
   const BACK_HOST = "http://localhost:8080";
 
-  const defaultHttpConfig = useMemo(() => {
-    return {
-      auth: {
-        username: "",
-        password: "",
-      } 
-    }
-  }, [auth.user])
 
-  const handleHttpError = (error, action) => {
-    Alertify.alert(error.message)
-    throw error
-  }
-
-  const get = async (url, params, httpConfig) => {
+  const get = async (url, httpConfig) => {
     try {
-      const response = await Axios.get(BACK_HOST + url, {
-        ...(httpConfig ? httpConfig : defaultHttpConfig),
-        params,
-      })
+      const response = await Axios.get(BACK_HOST + url, httpConfig);
       return response.data
     } catch (e) {
-      return handleHttpError(e, { func: get})
+      return console.log(e);
     }
   }
 
@@ -58,5 +42,5 @@ export const useAPI = () => {
     }
   }
 
-  return { get, post, put, delete: _delete }
+  return {get, post, put, delete: _delete }
 };

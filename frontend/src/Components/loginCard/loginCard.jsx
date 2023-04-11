@@ -2,13 +2,13 @@ import {Link} from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
 import React, {useContext, useState} from 'react';
 import { useAPI } from '../../services/api.service';
-import { AuthContext } from '../../store/authContext';
+import { UserContext } from '../../store/authContext';
+import authHeader from '../../utils/authHeader';
 
 
 const LoginCard = () => {
 
-
-    const auth = useContext(AuthContext);
+    const userData = useContext(UserContext);
     const navigate = useNavigate();
     const [state, setState] = useState({ email: '', password: '' });
     const api = useAPI()
@@ -21,20 +21,24 @@ const LoginCard = () => {
         e.preventDefault()
     
         if (state.email && state.password) {
-            const basicAuth = 'Basic ' + btoa(state.email + ':' + state.password)
-            const htmlConfig = {
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Access-Control-Allow-Origin': '*',
-                  Authorization: basicAuth,
-                },
-              }
-        
-            api.get('/my/participante', {}, htmlConfig).then((res) => {
-                auth.updateUser ? auth.updateUser({...res}) : null;
-                console.log(auth.user)
+
+            const auth = {basicAuth:'Basic ' + btoa(state.email + ':' + state.password)}
+
+            const htmlConfig = authHeader(auth.basicAuth);
+            console.log(htmlConfig);
+            
+            const getUSerData = async ( ) => {
+                const response = await api.get('/my/participante', htmlConfig)
+                console.log(response)
+                userData.updateUser({...response},{...auth});
+                console.log(auth)
+                console.log("retorno")
+                console.log(userData.user);
                 navigate('/home');
-            })
+            }
+            getUSerData()
+        
+           
         }
     }
     return(
