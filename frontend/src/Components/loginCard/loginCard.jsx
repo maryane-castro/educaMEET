@@ -1,25 +1,29 @@
 import {Link} from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { useAPI } from '../../services/api.service';
 import { AuthContext } from "../../store/authContext";
 import authHeader from '../../utils/authHeader';
-
+import Cookies from 'js-cookie';
 
 const LoginCard = () => {
-
     const {auth, updateAuth} = useContext(AuthContext);
     const navigate = useNavigate();
     const [state, setState] = useState({ email: '', password: '' });
     const api = useAPI()
 
+    useEffect(() => {
+        const userCookie = Cookies.get('user');
+        if (userCookie) {
+            const user = JSON.parse(userCookie);
+            updateAuth(user);
+            navigate('/home');
+        }
+    }, [updateAuth, navigate]);
+
     const onUpdate = (e, name) => {
-    setState((state) => ({ ...state, [name]: e.target.value }))
+        setState((state) => ({ ...state, [name]: e.target.value }))
     }
-    
-    
-    
-    
     
     function handleSubmit(e) {
         e.preventDefault()
@@ -28,9 +32,10 @@ const LoginCard = () => {
             const htmlConfig = authHeader(auth.basicAuth);
 
             api.get('/my/participante', htmlConfig).then((res) =>{
-                    const userAndAuth = {...res, ...auth}
-                    updateAuth(userAndAuth);
-                    navigate('/home');
+                const userAndAuth = {...res, ...auth}
+                updateAuth(userAndAuth);
+                Cookies.set('user', JSON.stringify(userAndAuth), { expires: 7 });
+                navigate('/home');
             });
         }
     }

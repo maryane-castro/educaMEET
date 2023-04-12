@@ -9,6 +9,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
     "date-fns": "^2.29.3",
+    "js-cookie": "^3.0.1",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-avatar-group": "^1.0.2",
