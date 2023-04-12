@@ -1,11 +1,10 @@
 import Axios, { AxiosError } from 'axios'
 import { useContext, useMemo } from 'react'
 
-import Alertify from '../utils/alertify';
-import { UserContext } from '../store/authContext';
+import { AuthContext } from '../store/authContext';
 
 export const useAPI = () => {
-  const auth = useContext(UserContext)
+  const {auth} = useContext(AuthContext)
   const BACK_HOST = "http://localhost:8080";
 
 

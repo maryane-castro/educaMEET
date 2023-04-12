@@ -2,13 +2,13 @@ import {Link} from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
 import React, {useContext, useState} from 'react';
 import { useAPI } from '../../services/api.service';
-import { UserContext } from '../../store/authContext';
+import { AuthContext } from "../../store/authContext";
 import authHeader from '../../utils/authHeader';
 
 
 const LoginCard = () => {
-    const {updateUser} = useContext(UserContext);
-    const {user} = useContext(UserContext);
+
+    const {auth, updateAuth} = useContext(AuthContext);
     const navigate = useNavigate();
     const [state, setState] = useState({ email: '', password: '' });
     const api = useAPI()
@@ -17,28 +17,21 @@ const LoginCard = () => {
     setState((state) => ({ ...state, [name]: e.target.value }))
     }
     
+    
+    
+    
+    
     function handleSubmit(e) {
         e.preventDefault()
-    
         if (state.email && state.password) {
-
             const auth = {basicAuth:'Basic ' + btoa(state.email + ':' + state.password)}
-
             const htmlConfig = authHeader(auth.basicAuth);
-            console.log(htmlConfig);
-            
-            const getUSerData = async ( ) => {
-                const response = await api.get('/my/participante', htmlConfig)
-                console.log(response)
-                updateUser((user) => ({...user,...response}));
-                console.log(auth)
-                console.log("retorno")
-                console.log(user);
-                navigate('/home');
-            }
-            getUSerData()
-        
-           
+
+            api.get('/my/participante', htmlConfig).then((res) =>{
+                    const userAndAuth = {...res, ...auth}
+                    updateAuth(userAndAuth);
+                    navigate('/home');
+            });
         }
     }
     return(
