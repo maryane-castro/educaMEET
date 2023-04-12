@@ -1,5 +1,5 @@
 import Axios, { AxiosError } from 'axios'
-import { useContext, useMemo } from 'react'
+import { useContext} from 'react'
 
 import { AuthContext } from '../store/authContext';
 

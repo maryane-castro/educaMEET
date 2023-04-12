@@ -1,19 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import AppRoutes from './AppRoutes';
-import { AuthContext } from "./store/authContext";
+import { AuthProvider } from './store/authContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
 import './styles/app.scss';
 
 const App = () => {
-  const [auth, updateAuth]= useState();
+
 
   return (
-    <AuthContext.Provider value={{auth, updateAuth}}>
-        <AppRoutes />
-    </AuthContext.Provider>
-    
+    <AuthProvider>
+      <AppRoutes />
+    </AuthProvider>
   );
-}
+};
 
 export default App;

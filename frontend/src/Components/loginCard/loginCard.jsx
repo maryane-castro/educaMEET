@@ -7,7 +7,7 @@ import authHeader from '../../utils/authHeader';
 import Cookies from 'js-cookie';
 
 const LoginCard = () => {
-    const {auth, updateAuth} = useContext(AuthContext);
+    const {updateAuth} = useContext(AuthContext);
     const navigate = useNavigate();
     const [state, setState] = useState({ email: '', password: '' });
     const api = useAPI()
@@ -34,7 +34,7 @@ const LoginCard = () => {
             api.get('/my/participante', htmlConfig).then((res) =>{
                 const userAndAuth = {...res, ...auth}
                 updateAuth(userAndAuth);
-                Cookies.set('user', JSON.stringify(userAndAuth), { expires: 7 });
+                Cookies.set('user', JSON.stringify(userAndAuth), { expires: 1/24 });
                 navigate('/home');
             });
         }
