@@ -33,7 +33,7 @@ const LoginCard = () => {
 
             api.get('/my/participante', htmlConfig).then((res) =>{
                 const userAndAuth = {...res, ...auth}
-                updateAuth(userAndAuth);
+                localStorage.setItem('auth', JSON.stringify(userAndAuth));
                 Cookies.set('user', JSON.stringify(userAndAuth), { expires: 1/24 });
                 navigate('/home');
             });

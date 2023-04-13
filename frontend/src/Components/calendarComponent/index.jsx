@@ -1,25 +1,34 @@
-import { Calendar, theme, ConfigProvider} from 'antd';
-import ptBR from 'antd/lib/locale/pt_BR';
+import React, { useState, useEffect } from "react";
+import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Calendar } from "react-modern-calendar-datepicker";
+import { myCustomLocale } from "../../utils/calendarDataFormat";
 
-const onPanelChange = (value, mode) => {
-  console.log(value.format('YYYY-MM-DD'), mode);
-};
 const CalendarComponent = () => {
-  
-    const { token } = theme.useToken();
-  
-  const wrapperStyle = {
-    width: 300,
-    border: `1px solid ${token.colorBorderSecondary}`,
-    borderRadius: token.borderRadiusLG,
-  };
+
+  //const [dates, setDates] = useState([]);
+  const [selectedDay, setSelectedDay] = useState([]);
+
+  function convertDatesToNewFormat(dates) {
+    return dates.map(date => {
+      const [year, month, day] = date.split('-').map(part => parseInt(part));
+      return { year, month, day };
+    });
+  }
+    
+  useEffect(() => {
+    const events = localStorage.getItem('events');
+    const eventsDate = JSON.parse(events).map(event => event.startDate);
+    const convertedDates = convertDatesToNewFormat(eventsDate);
+    setSelectedDay(convertedDates);
+  }, []);
 
   return (
-    <div style={wrapperStyle}>
-      <ConfigProvider locale={ptBR}>
-        <Calendar fullscreen={false} onPanelChange={onPanelChange} /> 
-      </ConfigProvider>
-    </div>
+    <Calendar
+      value={selectedDay}
+      shouldHighlightWeekends
+      locale={myCustomLocale}
+    />
   );
 };
+
 export default CalendarComponent;

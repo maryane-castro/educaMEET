@@ -2,6 +2,7 @@ import Thumbnail from "../Thumbnail/Thumbnail";
 import DropdownMenu from "./DropdownMenu";
 import {ReactComponent as Logo} from '../../assets/logo-educameet-light.svg'
 import { Link } from "react-router-dom";
+import EventFilter from "../eventsFilter/eventsFilter";
 
 const Navbar = () => {
 
@@ -14,8 +15,7 @@ const Navbar = () => {
                 </Link>
                 <div class="d-flex justify-content-center">
                     <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Pesquisar Evento" aria-label="Search"/>
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                       <EventFilter/>
                     </form>
                 </div>
                 <div class="d-flex align-items-center">

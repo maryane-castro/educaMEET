@@ -6,7 +6,9 @@ import Cookies from 'js-cookie';
 
 const DropdownMenu = ({DropImage}) => {
     const navigate = useNavigate();
-    const { clearAuth } = useContext(AuthContext);
+    const clearAuth = () => {
+        localStorage.removeItem('auth');
+      };
 
     const handleLogout = () => {
         clearAuth();

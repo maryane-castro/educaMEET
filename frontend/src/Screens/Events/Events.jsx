@@ -1,16 +1,12 @@
 import {useEffect, useState, useContext} from 'react';
 import { useAPI } from '../../services/api.service';
 import authHeader from '../../utils/authHeader';
-import { AuthContext } from '../../store/authContext';
 import EventCard from '../../Components/EventCard/EventCard';
 
 const Events = () => {
-    const {auth} = useContext(AuthContext);
-    console.log("response");
-    console.log(auth)
-    console.log(auth.basicAuth);
-    const htmlconfing = authHeader(auth.basicAuth)
-    console.log(htmlconfing);
+    const storedAuth =  localStorage.getItem('auth');
+    const authObject = JSON.parse(storedAuth);
+    const htmlconfing = authHeader(authObject.basicAuth)
     const api = useAPI();
 
     const [events, setEvents] = useState([]);
@@ -18,9 +14,9 @@ const Events = () => {
     useEffect(()=>{
         api.get('/events', htmlconfing).then((res)=>{
             setEvents(res);
+            localStorage.setItem('events', JSON.stringify(res));
         })
     },[]);
-
 
     return(
         <div className='container-fluid'>

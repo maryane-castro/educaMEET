@@ -11,8 +11,6 @@ import Profile from "../../Components/profile/Profile";
 
 const Main = () => {
 
-  
-
     const resolutionSmallerThanXL = useMediaQuery({
         query: '(min-width: 992px)'
     });

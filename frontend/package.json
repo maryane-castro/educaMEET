@@ -9,8 +9,10 @@
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
     "date-fns": "^2.29.3",
+    "intrivo-react-modern-calendar": "^1.0.6",
     "js-cookie": "^3.0.1",
     "moment": "^2.29.4",
+    "multiselect-react-dropdown": "^2.0.25",
     "react": "^18.2.0",
     "react-avatar-group": "^1.0.2",
     "react-bootstrap": "^2.7.2",
@@ -20,6 +22,7 @@
     "react-files": "^3.0.0",
     "react-google-charts": "^4.0.0",
     "react-icons": "^4.8.0",
+    "react-modern-calendar-datepicker": "^3.1.6",
     "react-responsive": "^9.0.2",
     "react-router-dom": "^6.8.2",
     "react-scripts": "^5.0.1"
