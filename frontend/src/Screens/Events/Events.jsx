@@ -2,6 +2,7 @@ import {useEffect, useState, useContext} from 'react';
 import { useAPI } from '../../services/api.service';
 import authHeader from '../../utils/authHeader';
 import EventCard from '../../Components/EventCard/EventCard';
+import moment from 'moment';
 
 const Events = () => {
     const storedAuth =  localStorage.getItem('auth');
@@ -28,8 +29,8 @@ const Events = () => {
                         id={evt.id}
                         name={evt.name}
                         campus={evt.campus}
-                        startDate={evt.startDate}
-                        endDate={evt.endDate}
+                        startDate={moment(evt.startDate).format('D [de] MMMM [de] YYYY')}
+                        endDate={moment(evt.endDate).format('D [de] MMMM [de] YYYY')}
                         details={evt.details}
                         folder={evt.folder} />
                     </div>

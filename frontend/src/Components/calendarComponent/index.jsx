@@ -4,8 +4,7 @@ import { Calendar } from "react-modern-calendar-datepicker";
 import { myCustomLocale } from "../../utils/calendarDataFormat";
 
 const CalendarComponent = () => {
-
-  //const [dates, setDates] = useState([]);
+  
   const [selectedDay, setSelectedDay] = useState([]);
 
   function convertDatesToNewFormat(dates) {

@@ -1,38 +1,60 @@
 import React from 'react';
-import {BsCalendarEvent} from "react-icons/bs"
-import {GoLocation} from "react-icons/go" 
-import AvatarsComponent from '../avatarComponent/avatarComponent';
+import { useNavigate, useParams} from "react-router-dom";
+import moment from 'moment';
 
 
-function EventCard({name, campus, startDate, endDate, details, folder, id}) {
-  
+function EventCard({name, campus, startDate, folder, id}) {
+
   let cardFolder;
   try {
     cardFolder = require(`../../assets/crossfit.jpg`);
   } catch (error) {
     console.log(error);
   }
-  
-  
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/home/event/${id}`);
+  };
+
   return (
-        <div className=" custom-card card shadow-border">
-          <div className="row">
-          <div className='col-12'>
-              <img src={cardFolder} className="img-fluid rounded-top" alt="..."/>
-            </div>
-            <div className='col-12'>
-              <div className="card-body event-card-body">
-                <h4 className=" col- card-title">
-                    <div className='event-name'>{name}</div>
-                </h4>
-                <div>{campus}</div>
-                <div>Início: {startDate}</div>
-                <div>Final: {endDate}</div>
-              </div>
-            </div>
-          </div>  
+    <div className="card h-100">
+      <div className="position-relative">
+        <img className="img-fluid rounded-top" src={cardFolder} alt="" />
+        <div className="badge bg-primary text-white mt-2 me-2 position-absolute top-0 end-0">
+          {moment(startDate, 'D [de] MMMM [de] YYYY').format('D')}
         </div>
-  );
-}
+      </div>
+      <div className="card-body position-relative pt-0">
+        <h6 className="mt-3">
+          <div>
+            <strong>
+              {name}
+            </strong>
+          </div>
+        </h6>
+        <p className="mb-0 small">
+          {startDate}
+        </p>
+        <p className="small">
+          {campus}
+        </p>
+        <ul className="avatar-group list-unstyled align-items-center mb-0">
+         
+        </ul>
+        <div className="d-flex mt-3 justify-content-between">
+          <div className="w-100">
+            <label onClick={handleClick} className="btn btn-sm btn-outline-primary d-block" htmlFor="Interested1">
+              <strong>Saiba mais!</strong>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  )
+};
 
 export default EventCard;
+

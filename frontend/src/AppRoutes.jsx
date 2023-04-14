@@ -23,6 +23,7 @@ const AppRoutes = () => {
                 
                 <Route path="/home" element={<Main/>}>
                     <Route index element={<Events/>}/>
+                    <Route path="/home/event/:id" element={<Event/>}/>
                     {/*
                     <Route path="/event" element={<Event/>}/>
                     <Route path="/new" element={<EventForm/>}/>
