@@ -7,8 +7,6 @@ import com.educaagenda.backend.model.EventReview;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 public class EventReviewRequestDTO implements Serializable{
     private static final long serialVersionUID = 1L;
